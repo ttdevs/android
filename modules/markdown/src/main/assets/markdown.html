@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<!--
+  ~ Created by ttdevs at 16-4-14 下午3:52.
+  ~ E-mail:ttdevs@gmail.com
+  ~ https://github.com/ttdevs
+  ~ Copyright (c) 2016 ttdevs
+  -->
+
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Markdown Browser</title>
+
+    <script src="remarkable.min.js" ></script>
+    <script src="highlight.min.js"></script>
+    <link rel="stylesheet" href="bootstrap.css">
+    <link rel="stylesheet" href="solarized_light.min.css">
+    <style type="text/css">
+      .result-html {
+        padding: 12px 12px;
+        overflow: auto;
+        background-color: #fff;
+      }
+      .result-html img {
+        max-width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+
+    <div id="content" class="result-html" />
+
+    <script type="text/javascript">
+      var result = "## 欢迎使用MarkdownView  \n\n";
+      result += "\n\n  我们支持以下你所能看到的正常解析的语法:  \n\n";
+      result += "\n\n  `code`  \n\n";
+      result += "\n\n  ```java \n int age = 18; \n String name = \"Jim\" \n ```  \n\n";
+      result += "\n\n  ![image](http://mm.howkuai.com/wp-content/uploads/2016a/02/18/01.jpg)  \n\n";
+      result += "\n\n  (c) (C) (r) (R) (tm) (TM) (p) (P) +-  \n ";
+      result += "\n\n  **This is bold text** \n\n *This is italic text* \n\n ~~Deleted text~~  \n\n";
+      result += "\n\n  Superscript: 19^th^  \n\n";
+      result += "\n\n  Subscript: H~2~O  \n\n";
+      result += "\n\n  ==Marked text==  \n\n";
+      result += "\n\n  ++inserted text++   \n\n";
+      result += "\n\n  * Ac tristique libero volutpat at  \n\n";
+      result += "\n\n  - item name  \n\n";
+      result += "\n\n  | Option | Description | \n\n";
+      result += "\n\n  | ------ | ----------- | \n\n";
+      result += "\n\n  | data   | path to data files. | \n\n";
+      result += "\n\n  link text: [ttdevs](http://blog.csdn.net/ttdevs)  \n\n";
+      result += "\n\n  This is HTML abbreviation example.   \n\n";
+      result += "\n\n  `PS:` [MarkdownView][1]基于[remarkable][2]  \n\n";
+      result += "\n\n  ------  \n\n";
+      result += "\n\n  [1]: https://github.com/ttdevs/Demo  \n\n";
+      result += "\n\n  [2]: https://github.com/jonschlinkert/remarkable  \n\n";
+
+      parseMarkdown(result);
+
+      function parseMarkdown(content){
+        var md = new Remarkable("full", {
+          html:         false,        // Enable HTML tags in source
+          xhtmlOut:     false,        // Use '/' to close single tags (&lt;br /&gt;)
+          breaks:       false,        // Convert '\n' in paragraphs into &lt;br&gt;
+          langPrefix:   'language-',  // CSS language prefix for fenced blocks
+          linkify:      true,         // autoconvert URL-like texts to links
+          linkTarget:   '',           // set target to open link in
+
+          typographer:  false,
+          table:        true, 
+
+          quotes: '“”‘’',
+
+          highlight: function (str, lang) {
+            if (lang && hljs.getLanguage(lang)) {
+              try {
+                return hljs.highlight(lang, str).value;
+              } catch (err) {}
+            }
+
+            try {
+              return hljs.highlightAuto(str).value;
+            } catch (err) {}
+
+            return ''; // use external default escaping
+          }
+        });
+
+        md.core.ruler.enable(['abbr']);
+        md.inline.ruler.enable([ 'ins', 'mark']);
+        md.block.ruler.enable([ 'table' ]);
+        // md.block.ruler.disable([ 'table' ]);
+
+        if(null != content){
+          result = content;
+        }
+        document.getElementById('content').innerHTML = md.render(result);
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,27 @@
+# .gradle version
+.gradle
+
+# idea
+.idea/libraries
+.idea/.name
+.idea/compiler.xml
+.idea/encodings.xml
+.idea/gradle.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/runConfigurations.xml
+.idea/workspace.xml
+
+# build folder
+build
+
+# sdk.dir ndk.dir
+local.properties
+
+# gradlew
+gradlew
+gradlew.bat
+
+# other
+*.iml
+*.log

@@ -1,0 +1,49 @@
+/*
+ * Created by ttdevs at 16-4-14 下午3:52.
+ * E-mail:ttdevs@gmail.com
+ * https://github.com/ttdevs
+ * Copyright (c) 2016 ttdevs
+ */
+
+apply plugin: 'com.android.application'
+
+def support = rootProject.ext.projectSupport
+def cfg = rootProject.ext.projectConfig
+def libs = rootProject.ext.projectLibraries
+
+android {
+    compileSdkVersion cfg.compileSdkVersion
+    buildToolsVersion cfg.buildToolsVersion
+
+    defaultConfig {
+        applicationId "com.ttdevs.android"
+        minSdkVersion cfg.minSdkVersion
+        targetSdkVersion cfg.targetSdkVersion
+        versionCode cfg.versionCode
+        versionName cfg.versionName
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile libs.junit
+
+    compile support.v4
+    compile support.appcompat_v7
+    compile support.design
+    compile libs.butterknife
+
+    compile project(':modules:jniutils')
+    compile project(':modules:markdown')
+    compile project(':modules:reactive')
+
+    compile 'com.facebook.conceal:conceal:1.0.1@aar'
+    compile 'com.yalantis:ucrop:1.2.3'
+    compile 'us.feras.mdv:markdownview:1.1.0'
+}
