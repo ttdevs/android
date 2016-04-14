@@ -5,7 +5,7 @@ LOCAL_PATH := $(call my-dir)
 include $(CLEAR_VARS)
 
 LOCAL_MODULE := CipherUtils
-LOCAL_SRC_FILES := CipherUtils.cpp QiniuConfig.cpp FrogSha1.cpp FrogBase64.cpp
+LOCAL_SRC_FILES := CipherUtils.cpp QiniuConfig.cpp FrogSha1.cpp FrogBase64.cpp base64.cpp modp_base64/modp_b64.cc
 
 LOCAL_CPP_EXTENSION := .cxx .cpp .cc
 
