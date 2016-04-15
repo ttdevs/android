@@ -16,6 +16,13 @@ android {
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
+
+        ndk {
+            moduleName "CipherUtils"
+            stl "gnustl_static" // stlport_static
+            abiFilters "armeabi", "armeabi-v7a"
+            ldLibs "log", "android"
+        }
     }
 
     sourceSets.main {
@@ -24,7 +31,7 @@ android {
         // this file has been added after the last project sync with gradle
         // 必须有值,如: 'src/main/jni/'
         jni.srcDirs = ['src/main/jni/']
-        jniLibs.srcDir "libs"
+        // jniLibs.srcDir "libs"
     }
 
     buildTypes {
