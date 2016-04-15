@@ -29,6 +29,7 @@ public class SysUtils {
             Signature[] signatures = packageInfo.signatures;
             if (null != signatures && signatures.length > 0) {
                 Signature signature = signatures[0];
+                signature.hashCode();
                 result = signature.toCharsString();
                 LogUtils.debug(result);
                 System.out.println(result);
