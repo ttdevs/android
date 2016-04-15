@@ -19,7 +19,11 @@ android {
     }
 
     sourceSets.main {
-        jni.srcDirs = []
+        // 如果不写(jni.srcDirs = ['src/main/jni/'])
+        // Android展示模式没有jni目录
+        // this file has been added after the last project sync with gradle
+        // 必须有值,如: 'src/main/jni/'
+        jni.srcDirs = ['src/main/jni/']
         jniLibs.srcDir "libs"
     }
 
@@ -29,7 +33,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    sourceSets { main { jni.srcDirs = ['src/main/jni', 'src/main/jni/'] } }
 }
 
 dependencies {
