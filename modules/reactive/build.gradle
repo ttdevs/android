@@ -12,12 +12,12 @@ def cfg = rootProject.ext.projectConfig
 def libs = rootProject.ext.projectLibraries
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.3"
+    compileSdkVersion cfg.compileSdkVersion
+    buildToolsVersion cfg.buildToolsVersion
 
     defaultConfig {
-        minSdkVersion 15
-        targetSdkVersion 23
+        minSdkVersion cfg.minSdkVersion
+        targetSdkVersion cfg.targetSdkVersion
         versionCode 1
         versionName "1.0"
     }

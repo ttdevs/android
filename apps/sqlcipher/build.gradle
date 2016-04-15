@@ -7,14 +7,18 @@
 
 apply plugin: 'com.android.application'
 
+def support = rootProject.ext.projectSupport
+def cfg = rootProject.ext.projectConfig
+def libs = rootProject.ext.projectLibraries
+
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.3"
+    compileSdkVersion cfg.compileSdkVersion
+    buildToolsVersion cfg.buildToolsVersion
 
     defaultConfig {
         applicationId "com.ttdevs.sqlcipher"
-        minSdkVersion 15
-        targetSdkVersion 23
+        minSdkVersion cfg.minSdkVersion
+        targetSdkVersion cfg.targetSdkVersion
         versionCode 1
         versionName "1.0"
     }
@@ -28,7 +32,8 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:23.3.0'
-    compile 'com.android.support:design:23.3.0'
+    testCompile libs.junit
+
+    compile support.appcompat_v7
+    compile support.design
 }
