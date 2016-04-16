@@ -1,10 +1,9 @@
 #include <jni.h>
-// #include <string>
+#include <string>
 
 using namespace std;
 
 #include "utils/log.h"
-#include "base64.h"
 
 #include "com_ttdevs_jniutils_CipherUtils.h"
 
@@ -13,11 +12,10 @@ JNIEXPORT jint JNICALL Java_com_ttdevs_jniutils_CipherUtils_add(JNIEnv *env, jcl
     std::string base64_str, output_str;
 
     LOGE("%s", input_str.c_str());
-    printf("input_strinput_str");
 
-    Base64Encode(input_str, &base64_str);
-    LOGE("%s", base64_str.c_str());
-    Base64Decode(base64_str, &output_str);
-    LOGE("%s", output_str.c_str());
+//    Base64Encode(input_str, &base64_str);
+//    LOGE("%s", base64_str.c_str());
+//    Base64Decode(base64_str, &output_str);
+//    LOGE("%s", output_str.c_str());
     return x + y;
 }
