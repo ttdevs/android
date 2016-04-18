@@ -13,5 +13,5 @@ public class CipherUtils {
         System.loadLibrary("CipherUtils");
     }
 
-    public static native void base64Encode(String dataString);
+    public static native String base64Encode(String dataString);
 }

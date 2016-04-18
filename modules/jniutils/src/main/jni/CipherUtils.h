@@ -12,7 +12,7 @@ extern "C" {
  * Method:    base64Encode
  * Signature: (Ljava/lang/String;)V
  */
-JNIEXPORT void JNICALL Java_com_ttdevs_jniutils_CipherUtils_base64Encode
+JNIEXPORT jstring JNICALL Java_com_ttdevs_jniutils_CipherUtils_base64Encode
   (JNIEnv *, jclass, jstring);
 
 #ifdef __cplusplus

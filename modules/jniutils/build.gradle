@@ -24,6 +24,7 @@ android {
         ndk {
             moduleName "CipherUtils"
             stl "gnustl_static" // stlport_static
+            // cFlags "-std=c++11 -Wall"
             abiFilters "armeabi", "armeabi-v7a"
             ldLibs "log", "android"
         }

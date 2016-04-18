@@ -55,7 +55,7 @@ public class JNIActivity extends BaseActivity {
                 break;
             case R.id.bt_base64_encode:
                 String str = "{\"bucket\":\"onetest\",\"keys\":[\"/one/2016-08-09/160402b4-0470-49e0-b408-b580675cf910.png\",\"/bingo/2015-12-09/160402b4-0470-49e0-b408-b580675cf910.png\",\"/status/2014-10-09/160402b4-0470-49e0-b408-b580675cf910.png\",\"/food/2014-10-09/160402b4-0470-49e0-b408-b580675cf910.png\"]}";
-                CipherUtils.base64Encode(str);
+                showSnackbar(viewMain, CipherUtils.base64Encode(str));
                 break;
 
             default:

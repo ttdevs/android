@@ -3,9 +3,9 @@
 
 #include "utils/log.h"
 #include "ios_base64/NSDataMKBase64.h"
-#include "com_ttdevs_jniutils_CipherUtils.h"
+#include "CipherUtils.h"
 
-JNIEXPORT void JNICALL
+JNIEXPORT jstring JNICALL
 Java_com_ttdevs_jniutils_CipherUtils_base64Encode(JNIEnv *env, jclass type, jstring dataString_) {
     const char *dataString = env->GetStringUTFChars(dataString_, 0);
     LOGE("Input from java: %s", dataString);
@@ -18,4 +18,6 @@ Java_com_ttdevs_jniutils_CipherUtils_base64Encode(JNIEnv *env, jclass type, jstr
                                             &szOutString);
     LOGE("output String: %s", outputBuffer);
     LOGE("szOutString lenght: %d", szOutString);
+
+    return env->NewStringUTF(dataString);
 }
