@@ -9,43 +9,11 @@ extern "C" {
 #endif
 /*
  * Class:     com_ttdevs_jniutils_CipherUtils
- * Method:    getCipherKey
- * Signature: (Lcom/ttdevs/jniutils/demo/JavaClass;)Ljava/lang/String;
+ * Method:    base64Encode
+ * Signature: (Ljava/lang/String;)V
  */
-JNIEXPORT jstring JNICALL Java_com_ttdevs_jniutils_CipherUtils_getCipherKey
-  (JNIEnv *, jclass, jobject);
-
-/*
- * Class:     com_ttdevs_jniutils_CipherUtils
- * Method:    signature
- * Signature: (Ljava/lang/String;)Ljava/lang/String;
- */
-JNIEXPORT jstring JNICALL Java_com_ttdevs_jniutils_CipherUtils_signature
+JNIEXPORT void JNICALL Java_com_ttdevs_jniutils_CipherUtils_base64Encode
   (JNIEnv *, jclass, jstring);
-
-/*
- * Class:     com_ttdevs_jniutils_CipherUtils
- * Method:    add
- * Signature: (II)I
- */
-JNIEXPORT jint JNICALL Java_com_ttdevs_jniutils_CipherUtils_add
-  (JNIEnv *, jclass, jint, jint);
-
-/*
- * Class:     com_ttdevs_jniutils_CipherUtils
- * Method:    setModule
- * Signature: (Z)V
- */
-JNIEXPORT void JNICALL Java_com_ttdevs_jniutils_CipherUtils_setModule
-  (JNIEnv *, jclass, jboolean);
-
-/*
- * Class:     com_ttdevs_jniutils_CipherUtils
- * Method:    getAppSign
- * Signature: (Landroid/content/Context;)V
- */
-JNIEXPORT void JNICALL Java_com_ttdevs_jniutils_CipherUtils_getAppSign
-  (JNIEnv *, jclass, jobject);
 
 #ifdef __cplusplus
 }
