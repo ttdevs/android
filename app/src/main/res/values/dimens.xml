@@ -1,0 +1,22 @@
+<!--
+  ~ Created by ttdevs at 16-4-14 下午4:14.
+  ~ E-mail:ttdevs@gmail.com
+  ~ https://github.com/ttdevs
+  ~ Copyright (c) 2016 ttdevs
+  -->
+
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="nav_header_vertical_spacing">16dp</dimen>
+    <dimen name="nav_header_height">160dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+
+    <!-- global -->
+
+    <dimen name="global_dimen_large">26dp</dimen>
+    <dimen name="global_dimen_normal">16dp</dimen>
+    <dimen name="global_dimen_small">8dp</dimen>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_dimen">16dp</dimen>
+    <dimen name="activity_vertical_dimen">16dp</dimen>
+</resources>

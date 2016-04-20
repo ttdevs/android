@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Created by ttdevs at 16-4-14 下午4:14.
+  ~ E-mail:ttdevs@gmail.com
+  ~ https://github.com/ttdevs
+  ~ Copyright (c) 2016 ttdevs
+  -->
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/view_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_dimen"
+    android:paddingLeft="@dimen/activity_horizontal_dimen"
+    android:paddingRight="@dimen/activity_horizontal_dimen"
+    android:paddingTop="@dimen/activity_vertical_dimen"
+    tools:context=".JNIActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/bt_authenticate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/global_dimen_normal"
+            android:text="authenticate" />
+
+        <Button
+            android:id="@+id/bt_base64_encode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/global_dimen_normal"
+            android:text="Base64 Encode" />
+    </LinearLayout>
+</ScrollView>

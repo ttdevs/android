@@ -1,0 +1,44 @@
+# .gradle version
+.gradle
+
+# idea
+.idea/libraries
+.idea/.name
+.idea/compiler.xml
+.idea/encodings.xml
+.idea/gradle.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/runConfigurations.xml
+.idea/workspace.xml
+.idea/codeStyleSettings.xml
+
+# build folder
+build
+
+# sdk.dir ndk.dir
+local.properties
+
+# gradlew
+gradlew
+gradlew.bat
+
+# other
+*.iml
+*.log
+
+# Built application files
+*.apk
+*.ap_
+
+# Files for the Dalvik VM
+*.dex
+
+# Java class files
+*.class
+
+# Android Studio Navigation editor temp files
+.navigation/
+
+# Android Studio captures folder
+captures/

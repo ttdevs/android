@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Created by ttdevs at 16-4-14 下午3:52.
+  ~ E-mail:ttdevs@gmail.com
+  ~ https://github.com/ttdevs
+  ~ Copyright (c) 2016 ttdevs
+  -->
+
+<resources>
+    <declare-styleable name="MarkDownView">
+        <attr name="mdv_content" format="string|reference" />
+        <attr name="mdv_showDefault" format="boolean|reference" />
+    </declare-styleable>
+</resources>

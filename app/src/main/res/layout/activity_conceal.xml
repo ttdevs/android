@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Created by ttdevs at 16-4-14 下午4:14.
+  ~ E-mail:ttdevs@gmail.com
+  ~ https://github.com/ttdevs
+  ~ Copyright (c) 2016 ttdevs
+  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/global_dimen_normal"
+    tools:context="com.ttdevs.android.ConcealActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/global_dimen_small"
+        android:layout_marginTop="@dimen/global_dimen_normal"
+        android:text="String test:" />
+
+    <include layout="@layout/subview_divider" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="bottom"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/et_original_string"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Please input content."
+            android:text="Hello world!" />
+
+        <Button
+            android:id="@+id/bt_encrypt_string"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Encrypt" />
+
+        <Button
+            android:id="@+id/bt_database"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/global_dimen_small"
+            android:text="DB" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/global_dimen_small"
+        android:layout_marginTop="@dimen/global_dimen_normal"
+        android:text="File test:" />
+
+    <include layout="@layout/subview_divider" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/bt_file_list"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="List" />
+
+        <Button
+            android:id="@+id/bt_encrypt_file"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/global_dimen_normal"
+            android:layout_marginRight="@dimen/global_dimen_normal"
+            android:layout_weight="1"
+            android:text="Encrypt" />
+
+        <Button
+            android:id="@+id/bt_decrypt_file"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Decrypt" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_log"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/global_dimen_small"
+        android:layout_marginTop="@dimen/global_dimen_normal"
+        android:text="Log info:" />
+
+    <include layout="@layout/subview_divider" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tv_log_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="This is log info!"
+            android:textIsSelectable="true" />
+    </ScrollView>
+</LinearLayout>
