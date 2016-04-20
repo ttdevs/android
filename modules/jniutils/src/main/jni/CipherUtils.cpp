@@ -58,7 +58,7 @@ Java_com_ttdevs_jniutils_CipherUtils_authenticate(JNIEnv *env, jclass type,
 
     mid = env->GetMethodID(jclazz, "toCharsString", "()Ljava/lang/String;");
     jstring signature = (jstring) env->CallObjectMethod(sign, mid);// 返回当前应用签名信息
-    LOGI("Signatures: %s", env->GetStringUTFChars(signature, false));
+    LOGI("Signatures: %s", env->GetStringUTFChars(signature, 0));
 
     mid = env->GetMethodID(jclazz, "hashCode", "()I");
     jint hashCode = env->CallIntMethod(sign, mid);
