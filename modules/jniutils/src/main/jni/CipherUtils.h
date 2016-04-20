@@ -10,10 +10,18 @@ extern "C" {
 /*
  * Class:     com_ttdevs_jniutils_CipherUtils
  * Method:    base64Encode
- * Signature: (Ljava/lang/String;)V
+ * Signature: (Ljava/lang/String;)Ljava/lang/String;
  */
 JNIEXPORT jstring JNICALL Java_com_ttdevs_jniutils_CipherUtils_base64Encode
-  (JNIEnv *, jclass, jstring);
+        (JNIEnv *, jclass, jstring);
+
+/*
+ * Class:     com_ttdevs_jniutils_CipherUtils
+ * Method:    authenticate
+ * Signature: (Landroid/content/Context;)V
+ */
+JNIEXPORT void JNICALL Java_com_ttdevs_jniutils_CipherUtils_authenticate
+        (JNIEnv *, jclass, jobject);
 
 #ifdef __cplusplus
 }

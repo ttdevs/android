@@ -18,22 +18,21 @@ public class SysUtils {
      * 获取apk的签名,一长串数字
      *
      * @param context 上下文
-     * @param pkgName 包名
      * @return 签名数字串
      */
-    public static String getAppSignature(Context context, String pkgName) {
+    public static String getAppSignature(Context context) {
         String result = null;
         try {
             PackageManager manager = context.getPackageManager();
+            String pkgName = context.getPackageName();
             PackageInfo packageInfo = manager.getPackageInfo(pkgName, PackageManager.GET_SIGNATURES);
             Signature[] signatures = packageInfo.signatures;
             if (null != signatures && signatures.length > 0) {
                 Signature signature = signatures[0];
-                signature.hashCode();
+                int hashCode = signature.hashCode();
                 result = signature.toCharsString();
                 LogUtils.debug(result);
-                System.out.println(result);
-                // result = signature.toString();
+                System.out.println(hashCode + "|" + result);
             }
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();

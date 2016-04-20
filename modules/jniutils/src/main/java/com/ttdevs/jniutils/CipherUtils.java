@@ -7,11 +7,26 @@
 
 package com.ttdevs.jniutils;
 
+import android.content.Context;
+
 public class CipherUtils {
 
     static {
         System.loadLibrary("CipherUtils");
     }
 
+    /**
+     * base64 编码
+     *
+     * @param dataString
+     * @return
+     */
     public static native String base64Encode(String dataString);
+
+    /**
+     * 签名认证
+     *
+     * @param context
+     */
+    public static native void authenticate(Context context);
 }

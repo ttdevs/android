@@ -14,7 +14,7 @@
     android:paddingLeft="@dimen/activity_horizontal_dimen"
     android:paddingRight="@dimen/activity_horizontal_dimen"
     android:paddingTop="@dimen/activity_vertical_dimen"
-    tools:context="com.ttdevs.demo.JNIActivity">
+    tools:context=".JNIActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,39 +22,11 @@
         android:orientation="vertical">
 
         <Button
-            android:id="@+id/bt_boolean_void"
+            android:id="@+id/bt_authenticate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/global_dimen_normal"
-            android:text="void setModule(boolean isDebug)" />
-
-        <Button
-            android:id="@+id/bt_int_int"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/global_dimen_normal"
-            android:text="int add(int x, int y)" />
-
-        <Button
-            android:id="@+id/bt_string_string"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/global_dimen_normal"
-            android:text="String signature(String key)" />
-
-        <Button
-            android:id="@+id/bt_void_string"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/global_dimen_normal"
-            android:text="String getCipherKey()" />
-
-        <Button
-            android:id="@+id/bt_get_app_sign"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/global_dimen_normal"
-            android:text="getAppSign()" />
+            android:text="authenticate" />
 
         <Button
             android:id="@+id/bt_base64_encode"

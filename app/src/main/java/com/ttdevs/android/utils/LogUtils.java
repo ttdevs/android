@@ -7,6 +7,7 @@
 
 package com.ttdevs.android.utils;
 
+import android.provider.Settings;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.View;
@@ -20,6 +21,7 @@ public class LogUtils {
 
     public static void debug(String msg) {
         if (DEBUG) {
+            System.err.println(TAG + msg);
             Log.d(TAG, msg);
         }
     }

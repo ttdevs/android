@@ -11,6 +11,7 @@
 .idea/modules.xml
 .idea/runConfigurations.xml
 .idea/workspace.xml
+.idea/codeStyleSettings.xml
 
 # build folder
 build

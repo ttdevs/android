@@ -26,32 +26,13 @@ public class JNIActivity extends BaseActivity {
     @Bind(R.id.view_main)
     ScrollView viewMain;
 
-    @OnClick({R.id.bt_boolean_void,
-            R.id.bt_int_int,
-            R.id.bt_string_string,
-            R.id.bt_void_string,
-            R.id.bt_get_app_sign,
+    @OnClick({R.id.bt_authenticate,
             R.id.bt_base64_encode})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.bt_boolean_void:
-//                CipherUtils.setModule(Math.random() * 10 > 5);
-                break;
-            case R.id.bt_int_int:
-                int a = (int) Math.random() * 10;
-                int b = (int) Math.random() * 10;
-//                showSnackbar(viewMain, String.valueOf(CipherUtils.add(a, b)));
-                break;
-            case R.id.bt_string_string:
-                String key = String.valueOf(System.currentTimeMillis());
-//                showSnackbar(viewMain, CipherUtils.signature(key));
-                break;
-            case R.id.bt_void_string:
-//                showSnackbar(viewMain, CipherUtils.getCipherKey(new JavaClass()));
-                break;
-            case R.id.bt_get_app_sign:
-                SysUtils.getAppSignature(this, "com.boohee.one");
-//                CipherUtils.getAppSign(this);
+            case R.id.bt_authenticate:
+                SysUtils.getAppSignature(this);
+                CipherUtils.authenticate(this);
                 break;
             case R.id.bt_base64_encode:
                 String str = "{\"bucket\":\"onetest\",\"keys\":[\"/one/2016-08-09/160402b4-0470-49e0-b408-b580675cf910.png\",\"/bingo/2015-12-09/160402b4-0470-49e0-b408-b580675cf910.png\",\"/status/2014-10-09/160402b4-0470-49e0-b408-b580675cf910.png\",\"/food/2014-10-09/160402b4-0470-49e0-b408-b580675cf910.png\"]}";
@@ -73,5 +54,4 @@ public class JNIActivity extends BaseActivity {
     private void showSnackbar(View view, String msg) {
         Snackbar.make(view, msg, Snackbar.LENGTH_LONG).setAction("Action", null).show();
     }
-
 }
