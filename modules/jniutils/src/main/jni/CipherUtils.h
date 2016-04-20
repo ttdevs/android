@@ -13,15 +13,23 @@ extern "C" {
  * Signature: (Ljava/lang/String;)Ljava/lang/String;
  */
 JNIEXPORT jstring JNICALL Java_com_ttdevs_jniutils_CipherUtils_base64Encode
-        (JNIEnv *, jclass, jstring);
+  (JNIEnv *, jclass, jstring);
 
 /*
  * Class:     com_ttdevs_jniutils_CipherUtils
  * Method:    authenticate
- * Signature: (Landroid/content/Context;)V
+ * Signature: (Landroid/content/Context;)Z
  */
-JNIEXPORT void JNICALL Java_com_ttdevs_jniutils_CipherUtils_authenticate
-        (JNIEnv *, jclass, jobject);
+JNIEXPORT jboolean JNICALL Java_com_ttdevs_jniutils_CipherUtils_authenticate
+  (JNIEnv *, jclass, jobject);
+
+/*
+ * Class:     com_ttdevs_jniutils_CipherUtils
+ * Method:    createCipherKey
+ * Signature: ()Ljava/lang/String;
+ */
+JNIEXPORT jstring JNICALL Java_com_ttdevs_jniutils_CipherUtils_createCipherKey
+  (JNIEnv *, jclass);
 
 #ifdef __cplusplus
 }

@@ -11,6 +11,10 @@ import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
+import android.os.Build;
+import android.telephony.TelephonyManager;
 
 public class SysUtils {
 
@@ -38,5 +42,31 @@ public class SysUtils {
             e.printStackTrace();
         }
         return result;
+    }
+
+    /**
+     * 获取手机信息
+     *
+     * @param context
+     */
+    public static void printSystemInfo(Context context) {
+        try {
+            // MAC地址(如:1C:B0:94:ED:6C:AC)
+            WifiManager manager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+            WifiInfo info = manager.getConnectionInfo();
+            String macAddress = info.getMacAddress();
+
+            // imei maybe null
+            TelephonyManager TelephonyMgr = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+            String imei = TelephonyMgr.getDeviceId();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        int sdk = Build.VERSION.SDK_INT;// API版本号(如:14)
+        String version = Build.VERSION.RELEASE; // 系统版本号(如:4.0)
+        String model = Build.MODEL;// 手机型号(如:Galaxy Nexus)
+        String serial = Build.SERIAL;
     }
 }

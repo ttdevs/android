@@ -28,5 +28,12 @@ public class CipherUtils {
      *
      * @param context
      */
-    public static native void authenticate(Context context);
+    public static native boolean authenticate(Context context);
+
+    /**
+     * 创建本地加密的Key
+     *
+     * @return
+     */
+    public static native String createCipherKey();
 }

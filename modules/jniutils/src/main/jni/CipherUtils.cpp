@@ -5,12 +5,19 @@
 #include "ios_base64/NSDataMKBase64.h"
 #include "CipherUtils.h"
 
+bool mAuth = false;
+jint boohee = -2997946;
+jint ttdevs = 1765215831;
+
 JNIEXPORT jstring JNICALL
 Java_com_ttdevs_jniutils_CipherUtils_base64Encode(JNIEnv *env, jclass type,
                                                   jstring dataString_) {
+    if (!mAuth) {
+        return env->NewStringUTF("haha");
+    }
+
     const char *dataString = env->GetStringUTFChars(dataString_, 0);
     LOGE("Input from java: %s", dataString);
-
 
     int szOutString = 0;
     char *outputBuffer = mk_NewBase64Encode(dataString,
@@ -25,8 +32,7 @@ Java_com_ttdevs_jniutils_CipherUtils_base64Encode(JNIEnv *env, jclass type,
     return env->NewStringUTF(dataString);
 }
 
-
-JNIEXPORT void JNICALL
+JNIEXPORT jboolean JNICALL
 Java_com_ttdevs_jniutils_CipherUtils_authenticate(JNIEnv *env, jclass type,
                                                   jobject context) {
 
@@ -64,4 +70,12 @@ Java_com_ttdevs_jniutils_CipherUtils_authenticate(JNIEnv *env, jclass type,
     jint hashCode = env->CallIntMethod(sign, mid);
 
     LOGI("Signatures: %d", hashCode);
+
+    mAuth = (hashCode == boohee);
+    return mAuth;
+}
+
+JNIEXPORT jstring JNICALL
+Java_com_ttdevs_jniutils_CipherUtils_createCipherKey(JNIEnv *env, jclass) {
+
 }

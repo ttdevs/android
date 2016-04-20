@@ -27,7 +27,8 @@ public class JNIActivity extends BaseActivity {
     ScrollView viewMain;
 
     @OnClick({R.id.bt_authenticate,
-            R.id.bt_base64_encode})
+            R.id.bt_base64_encode,
+            R.id.bt_device_info})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.bt_authenticate:
@@ -37,6 +38,9 @@ public class JNIActivity extends BaseActivity {
             case R.id.bt_base64_encode:
                 String str = "{\"bucket\":\"onetest\",\"keys\":[\"/one/2016-08-09/160402b4-0470-49e0-b408-b580675cf910.png\",\"/bingo/2015-12-09/160402b4-0470-49e0-b408-b580675cf910.png\",\"/status/2014-10-09/160402b4-0470-49e0-b408-b580675cf910.png\",\"/food/2014-10-09/160402b4-0470-49e0-b408-b580675cf910.png\"]}";
                 showSnackbar(viewMain, CipherUtils.base64Encode(str));
+                break;
+            case R.id.bt_device_info:
+                SysUtils.printSystemInfo(this);
                 break;
 
             default:
