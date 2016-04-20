@@ -40,9 +40,9 @@ android {
     }
 
     buildTypes {
-        // debug {
-        //    jniDebuggable = true
-        //}
+        debug {
+            jniDebuggable = true
+        }
 
         release {
             minifyEnabled false

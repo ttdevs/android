@@ -22,7 +22,6 @@ android {
         versionCode cfg.versionCode
         versionName cfg.versionName
     }
-
     signingConfigs {
         release {
             storeFile file("../android.jks")
@@ -31,7 +30,6 @@ android {
             keyPassword "ttdevs"
         }
     }
-
     buildTypes {
         debug {
             jniDebuggable = true
