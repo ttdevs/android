@@ -14,7 +14,6 @@ import android.widget.ScrollView;
 
 import com.ttdevs.android.utils.SysUtils;
 import com.ttdevs.jniutils.CipherUtils;
-import com.ttdevs.jniutils.demo.JavaClass;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
