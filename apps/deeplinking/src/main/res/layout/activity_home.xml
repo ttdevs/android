@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+  ~ Created by ttdevs at 16-5-6 下午4:24.
+  ~ E-mail:ttdevs@gmail.com
+  ~ https://github.com/ttdevs
+  ~ Copyright (c) 2016 ttdevs
+  -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <ImageView
+        android:id="@+id/splash_bg"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:cropToPadding="false"
+        android:scaleType="centerCrop"
+        android:src="@drawable/splash" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginTop="70dp"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="false"
+            android:cropToPadding="false"
+            android:src="@drawable/splash_logo" />
+    </LinearLayout>
+</RelativeLayout>

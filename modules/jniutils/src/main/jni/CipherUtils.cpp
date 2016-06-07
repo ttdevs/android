@@ -1,5 +1,5 @@
 #include <jni.h>
-#include <string>
+#include <string.h>
 
 #include "utils/log.h"
 #include "ios_base64/NSDataMKBase64.h"

@@ -3,8 +3,7 @@
   ~ E-mail:ttdevs@gmail.com
   ~ https://github.com/ttdevs
   ~ Copyright (c) 2016 ttdevs
-  -->
-
+-->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ttdevs.android">
 
@@ -53,6 +52,22 @@
         <activity
             android:name=".JNIActivity"
             android:label="@string/title_activity_jni" />
+        <activity
+            android:name=".RouterActivity"
+            android:label="@string/title_activity_router"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="article"
+                    android:pathPattern="/.*"
+                    android:scheme="ttdevs" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

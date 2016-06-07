@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Created by ttdevs at 16-5-9 下午6:37.
+  ~ E-mail:ttdevs@gmail.com
+  ~ https://github.com/ttdevs
+  ~ Copyright (c) 2016 ttdevs
+  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".RouterActivity">
+
+    <TextView
+        android:id="@+id/tv_handle_intent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="handle intent" />
+
+</LinearLayout>

@@ -6,7 +6,7 @@
  */
 
 // main application
-include ':app'
+include ':app', ':androiddeeplinking'
 
 // application
 include ':apps:bolts'
