@@ -6,7 +6,7 @@
  */
 
 // main application
-include ':app', ':androiddeeplinking'
+include ':app'
 
 // application
 include ':apps:bolts'
@@ -16,4 +16,5 @@ include ':apps:sqlcipher'
 include 'modules:jniutils'
 include 'modules:markdown'
 include 'modules:reactive'
+include 'modules:circleview'
 
