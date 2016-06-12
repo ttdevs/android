@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="cp_normal_gray">#FFDFDFDF</color>
+    <color name="cp_circle_background">#FFFFFFFF</color>
+
+    <color name="cp_circle_gray">#FFDFDFDF</color>
+    <color name="cp_circle_green">#FF62CC74</color>
+    <color name="cp_circle_yellow">#FFFFCC00</color>
+    <color name="cp_circle_red">#FFF96650</color>
+
+    <color name="cp_indicator_center">#FFD8D5D5</color>
+    <color name="cp_indicator_light">#FFEFEFEF</color>
+    <color name="cp_indicator_gray">#FFDFDFDF</color>
+</resources>

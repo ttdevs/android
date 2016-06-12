@@ -28,6 +28,10 @@
             android:id="@+id/nav_jni"
             android:icon="@drawable/ic_menu_send"
             android:title="NDK JNI" />
+        <item
+            android:id="@+id/nav_draw_circle"
+            android:icon="@drawable/ic_menu_send"
+            android:title="Draw Circle" />
     </group>
 
     <item android:title="Communicate">

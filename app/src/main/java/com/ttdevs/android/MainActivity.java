@@ -122,6 +122,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_jni:
                 Utils.comeOnBaby(this, JNIActivity.class);
                 break;
+            case R.id.nav_draw_circle:
+                Utils.comeOnBaby(this, CircleViewActivity.class);
+                break;
 
             default:
                 break;

@@ -68,6 +68,7 @@
                     android:scheme="ttdevs" />
             </intent-filter>
         </activity>
+        <activity android:name=".CircleViewActivity" />
     </application>
 
 </manifest>
