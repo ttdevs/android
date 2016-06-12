@@ -20,6 +20,11 @@
 
         <com.ttdevs.circleview.CircleProgress
             android:layout_width="320dp"
+            android:layout_height="220dp"
+            android:layout_gravity="center_horizontal" />
+
+        <com.ttdevs.circleview.CircleProgress
+            android:layout_width="220dp"
             android:layout_height="320dp"
             android:layout_gravity="center_horizontal" />
     </LinearLayout>
