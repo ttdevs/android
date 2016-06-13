@@ -18,7 +18,7 @@ public class Utils {
      * @param angle  夹角度数（非弧度）
      * @return
      */
-    public static float getCirclePathLength(int radius, int angle) {
+    public static float getCirclePathLength(float radius, float angle) {
         angle = Utils.changeAngleToSingle(angle);
         return (float) (Math.PI * radius * angle / 180);
     }
@@ -29,7 +29,7 @@ public class Utils {
      * @param angle
      * @return
      */
-    public static int changeAngleToSingle(int angle) {
+    public static float changeAngleToSingle(float angle) {
         while (angle >= 360) {
             angle -= 360;
         }
