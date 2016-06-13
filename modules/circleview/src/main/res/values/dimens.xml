@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="cp_out_indicator_text">12sp</dimen>
+
     <dimen name="cp_title_indicator_text">17sp</dimen>
-    <dimen name="cp_alert_indicator_text">14sp</dimen>
     <dimen name="cp_content_indicator_text">28sp</dimen>
     <dimen name="cp_unit_indicator_text">14sp</dimen>
+    <dimen name="cp_alert_indicator_text">14sp</dimen>
+
+    <dimen name="cp_divider_width">16dp</dimen>
+
+    <dimen name="center_circle_out">20dp</dimen>
+    <dimen name="center_circle_middle">12dp</dimen>
+    <dimen name="center_circle_inside">6dp</dimen>
 </resources>

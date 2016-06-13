@@ -19,9 +19,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
-import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Interpolator;
-import android.view.animation.LinearInterpolator;
 
 import com.ttdevs.circleview.utils.Utils;
 
@@ -29,15 +27,16 @@ public class CircleProgress extends View {
     private static final int CIRCLE_START_ANGLE = 135; // 起始角度
     private static final int CIRCLE_SWEEP_ANGLE = 270; // 展示角度
     private static final int CIRCLE_STROKE_WIDTH = 56; // 指示圆环的宽度
+
     private static final float CIRCLE_GAP = 2.6f;
 
-    private int mOutIndicatorTextColor = Color.parseColor("#FFDFDFDF");
-    private int mTitleColor, mAlertColor, mContentColor, mUnitColor;
+    //为了可以改
+    private int mNormalGray = Color.parseColor("#FFDFDFDF");
+    private int mTitleColor, mAlertColor, mContentColor;
     private int mCircleBackground, mCircleGray, mCircleGreen;
     private int mIndicatorCenter, mIndicatorGray, mIndicatorLight;
-
-    private Paint mNormalTextPaint = new Paint();
-    private int mTextHeight;
+    private int mCenterCircleOut, mCenterCircleMiddle, mCenterCircleInside;
+    private int mDividerWidth = 32;
 
     private int mWidth = 0;
     private int mHeight = 0;
@@ -62,31 +61,30 @@ public class CircleProgress extends View {
 //        mIsCapRound = a.getBoolean(R.styleable.CircularProgressBar_cpbIsCapRound, mIsCapRound);
 //        a.recycle();
 
-        initColor();
-        initOther();
+        initData();
     }
 
-    private void initColor() {
-        mOutIndicatorTextColor = getResources().getColor(R.color.cp_normal_gray);
+    private void initData() {
+        mNormalGray = getResources().getColor(R.color.cp_normal_gray);
+
         mTitleColor = getResources().getColor(R.color.cp_circle_title);
         mAlertColor = getResources().getColor(R.color.cp_circle_alert);
         mContentColor = getResources().getColor(R.color.cp_circle_content);
-        mUnitColor = getResources().getColor(R.color.cp_circle_unit);
+        // mUnitColor = getResources().getColor(R.color.cp_circle_unit);
+
         mCircleBackground = getResources().getColor(R.color.cp_circle_background);
         mCircleGray = getResources().getColor(R.color.cp_circle_gray);
         mCircleGreen = getResources().getColor(R.color.cp_circle_green);
+
         mIndicatorCenter = getResources().getColor(R.color.cp_indicator_center);
         mIndicatorGray = getResources().getColor(R.color.cp_indicator_gray);
         mIndicatorLight = getResources().getColor(R.color.cp_indicator_light);
-    }
 
-    private void initOther() {
-        mNormalTextPaint.setColor(mOutIndicatorTextColor);
-        mNormalTextPaint.setAntiAlias(true);
-        mNormalTextPaint.setTextSize(getResources().getDimension(R.dimen.cp_out_indicator_text));
-        mNormalTextPaint.setStyle(Paint.Style.STROKE);
+        mDividerWidth = (int) getResources().getDimension(R.dimen.cp_divider_width);
 
-        mTextHeight = Utils.getTextHeight(mNormalTextPaint);
+        mCenterCircleOut = (int) getResources().getDimension(R.dimen.center_circle_out);
+        mCenterCircleMiddle = (int) getResources().getDimension(R.dimen.center_circle_middle);
+        mCenterCircleInside = (int) getResources().getDimension(R.dimen.center_circle_inside);
     }
 
     @Override
@@ -110,37 +108,39 @@ public class CircleProgress extends View {
         drawContent(canvas);
 
         drawIndicator(canvas);
-
-        drawOther(canvas);
-    }
-
-    private void drawOther(Canvas canvas) {
-        canvas.drawLine(0, 0, mWidth, mHeight, mNormalTextPaint);
-        canvas.drawLine(mWidth, 0, 0, mHeight, mNormalTextPaint);
     }
 
     /**
      * 画外侧的指示文字
-     * 半径：view_radius － mTextHeight
+     * 半径：view_radius － mDividerWidth
      *
      * @param canvas 画布
      */
     private void drawOutSideText(Canvas canvas) {
-        int radius = getViewRadius() - mTextHeight; // 文字所在圆环半径
+        Paint textPaint = new Paint();
+        textPaint.setColor(mNormalGray);
+        textPaint.setAntiAlias(true);
+        textPaint.setTextSize(getResources().getDimension(R.dimen.cp_out_indicator_text));
+        textPaint.setStyle(Paint.Style.STROKE);
+
+        int radius = getViewRadius() - mDividerWidth; // 文字所在圆环半径
 
         Path path = new Path();
         path.addCircle(getCenterX(), getCenterY(), radius, Path.Direction.CW);//顺时针绘制（or CCW）
 
-        // canvas.drawPath(path, mNormalTextPaint); // TODO: 16/6/12
+        // canvas.drawPath(path, textPaint); // TODO: 16/6/12
 
         // 画第一个数字
-        canvas.drawTextOnPath(String.valueOf(mStartIndicator),
-                path, Utils.getCirclePathLength(radius, CIRCLE_START_ANGLE),
-                0, mNormalTextPaint);
+        String content = String.valueOf(mStartIndicator);
+        float hOffset = Utils.getCirclePathLength(radius, CIRCLE_START_ANGLE);
+        hOffset -= Utils.getTextWidth(textPaint, content) / 2;
+        canvas.drawTextOnPath(content, path, hOffset, 0, textPaint);
+
         // 画最后一个数字
-        canvas.drawTextOnPath(String.valueOf(mEndIndicator),
-                path, Utils.getCirclePathLength(radius, (CIRCLE_START_ANGLE + CIRCLE_SWEEP_ANGLE)),
-                0, mNormalTextPaint);
+        content = String.valueOf(mEndIndicator);
+        hOffset = Utils.getCirclePathLength(radius, (CIRCLE_START_ANGLE + CIRCLE_SWEEP_ANGLE));
+        hOffset -= Utils.getTextWidth(textPaint, content) / 2;
+        canvas.drawTextOnPath(content, path, hOffset, 0, textPaint);
 
         if (null == mDiviverIndicator || mDiviverIndicator.length == 0) {
             return;
@@ -150,15 +150,16 @@ public class CircleProgress extends View {
         int sizeOfDivider = mDiviverIndicator.length;
         int perAngle = CIRCLE_SWEEP_ANGLE / (sizeOfDivider + 1);
         for (int i = 1; i <= sizeOfDivider; i++) {
-            canvas.drawTextOnPath(String.valueOf(mDiviverIndicator[i - 1]), path,
-                    Utils.getCirclePathLength(radius, (CIRCLE_START_ANGLE + perAngle * i)),
-                    0, mNormalTextPaint);
+            content = String.valueOf(mDiviverIndicator[i - 1]);
+            hOffset = Utils.getCirclePathLength(radius, (CIRCLE_START_ANGLE + perAngle * i));
+            hOffset -= Utils.getTextWidth(textPaint, content) / 2;
+            canvas.drawTextOnPath(content, path, hOffset, 0, textPaint);
         }
     }
 
     /**
      * 画大的白色背景
-     * 半径：view_radius － (3/2) * mTextHeight
+     * 半径：view_radius － (3/2) * mDividerWidth
      *
      * @param canvas 画布
      */
@@ -166,7 +167,7 @@ public class CircleProgress extends View {
         Paint bgPaint = new Paint();
         bgPaint.setColor(mCircleBackground);
 
-        int radius = getViewRadius() - (mTextHeight * 3 / 2);
+        int radius = getViewRadius() - (mDividerWidth * 3 / 2);
 
         canvas.drawCircle(getCenterX(), getCenterY(), radius, bgPaint);
 
@@ -183,12 +184,12 @@ public class CircleProgress extends View {
 
     /**
      * 画中间大的圆环，先画背景，后画绿色进度
-     * 半径：view_radius － CIRCLE_GAP ＊ mTextHeight
+     * 半径：view_radius － CIRCLE_GAP ＊ mDividerWidth
      *
      * @param canvas 画布
      */
     private void drawCircle(Canvas canvas) {
-        int radius = (int) (getViewRadius() - CIRCLE_GAP * mTextHeight);
+        int radius = (int) (getViewRadius() - CIRCLE_GAP * mDividerWidth);
 
         RectF oval = new RectF(
                 getCenterX() - radius,
@@ -216,12 +217,7 @@ public class CircleProgress extends View {
      * @param canvas 画布
      */
     private void drawContent(Canvas canvas) {
-        Paint line = new Paint();
-        line.setStrokeWidth(2);
-        line.setColor(mCircleGray);
-        line.setStyle(Paint.Style.STROKE);
-
-        int radius = (int) (getViewRadius() - CIRCLE_GAP * mTextHeight);
+        int radius = (int) (getViewRadius() - CIRCLE_GAP * mDividerWidth);
 
         Paint titlePaint = new Paint();
         titlePaint.setTextSize(getResources().getDimension(R.dimen.cp_title_indicator_text));
@@ -229,14 +225,19 @@ public class CircleProgress extends View {
         titlePaint.setStyle(Paint.Style.STROKE);
 
         int titleX = getCenterX() - Utils.getTextWidth(titlePaint, mTitle) / 2;
-        int titleY = getCenterY() - radius * 3 / 5;
+        int titleY = getCenterY() - radius * 3 / 5; // 上下3/5的比列
         canvas.drawText(mTitle, titleX, titleY, titlePaint);
 
+        Paint line = new Paint();
+        line.setStrokeWidth(3);
+        line.setColor(mCircleGray);
+        line.setStyle(Paint.Style.STROKE);
+
         int lineY = 0, startX = 0, startY = 0, stopX = 0, stopY = 0;
-        startX = getCenterX() - (int) (radius * Math.sin(Math.PI / 4)) + mTextHeight;
-        stopX = getCenterX() + (int) (radius * Math.sin(Math.PI / 4)) - mTextHeight;
+        startX = getCenterX() - (int) (radius * Math.sin(Math.PI / 4)) + mDividerWidth;
+        stopX = getCenterX() + (int) (radius * Math.sin(Math.PI / 4)) - mDividerWidth;
         lineY = getCenterY() + (int) (radius * Math.sin(Math.PI / 4));
-        lineY += mTextHeight / 2; // 矫正，不矫正会偏下
+        lineY += mDividerWidth / 2; // 矫正，不矫正会偏下
         startY = lineY;
         stopY = lineY;
         canvas.drawLine(startX, startY, stopX, stopY, line);
@@ -246,7 +247,7 @@ public class CircleProgress extends View {
         alertPaint.setColor(mAlertColor);
         alertPaint.setStyle(Paint.Style.STROKE);
 
-        int lineMargin = mTextHeight * 3 / 2; // 距离分割横线的距离
+        int lineMargin = mDividerWidth * 3 / 2; // 距离分割横线的距离
 
         int alertX = getCenterX() - Utils.getTextWidth(alertPaint, mAlert) / 2;
         int alertY = lineY + lineMargin;
@@ -259,7 +260,7 @@ public class CircleProgress extends View {
 
         Paint unitPaint = new Paint();
         unitPaint.setTextSize(getResources().getDimension(R.dimen.cp_unit_indicator_text));
-        unitPaint.setColor(mUnitColor);
+        unitPaint.setColor(mContentColor);
         unitPaint.setStyle(Paint.Style.STROKE);
 
         int contentWidth = Utils.getTextWidth(contentPaint, mContent);
@@ -267,7 +268,7 @@ public class CircleProgress extends View {
             contentWidth += Utils.getTextWidth(unitPaint, mUnit);
         }
 
-        lineMargin = mTextHeight / 2; // 距离分割横线的距离
+        lineMargin = mDividerWidth / 2; // 距离分割横线的距离
         int contentY = lineY - lineMargin;
         int contentX = getCenterX() - contentWidth / 2;
         canvas.drawText(mContent, contentX, contentY, contentPaint);
@@ -283,17 +284,15 @@ public class CircleProgress extends View {
      * @param canvas 画布
      */
     private void drawIndicator(Canvas canvas) {
-        int out = 86, middle = 48, inside = 24; // 半径
-
         Paint centerPaint = new Paint();
         centerPaint.setColor(mIndicatorCenter);
-        canvas.drawCircle(getCenterX(), getCenterY(), out, centerPaint);// 最大圆环
+        canvas.drawCircle(getCenterX(), getCenterY(), mCenterCircleOut, centerPaint);// 最大圆环
 
         RectF oval = new RectF(
-                getCenterX() - middle,
-                getCenterY() - middle,
-                getCenterX() + middle,
-                getCenterY() + middle);
+                getCenterX() - mCenterCircleMiddle,
+                getCenterY() - mCenterCircleMiddle,
+                getCenterX() + mCenterCircleMiddle,
+                getCenterY() + mCenterCircleMiddle);
 
         float angle = CIRCLE_SWEEP_ANGLE * (mIndicator - mStartIndicator) / (mEndIndicator - mStartIndicator);
 
@@ -306,15 +305,15 @@ public class CircleProgress extends View {
         canvas.drawArc(oval, CIRCLE_START_ANGLE + angle + 180, 90, true, grayPaint);
 
         // 画剪头
-        drawArrow(canvas, angle, middle, grayPaint, false);
-        drawArrow(canvas, angle, middle, lightPaint, true);
+        drawArrow(canvas, angle, mCenterCircleMiddle, grayPaint, false);
+        drawArrow(canvas, angle, mCenterCircleMiddle, lightPaint, true);
 
         // 话中间的小圆
         RectF center = new RectF(
-                getCenterX() - inside,
-                getCenterY() - inside,
-                getCenterX() + inside,
-                getCenterY() + inside);
+                getCenterX() - mCenterCircleInside,
+                getCenterY() - mCenterCircleInside,
+                getCenterX() + mCenterCircleInside,
+                getCenterY() + mCenterCircleInside);
         canvas.drawArc(center, 0, 360, true, centerPaint);
     }
 
@@ -329,7 +328,7 @@ public class CircleProgress extends View {
         oneY = getCenterY() + oneY;
 
         double twoAngle = (CIRCLE_START_ANGLE + angle) * Math.PI / 180;
-        int middleRadius = (int) (getViewRadius() - CIRCLE_GAP * mTextHeight);
+        int middleRadius = (int) (getViewRadius() - CIRCLE_GAP * mDividerWidth);
         int twoX = (int) (middleRadius * Math.cos(twoAngle));
         twoX = getCenterX() + twoX;
         int twoY = (int) (middleRadius * Math.sin(twoAngle));
@@ -388,12 +387,17 @@ public class CircleProgress extends View {
     private String mTitle = "身体年龄", mContent = "23", mUnit = "岁", mAlert = "显年轻 4 岁";
 
     public void setContent(String title, String content, String unit, String alert) {
+        setContent(title, content, unit, alert, mContentColor);
+    }
+
+    public void setContent(String title, String content, String unit, String alert, int color) {
         mTitle = title;
         mContent = content;
         mUnit = unit;
         mAlert = alert;
+        mContentColor = color;
 
-        // TODO: 16/6/8 refresh
+        postInvalidate();
     }
 
 
@@ -407,10 +411,7 @@ public class CircleProgress extends View {
     }
 
     public void animateProgress(float progress) {
-        animateProgress(progress, new AccelerateDecelerateInterpolator());
-    }
-
-    public void animateProgress(float progress, Interpolator interpolator) {
+        Interpolator interpolator = new AccelerateDecelerateInterpolator();
         ObjectAnimator animation = ObjectAnimator.ofFloat(this, "progress", progress);
         animation.setDuration(2000);
         animation.setInterpolator(interpolator);

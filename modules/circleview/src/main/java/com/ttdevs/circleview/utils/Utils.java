@@ -67,6 +67,6 @@ public class Utils {
      */
     public static int getTextHeight(Paint paint) {
         Paint.FontMetrics fm = paint.getFontMetrics();
-        return (int) Math.ceil(fm.descent - fm.ascent);
+        return (int)Math.ceil(fm.descent - fm.ascent);
     }
 }
