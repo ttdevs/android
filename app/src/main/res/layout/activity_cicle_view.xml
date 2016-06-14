@@ -18,6 +18,13 @@
         android:orientation="vertical"
         android:padding="@dimen/global_dimen_normal">
 
+        <Button
+            android:id="@+id/bt_indicator"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onClick"
+            android:text="indicator" />
+
         <com.ttdevs.circleview.CircleIndicator
             android:id="@+id/ci_1"
             android:layout_width="320dp"

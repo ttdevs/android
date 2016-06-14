@@ -1,15 +1,15 @@
 /*
- * Created by ttdevs at 16-6-12 下午3:37.
+ * Created by ttdevs at 16-6-14 上午9:54.
  * E-mail:ttdevs@gmail.com
  * https://github.com/ttdevs
  * Copyright (c) 2016 ttdevs
  */
 
-package com.ttdevs.circleview.utils;
+package com.ttdevs.circleview;
 
 import android.graphics.Paint;
 
-public class Utils {
+public class ViewUtils {
 
     /**
      * 计算圆弧长度
@@ -19,7 +19,7 @@ public class Utils {
      * @return
      */
     public static float getCirclePathLength(float radius, float angle) {
-        angle = Utils.changeAngleToSingle(angle);
+        angle = ViewUtils.changeAngleToSingle(angle);
         return (float) (Math.PI * radius * angle / 180);
     }
 
