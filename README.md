@@ -12,6 +12,7 @@ Android
 |----sqlcipher
 |--doc
 |--modules
+|----circleview
 |----jniutils
 |----markdown
 |----reactive
