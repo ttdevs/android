@@ -323,8 +323,19 @@ public class BaseCircle extends View {
         postInvalidate();
     }
 
+    /**
+     * 设置内容的颜色值（非resource的id）
+     *
+     * @param contentColor
+     * @param unitColor
+     */
+    public void setContentColor(int contentColor, int unitColor) {
+        mContentColor = contentColor;
+        mUnitColor = unitColor;
+    }
+
     public void setIndicator(float indicator) {
-        Log.e("indicator", String.valueOf(indicator));
+        // Log.e("indicator", String.valueOf(indicator));
 
         if (indicator <= mStartIndicator) {
             mIndicator = mStartIndicator;

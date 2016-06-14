@@ -12,6 +12,10 @@ import android.view.View;
 
 import com.ttdevs.circleview.CircleIndicator;
 import com.ttdevs.circleview.CircleProgress;
+import com.ttdevs.circleview.IndicatorItem;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -65,6 +69,45 @@ public class CircleViewActivity extends BaseActivity implements View.OnClickList
     }
 
     private void testIndicator() {
+        int mCircleGreen = getResources().getColor(com.ttdevs.circleview.R.color.circle_green);
+        int mCircleYellow = getResources().getColor(com.ttdevs.circleview.R.color.circle_yellow);
+        int mCircleRed = getResources().getColor(com.ttdevs.circleview.R.color.circle_red);
 
+        List<IndicatorItem> dividerIndicator = new ArrayList<>();
+        IndicatorItem item1 = new IndicatorItem();
+        item1.start = 5;
+        item1.end = 13;
+        item1.value = "过低";
+        item1.color = mCircleYellow;
+        dividerIndicator.add(item1);
+
+        IndicatorItem item2 = new IndicatorItem();
+        item2.start = 13;
+        item2.end = 20;
+        item2.value = "正常";
+        item2.color = mCircleGreen;
+        dividerIndicator.add(item2);
+
+        IndicatorItem item3 = new IndicatorItem();
+        item3.start = 20;
+        item3.end = 35;
+        item3.value = "过高";
+        item3.color = mCircleYellow;
+        dividerIndicator.add(item3);
+
+        IndicatorItem item4 = new IndicatorItem();
+        item4.start = 35;
+        item4.end = 60;
+        item4.value = "超级高";
+        item4.color = mCircleRed;
+        dividerIndicator.add(item4);
+
+        String title = "体脂率";
+        String content = "23";
+        String unit = "％";
+        String alert = "体脂过高";
+        ci1.setContentColor(mCircleRed, mCircleRed);
+        ci1.setContent(title, content, unit, alert);
+        ci1.setIndicatorValue(dividerIndicator, 19);
     }
 }
