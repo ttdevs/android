@@ -8,7 +8,6 @@
 package com.ttdevs.circleview;
 
 import android.animation.ObjectAnimator;
-import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
@@ -18,9 +17,7 @@ import android.graphics.Path;
 import android.graphics.RectF;
 import android.text.TextUtils;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
-import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AnticipateOvershootInterpolator;
 import android.view.animation.Interpolator;
 
@@ -176,14 +173,11 @@ public class BaseCircle extends View {
         line.setColor(mCircleGray);
         line.setStyle(Paint.Style.STROKE);
 
-        int lineY = 0, startX = 0, startY = 0, stopX = 0, stopY = 0;
-        startX = getCenterX() - (int) (radius * Math.sin(Math.PI / 4)) + mDividerWidth;
-        stopX = getCenterX() + (int) (radius * Math.sin(Math.PI / 4)) - mDividerWidth;
-        lineY = getCenterY() + (int) (radius * Math.sin(Math.PI / 4));
+        int startX = getCenterX() - (int) (radius * Math.sin(Math.PI / 4)) + mDividerWidth;
+        int stopX = getCenterX() + (int) (radius * Math.sin(Math.PI / 4)) - mDividerWidth;
+        int lineY = getCenterY() + (int) (radius * Math.sin(Math.PI / 4));
         lineY += mDividerWidth / 2; // 矫正，不矫正会偏下
-        startY = lineY;
-        stopY = lineY;
-        canvas.drawLine(startX, startY, stopX, stopY, line);
+        canvas.drawLine(startX, lineY, stopX, lineY, line);
 
         Paint alertPaint = new Paint();
         alertPaint.setTextSize(getResources().getDimension(R.dimen.alert_indicator_size));
@@ -326,17 +320,20 @@ public class BaseCircle extends View {
     /**
      * 设置内容的颜色值（非resource的id）
      *
-     * @param contentColor
-     * @param unitColor
+     * @param contentColor 内容的颜色值
+     * @param unitColor    单位的颜色值
      */
     public void setContentColor(int contentColor, int unitColor) {
         mContentColor = contentColor;
         mUnitColor = unitColor;
     }
 
+    /**
+     * 设置进度
+     *
+     * @param indicator 进度值
+     */
     public void setIndicator(float indicator) {
-        // Log.e("indicator", String.valueOf(indicator));
-
         if (indicator <= mStartIndicator) {
             mIndicator = mStartIndicator;
         } else if (indicator > mEndIndicator) {
@@ -347,6 +344,11 @@ public class BaseCircle extends View {
         postInvalidate();
     }
 
+    /**
+     * 获取进度
+     *
+     * @return 当前进度值
+     */
     public float getIndicator() {
         return mStartIndicator;
     }
@@ -359,7 +361,13 @@ public class BaseCircle extends View {
         animation.start();
     }
 
-    public static final String formatNumber(float value) {
+    /**
+     * 格式化float不显示.0：1.2 >> 1.2, 1.0 >> 1
+     *
+     * @param value 要处理的数字
+     * @return
+     */
+    public static String formatNumber(float value) {
         int temp = (int) value;
         if (value > temp) {
             return String.valueOf(value);

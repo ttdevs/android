@@ -63,8 +63,6 @@ public class CircleProgress extends BaseCircle {
         Path path = new Path();
         path.addCircle(getCenterX(), getCenterY(), radius, Path.Direction.CW);//顺时针绘制（or CCW）
 
-        // canvas.drawPath(path, textPaint); // TODO: 16/6/12
-
         // 画第一个数字
         String content = formatNumber(mStartIndicator);
         float hOffset = ViewUtils.getCirclePathLength(radius, CIRCLE_START_ANGLE);

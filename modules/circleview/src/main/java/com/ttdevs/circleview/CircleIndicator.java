@@ -126,7 +126,7 @@ public class CircleIndicator extends BaseCircle {
         circlePaint.setStrokeWidth(textHeight + CIRCLE_STROKE_WIDTH);
         circlePaint.setStyle(Paint.Style.STROKE);
 
-        if (mDividerIndicator.size() == 0) { // TODO: 16/6/14
+        if (mDividerIndicator.size() == 0) {
             circlePaint.setStrokeCap(Paint.Cap.ROUND);
             circlePaint.setColor(mCircleGray);
             canvas.drawArc(oval, CIRCLE_START_ANGLE, CIRCLE_SWEEP_ANGLE, false, circlePaint);
