@@ -103,6 +103,12 @@ public class BaseCircle extends View {
     }
 
     @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        int specSize = MeasureSpec.getSize(widthMeasureSpec);
+        setMeasuredDimension(specSize, specSize);
+    }
+
+    @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
 
