@@ -10,9 +10,10 @@ package com.ttdevs.android;
 import android.os.Bundle;
 import android.view.View;
 
-import com.ttdevs.circleview.CircleIndicator;
-import com.ttdevs.circleview.CircleProgress;
-import com.ttdevs.circleview.IndicatorItem;
+import com.ttdevs.indicator.CircleIndicator;
+import com.ttdevs.indicator.CircleProgress;
+import com.ttdevs.indicator.IndicatorItem;
+import com.ttdevs.indicator.LineIndicator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +33,9 @@ public class CircleViewActivity extends BaseActivity implements View.OnClickList
     @Bind(R.id.cp_3)
     CircleProgress cp3;
 
+    @Bind(R.id.li_progress)
+    LineIndicator liProgress;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +47,9 @@ public class CircleViewActivity extends BaseActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.bt_line:
+                testLineProgress();
+                break;
             case R.id.bt_progress:
                 testProgress();
                 break;
@@ -55,13 +62,22 @@ public class CircleViewActivity extends BaseActivity implements View.OnClickList
         }
     }
 
+    private void testLineProgress() {
+        String leftAlert = "开始";
+        String leftContent = "60.0公斤";
+        String rightAlert = "目标";
+        String rightContent = "50.0公斤";
+        liProgress.setContent(leftAlert, leftContent, rightAlert, rightContent);
+        liProgress.setIndicator(60f, 50.0f, 53, "");
+    }
+
     private void testProgress() {
         String title = "身体年龄";
         String content = "23";
         String unit = "岁";
         String alert = "显年轻4岁";
         cp1.setContent(title, content, unit, alert);
-        cp1.setIndicatorValue(10f, 60f, 33f, 29f, 20, 30, 40, 50);
+        cp1.setIndicatorValue(10f, 60f, 33f, "实际年龄", 29f, 20, 30, 40, 50);
         cp2.setContent(title, content, unit, alert);
         cp2.setIndicatorValue(10f, 60f, 33f, 29f, 20, 30, 40, 50);
         cp3.setContent(title, content, unit, alert);
@@ -69,9 +85,9 @@ public class CircleViewActivity extends BaseActivity implements View.OnClickList
     }
 
     private void testIndicator() {
-        int mCircleGreen = getResources().getColor(com.ttdevs.circleview.R.color.circle_green);
-        int mCircleYellow = getResources().getColor(com.ttdevs.circleview.R.color.circle_yellow);
-        int mCircleRed = getResources().getColor(com.ttdevs.circleview.R.color.circle_red);
+        int mCircleGreen = getResources().getColor(com.ttdevs.indicator.R.color.circle_green);
+        int mCircleYellow = getResources().getColor(com.ttdevs.indicator.R.color.circle_yellow);
+        int mCircleRed = getResources().getColor(com.ttdevs.indicator.R.color.circle_red);
 
         List<IndicatorItem> dividerIndicator = new ArrayList<>();
         IndicatorItem item1 = new IndicatorItem();

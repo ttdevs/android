@@ -16,5 +16,4 @@ include ':apps:sqlcipher'
 include 'modules:jniutils'
 include 'modules:markdown'
 include 'modules:reactive'
-include 'modules:circleview'
-
+include 'modules:indicator'

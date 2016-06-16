@@ -1,0 +1,36 @@
+/*
+ * Created by ttdevs at 16-6-16 下午4:42.
+ * E-mail:ttdevs@gmail.com
+ * https://github.com/ttdevs
+ * Copyright (c) 2016 ttdevs
+ */
+
+apply plugin: 'com.android.library'
+
+def cfg = rootProject.ext.projectConfig
+def support = rootProject.ext.projectSupport
+def libs = rootProject.ext.projectLibraries
+
+android {
+    compileSdkVersion cfg.compileSdkVersion
+    buildToolsVersion cfg.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion cfg.minSdkVersion
+        targetSdkVersion cfg.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile libs.junit
+
+}

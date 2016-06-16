@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Created by ttdevs at 16-6-16 下午4:42.
+  ~ E-mail:ttdevs@gmail.com
+  ~ https://github.com/ttdevs
+  ~ Copyright (c) 2016 ttdevs
+  -->
+
+<resources>
+    <dimen name="divider_width">16dp</dimen>
+
+    <dimen name="out_indicator_size">12sp</dimen>
+
+    <dimen name="title_indicator_size">17sp</dimen>
+    <dimen name="content_indicator_size">36sp</dimen>
+    <dimen name="unit_indicator_size">24sp</dimen>
+    <dimen name="alert_indicator_size">14sp</dimen>
+
+    <dimen name="center_circle_out">20dp</dimen>
+    <dimen name="center_circle_middle">12dp</dimen>
+    <dimen name="center_circle_inside">6dp</dimen>
+
+    <dimen name="line_alert_size">12sp</dimen>
+    <dimen name="line_indicator_size">14sp</dimen>
+</resources>
