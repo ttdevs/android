@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Created by ttdevs at 16-6-16 下午4:42.
   ~ E-mail:ttdevs@gmail.com
   ~ https://github.com/ttdevs
@@ -20,6 +19,7 @@
     <dimen name="center_circle_middle">12dp</dimen>
     <dimen name="center_circle_inside">6dp</dimen>
 
+    <!-- LineIndicator -->
     <dimen name="line_alert_size">12sp</dimen>
-    <dimen name="line_indicator_size">14sp</dimen>
+    <dimen name="line_indicator_text_size">14sp</dimen>
 </resources>

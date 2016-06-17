@@ -74,4 +74,9 @@ public class ViewUtils {
         Paint.FontMetrics fm = paint.getFontMetrics();
         return (int)Math.ceil(fm.bottom - fm.top);
     }
+
+    public static int getTextBaseLine(Paint paint) {
+        Paint.FontMetrics fm = paint.getFontMetrics();
+        return (int)Math.abs(fm.bottom);
+    }
 }

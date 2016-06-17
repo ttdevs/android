@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Created by ttdevs at 16-6-16 下午4:42.
   ~ E-mail:ttdevs@gmail.com
   ~ https://github.com/ttdevs
@@ -8,25 +7,30 @@
 
 <resources>
     <color name="normal_gray">#FFDFDFDF</color>
-    <color name="circle_background">#FFFFFFFF</color>
+    <color name="normal_white">#FFFFFFFF</color>
+    <color name="normal_green">#FF62CC74</color>
+    <color name="normal_red">#FFF96650</color>
+    <color name="normal_yellow">#FFFFCC00</color>
+    <color name="circle_background">@color/normal_white</color>
 
-    <color name="circle_title">#FFDFDFDF</color>
-    <color name="circle_alert">#FFDFDFDF</color>
-    <color name="circle_content">#FF62CC74</color>
-    <color name="circle_unit">#FF62CC74</color>
+    <color name="circle_title">@color/normal_gray</color>
+    <color name="circle_alert">@color/normal_gray</color>
+    <color name="circle_content">@color/normal_green</color>
+    <color name="circle_unit">@color/normal_green</color>
 
-    <color name="circle_gray">#FFDFDFDF</color>
-    <color name="circle_green">#FF62CC74</color>
-    <color name="circle_yellow">#FFFFCC00</color>
-    <color name="circle_red">#FFF96650</color>
-    <color name="circle_white">#FFFFFFFF</color>
+    <color name="circle_gray">@color/normal_gray</color>
+    <color name="circle_green">@color/normal_green</color>
+    <color name="circle_yellow">@color/normal_yellow</color>
+    <color name="circle_red">@color/normal_red</color>
+    <color name="circle_white">@color/normal_white</color>
 
     <color name="indicator_center">#FFD8D5D5</color>
     <color name="indicator_light">#FFEFEFEF</color>
-    <color name="indicator_gray">#FFDFDFDF</color>
+    <color name="indicator_gray">@color/normal_gray</color>
 
-    <color name="line_alert">#FFDFDFDF</color>
-    <color name="line_indicator_bg">#FFDFDFDF</color>
-    <color name="line_indicator_progress">#FF62CC74</color>
-    <color name="line_indicator_text">#FFFFFFFF</color>
+    <color name="line_alert_color">@color/normal_gray</color>
+    <color name="line_progress_background">@color/normal_gray</color>
+    <color name="line_progress_color">@color/normal_green</color>
+    <color name="line_indicator_text_color">@color/normal_white</color>
+    <color name="line_indicator_background">@color/normal_green</color>
 </resources>

@@ -6,11 +6,12 @@
   -->
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFF4F4EC"
-    tools:context=".CircleViewActivity">
+    tools:context=".IndicatorViewActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -30,7 +31,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/global_dimen_normal"
-            android:layout_marginTop="@dimen/global_dimen_normal" />
+            android:layout_marginTop="@dimen/global_dimen_normal"
+            app:lineAlertColor="@color/normal_red" />
 
         <Button
             android:id="@+id/bt_indicator"

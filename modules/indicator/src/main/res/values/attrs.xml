@@ -6,19 +6,15 @@
   -->
 
 <resources>
-    <!-- Swipe Back Layout -->
-    <declare-styleable name="SwipeBackLayout">
-        <attr name="edge_size" format="dimension" />
-        <attr name="edge_flag">
-            <enum name="left" value="0" />
-            <enum name="right" value="1" />
-            <enum name="bottom" value="2" />
-            <enum name="all" value="3" />
-        </attr>
-        <attr name="shadow_left" format="reference" />
-        <attr name="shadow_right" format="reference" />
-        <attr name="shadow_bottom" format="reference" />
-    </declare-styleable>
+    <!--<declare-styleable name="SwipeBackLayout">-->
+    <!--<attr name="edge_flag">-->
+    <!--<enum name="left" value="0" />-->
+    <!--<enum name="right" value="1" />-->
+    <!--<enum name="bottom" value="2" />-->
+    <!--<enum name="all" value="3" />-->
+    <!--</attr>-->
+    <!--<attr name="shadow_bottom" format="reference" />-->
+    <!--</declare-styleable>-->
 
     <!-- CircleIndicator & CircleProgress -->
     <declare-styleable name="CircleView">
@@ -44,5 +40,16 @@
         <attr name="circle_alert" format="color" />
         <attr name="circle_content" format="color" />
         <attr name="circle_unit" format="color" />
+    </declare-styleable>
+
+    <!-- Line Indicator -->
+    <declare-styleable name="LineIndicator">
+        <attr name="lineAlertColor" format="color" />
+        <attr name="lineAlertSize" format="dimension" />
+        <attr name="lineProgressBackground" format="color" />
+        <attr name="lineProgressColor" format="color" />
+        <attr name="lineIndicatorTextSize" format="dimension" />
+        <attr name="lineIndicatorTextColor" format="color" />
+        <attr name="lineIndicatorBackground" format="color" />
     </declare-styleable>
 </resources>

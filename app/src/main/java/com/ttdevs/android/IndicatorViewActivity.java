@@ -21,7 +21,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class CircleViewActivity extends BaseActivity implements View.OnClickListener {
+public class IndicatorViewActivity extends BaseActivity implements View.OnClickListener {
 
     @Bind(R.id.ci_1)
     CircleIndicator ci1;
@@ -68,7 +68,7 @@ public class CircleViewActivity extends BaseActivity implements View.OnClickList
         String rightAlert = "目标";
         String rightContent = "50.0公斤";
         liProgress.setContent(leftAlert, leftContent, rightAlert, rightContent);
-        liProgress.setIndicator(60f, 50.0f, 53, "");
+        liProgress.setIndicator(60f, 50.0f, 55);
     }
 
     private void testProgress() {
