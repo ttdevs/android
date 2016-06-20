@@ -19,32 +19,32 @@
     <!-- CircleIndicator & CircleProgress -->
     <declare-styleable name="CircleView">
         <attr name="circle_divider_width" format="dimension" />
+        <attr name="circle_normal_gray" format="color" />
 
         <attr name="circle_out_indicator_size" format="dimension" />
-        <attr name="circle_title_indicator_size" format="dimension" />
-        <attr name="circle_content_indicator_size" format="dimension" />
-        <attr name="circle_unit_indicator_size" format="dimension" />
-        <attr name="circle_alert_indicator_size" format="dimension" />
+
+        <attr name="circle_title_size" format="dimension" />
+        <attr name="circle_content_size" format="dimension" />
+        <attr name="circle_unit_size" format="dimension" />
+        <attr name="circle_alert_size" format="dimension" />
 
         <attr name="circle_center_out" format="dimension" />
         <attr name="circle_center_middle" format="dimension" />
         <attr name="circle_center_inside" format="dimension" />
-
-        <attr name="circle_normal_gray" format="color" />
 
         <attr name="circle_indicator_center" format="color" />
         <attr name="circle_indicator_light" format="color" />
         <attr name="circle_indicator_gray" format="color" />
 
         <attr name="circle_title" format="color" />
-        <attr name="circle_alert" format="color" />
         <attr name="circle_content" format="color" />
         <attr name="circle_unit" format="color" />
+        <attr name="circle_alert" format="color" />
     </declare-styleable>
 
     <!-- Line Indicator -->
     <declare-styleable name="LineIndicator">
-        <attr name="lineAlertColor" format="color" />
+        <attr name="lineAlertColor" format="color|reference" />
         <attr name="lineAlertSize" format="dimension" />
         <attr name="lineProgressBackground" format="color" />
         <attr name="lineProgressColor" format="color" />

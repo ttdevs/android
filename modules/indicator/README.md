@@ -1,4 +1,4 @@
-#   自定义View——Indicator View
+#   自定义View——IndicatorView
 
 ## 0x00 main
 

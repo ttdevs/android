@@ -61,10 +61,9 @@ public class CircleIndicator extends BaseCircle {
      */
     private void drawOutSideText(Canvas canvas) {
         Paint textPaint = new Paint();
-        textPaint.setColor(mNormalGray);
         textPaint.setAntiAlias(true);
-        textPaint.setTextSize(getResources().getDimension(R.dimen.out_indicator_size));
-        textPaint.setStyle(Paint.Style.STROKE);
+        textPaint.setTextSize(mOutIndicatorSize);
+        textPaint.setColor(mNormalGray);
 
         int radius = getViewRadius() - mDividerWidth; // 文字所在圆环半径
 
@@ -100,10 +99,9 @@ public class CircleIndicator extends BaseCircle {
      */
     private void drawCircle(Canvas canvas) {
         Paint textPaint = new Paint();
-        textPaint.setColor(mCircleWhite);
         textPaint.setAntiAlias(true);
-        textPaint.setTextSize(getResources().getDimension(R.dimen.out_indicator_size));
-        textPaint.setStyle(Paint.Style.STROKE);
+        textPaint.setColor(mCircleWhite);
+        textPaint.setTextSize(mOutIndicatorSize); // TODO: 16/6/20
 
         float textHeight = ViewUtils.getTextHeight(textPaint);
         float perAngle = CIRCLE_SWEEP_ANGLE / (mEndIndicator - mStartIndicator);

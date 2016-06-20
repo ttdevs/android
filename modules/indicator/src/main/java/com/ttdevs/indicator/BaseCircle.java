@@ -78,18 +78,18 @@ public class BaseCircle extends View {
 
         TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.CircleView);
         mDividerWidth = (int) typedArray.getDimension(R.styleable.CircleView_circle_out_indicator_size, mDividerWidth);
+        mNormalGray = typedArray.getColor(R.styleable.CircleView_circle_normal_gray, mNormalGray);
 
         mOutIndicatorSize = (int) typedArray.getDimension(R.styleable.CircleView_circle_out_indicator_size, mOutIndicatorSize);
-        mTitleSize = (int) typedArray.getDimension(R.styleable.CircleView_circle_title_indicator_size, mTitleSize);
-        mContentSize = (int) typedArray.getDimension(R.styleable.CircleView_circle_content_indicator_size, mContentSize);
-        mUnitSize = (int) typedArray.getDimension(R.styleable.CircleView_circle_unit_indicator_size, mUnitSize);
-        mAlertSize = (int) typedArray.getDimension(R.styleable.CircleView_circle_alert_indicator_size, mAlertSize);
+
+        mTitleSize = (int) typedArray.getDimension(R.styleable.CircleView_circle_title_size, mTitleSize);
+        mContentSize = (int) typedArray.getDimension(R.styleable.CircleView_circle_content_size, mContentSize);
+        mUnitSize = (int) typedArray.getDimension(R.styleable.CircleView_circle_unit_size, mUnitSize);
+        mAlertSize = (int) typedArray.getDimension(R.styleable.CircleView_circle_alert_size, mAlertSize);
 
         mCenterCircleOut = (int) typedArray.getDimension(R.styleable.CircleView_circle_center_out, mCenterCircleOut);
         mCenterCircleMiddle = (int) typedArray.getDimension(R.styleable.CircleView_circle_center_middle, mCenterCircleMiddle);
         mCenterCircleInside = (int) typedArray.getDimension(R.styleable.CircleView_circle_center_inside, mCenterCircleInside);
-
-        mNormalGray = typedArray.getColor(R.styleable.CircleView_circle_normal_gray, mNormalGray);
 
         mIndicatorCenter = typedArray.getColor(R.styleable.CircleView_circle_indicator_center, mIndicatorCenter);
         mIndicatorGray = typedArray.getColor(R.styleable.CircleView_circle_indicator_gray, mIndicatorGray);
@@ -105,7 +105,7 @@ public class BaseCircle extends View {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int specSize = MeasureSpec.getSize(widthMeasureSpec);
-        setMeasuredDimension(specSize, specSize);
+        setMeasuredDimension(specSize, specSize); // 参考宽，处理成正方形
     }
 
     @Override
@@ -150,8 +150,8 @@ public class BaseCircle extends View {
         path.addCircle(getCenterX(), getCenterY(), radius, Path.Direction.CW);
 
         Paint paint = new Paint();
-        paint.setColor(mCircleGray);
         paint.setAntiAlias(true);
+        paint.setColor(mCircleGray);
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(1);
         canvas.drawPath(path, paint);
@@ -167,7 +167,7 @@ public class BaseCircle extends View {
 
         Paint titlePaint = new Paint();
         titlePaint.setAntiAlias(true);
-        titlePaint.setTextSize(getResources().getDimension(R.dimen.title_indicator_size));
+        titlePaint.setTextSize(mTitleSize);
         titlePaint.setColor(mTitleColor);
 
         int titleX = getCenterX() - ViewUtils.getTextWidth(titlePaint, mTitle) / 2;
@@ -177,7 +177,6 @@ public class BaseCircle extends View {
         Paint line = new Paint();
         line.setStrokeWidth(3);
         line.setColor(mCircleGray);
-        line.setStyle(Paint.Style.STROKE);
 
         int startX = getCenterX() - (int) (radius * Math.sin(Math.PI / 4)) + mDividerWidth;
         int stopX = getCenterX() + (int) (radius * Math.sin(Math.PI / 4)) - mDividerWidth;
@@ -187,7 +186,7 @@ public class BaseCircle extends View {
 
         Paint alertPaint = new Paint();
         alertPaint.setAntiAlias(true);
-        alertPaint.setTextSize(getResources().getDimension(R.dimen.alert_indicator_size));
+        alertPaint.setTextSize(mAlertSize);
         alertPaint.setColor(mAlertColor);
 
         int lineMargin = mDividerWidth * 3 / 2; // 距离分割横线的距离
@@ -198,14 +197,13 @@ public class BaseCircle extends View {
 
         Paint contentPaint = new Paint();
         contentPaint.setAntiAlias(true);
-        contentPaint.setTextSize(getResources().getDimension(R.dimen.content_indicator_size));
+        contentPaint.setTextSize(mContentSize);
         contentPaint.setColor(mContentColor);
 
         Paint unitPaint = new Paint();
         unitPaint.setAntiAlias(true);
-        unitPaint.setTextSize(getResources().getDimension(R.dimen.unit_indicator_size));
+        unitPaint.setTextSize(mUnitSize);
         unitPaint.setColor(mContentColor);
-        unitPaint.setStyle(Paint.Style.STROKE);
 
         int contentWidth = ViewUtils.getTextWidth(contentPaint, mContent);
         if (!TextUtils.isEmpty(mUnit)) {

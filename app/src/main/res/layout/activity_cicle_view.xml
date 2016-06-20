@@ -31,8 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/global_dimen_normal"
-            android:layout_marginTop="@dimen/global_dimen_normal"
-            app:lineAlertColor="@color/normal_red" />
+            android:layout_marginTop="@dimen/global_dimen_normal" />
 
         <Button
             android:id="@+id/bt_indicator"
