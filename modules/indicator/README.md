@@ -7,14 +7,14 @@
 
 这不，新的需求又来了。废话不多说，先上设计稿：
 
-![boohee](IndicatorView/boohee_design.png)
+![boohee](boohee_design.png)
 
 简单分析上图包括三部分：最上面的类Progressbar，中间两个指示盘和最下面的指示盘。第一个类Progressbar我们项目之前有实现过，但是和这个需求有一些差异，因此决定重新实现一遍。另外两个圆形指示盘本想通过在一张背景图片上放一张指针图，控制指针图的旋转来实现，但是考虑到这样不够灵活，因此也决定自己来画。So，我们接下来实现这三个View。
 
 正式开始之前，先看看我们最终效果图（当然，指针是可以动的）：
 
-![boohee](IndicatorView/result_1.png)
-![boohee](IndicatorView/result_2.png)
+![boohee](result_1.png)
+![boohee](result_2.png)
 
 ## 0x01 分析
 
