@@ -21,6 +21,8 @@ import android.view.animation.AnticipateOvershootInterpolator;
 import android.view.animation.Interpolator;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.text.NumberFormat;
 
 
@@ -120,11 +122,16 @@ public class LineIndicator extends View {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int textHeight = ViewUtils.getTextHeight(mAlertTextPaint);
 
-        int height = textHeight;
+        int height = 0;
+        if (!TextUtils.isEmpty(mLeftAlert) || !TextUtils.isEmpty(mRightAlert)) {
+            height += textHeight;
+        }
         height += LINE_MARGIN;
         height += STROKE_WIDTH * 2;
         height += LINE_MARGIN;
-        height += textHeight;
+        if (!TextUtils.isEmpty(mLeftContent) || !TextUtils.isEmpty(mRightContent)) {
+            height += textHeight;
+        }
 
         setMeasuredDimension(MeasureSpec.getSize(widthMeasureSpec), height);
     }
