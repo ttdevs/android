@@ -43,39 +43,6 @@ task.onSuccessTask();		//
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ## The `continueWith` 方法
 
 每个任务都有一个continueWith方法，这个方法在任务完成后执行。
