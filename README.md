@@ -42,7 +42,9 @@ Android
 ## [indicator][indicator_md]
 
 一个自定义View，展示效果如下：
+
 ![indicator_line](modules/indicator/indicator_line.png)
+
 ![indicator_progress](modules/indicator/indicator_progress.png)
 
 ## [jniutils][jniutils_md]
