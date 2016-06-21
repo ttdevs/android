@@ -79,7 +79,7 @@ Android
 [sqlcipher_md]:src/main/java/com/ttdevs/demo/sqlcipher/README.md
 [sqlcipher_src]:https://github.com/sqlcipher/android-database-sqlcipher
 [sqlcipher_blog]:http://blog.csdn.net/ttdevs/article/details/50700630
-[conceal_md]:src/main/java/com/ttdevs/demo/conceal/README.md
+[conceal_md]:app/src/main/java/com/ttdevs/android/conceal/README.md
 [conceal_src]:https://github.com/facebook/conceal
 [endless]:http://blog.csdn.net/ttdevs/article/details/48194885
 [indicator_md]:modules/indicator/README.md
