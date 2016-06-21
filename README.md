@@ -43,13 +43,13 @@ Android
 
 一个自定义View，展示效果如下：
 ![indicator_line](modules/indicator/indicator_line.png)
-![indicator_progress](modules/indicator/src/indicator_progress.png)
+![indicator_progress](modules/indicator/indicator_progress.png)
 
-## [jniutils][]
+## [jniutils][jniutils_md]
 
-## [markdown][]
+## [markdown][markdown_md]
 
-## [reactive][]
+## [reactive][reactive_md]
 
 # Tools
 
@@ -80,4 +80,7 @@ Android
 [conceal_md]:src/main/java/com/ttdevs/demo/conceal/README.md
 [conceal_src]:https://github.com/facebook/conceal
 [endless]:http://blog.csdn.net/ttdevs/article/details/48194885
-[indicator_md]:modules/indicator/src/README.md
+[indicator_md]:modules/indicator/README.md
+[jniutils_md]:modules/jniutils/README.md
+[markdown_md]:modules/markdown/README.md
+[reactive_md]:modules/reactive/README.md
