@@ -73,10 +73,10 @@ Android
 
 
 ------
-[bolts_md]:src/main/java/com/ttdevs/demo/bolts/README.md
+[bolts_md]:apps/bolts/README.md
 [bolts_src]:https://github.com/BoltsFramework/Bolts-Android
 [rxjava_src]:https://github.com/ReactiveX/RxJava
-[sqlcipher_md]:src/main/java/com/ttdevs/demo/sqlcipher/README.md
+[sqlcipher_md]:apps/sqlcipher/README.md
 [sqlcipher_src]:https://github.com/sqlcipher/android-database-sqlcipher
 [sqlcipher_blog]:http://blog.csdn.net/ttdevs/article/details/50700630
 [conceal_md]:app/src/main/java/com/ttdevs/android/conceal/README.md
