@@ -59,7 +59,7 @@ Android
 
 [Conceal][conceal_src]，一个本地文件加密工具类。
 
-## [Endless][endless]
+## [Endless][endless_md]
 
 自己实现的 `RecycleView` 的onLoadMore。
 
@@ -81,7 +81,8 @@ Android
 [sqlcipher_blog]:http://blog.csdn.net/ttdevs/article/details/50700630
 [conceal_md]:app/src/main/java/com/ttdevs/android/conceal/README.md
 [conceal_src]:https://github.com/facebook/conceal
-[endless]:http://blog.csdn.net/ttdevs/article/details/48194885
+[endless_md]:app/src/main/java/com/ttdevs/android/endless/README.md
+[endless_blog]:http://blog.csdn.net/ttdevs/article/details/48194885
 [indicator_md]:modules/indicator/README.md
 [jniutils_md]:modules/jniutils/README.md
 [markdown_md]:modules/markdown/README.md
