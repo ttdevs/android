@@ -9,8 +9,8 @@ ext {
 
     projectConfig = [
             applicationId    : "com.ttdevs.android",
-            compileSdkVersion: 23,
-            buildToolsVersion: "23.0.3",
+            compileSdkVersion: 24,
+            buildToolsVersion: "24.0.0",
             minSdkVersion    : 15,
             targetSdkVersion : 22,
             versionCode      : 1,
@@ -18,17 +18,16 @@ ext {
     ]
 
     projectSupport = [
-            "v4"             : "com.android.support:support-v4:23.2.1",
-            "appcompat_v7"   : "com.android.support:appcompat-v7:23.2.1", // 23.+
-            "design"         : "com.android.support:design:23.2.1",
-            "recyclerview_v7": "com.android.support:recyclerview-v7:23.2.1",
-            "cardview_v7"    : "com.android.support:cardview-v7:23.2.1",
+            "v4"             : "com.android.support:support-v4:24.0.0",
+            "appcompat_v7"   : "com.android.support:appcompat-v7:24.0.0",
+            "design"         : "com.android.support:design:24.0.0",
+            "recyclerview_v7": "com.android.support:recyclerview-v7:24.0.0",
+            "cardview_v7"    : "com.android.support:cardview-v7:24.0.0",
             "multidex"       : "com.android.support:multidex:1.0.0",
     ]
 
     projectLibraries = [
             "junit"               : "junit:junit:4.12",
-
             "butterknife"         : "com.jakewharton:butterknife:7.0.1",
             "okhttp"              : "com.squareup.okhttp:okhttp:2.7.5",
             "okhttp_urlconnection": "com.squareup.okhttp:okhttp-urlconnection:2.7.5",
@@ -42,7 +41,8 @@ ext {
             "dbinspector"         : "im.dino:dbinspector:3.1.0@aar",
             "conceal"             : "com.facebook.conceal:conceal:1.0.1@aar",
             "ucrop"               : "com.yalantis:ucrop:1.2.3",
-            "markdownview"        : "us.feras.mdv:markdownview:1.1.0"
+            "markdownview"        : "us.feras.mdv:markdownview:1.1.0",
+            "retrofit2"           : "com.squareup.retrofit2:retrofit:2.1.0"
     ]
 }
 
