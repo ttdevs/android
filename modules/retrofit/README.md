@@ -139,6 +139,8 @@ Call<User> ttdevs = github.userInfo("ttdevs");
 
 这样在运行上面的代码，我们就可以在 Http 请求的 Header 中看到我们加入的信息了。
 
+源码参考：[ttdevs](https://github.com/ttdevs/android/tree/master/modules/retrofit)
+
 参考：
 
 1. https://github.com/square/retrofit
