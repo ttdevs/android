@@ -1,14 +1,18 @@
 /*
- * Created by ttdevs at 16-7-8 下午3:04.
+ * Created by ttdevs at 16-7-14 下午3:28.
  * E-mail:ttdevs@gmail.com
  * https://github.com/ttdevs
  * Copyright (c) 2016 ttdevs
  */
 
-package com.ttdevs.retrofit;
+package com.ttdevs.retrofit.client;
+
+import com.google.gson.Gson;
+import com.ttdevs.retrofit.module.Error;
 
 import java.io.IOException;
 
+import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -16,18 +20,26 @@ import okhttp3.Response;
 /**
  * Created by ttdevs on 16/7/8.
  */
-public class HeadersInterceptor implements Interceptor {
+public class DefaultInterceptor implements Interceptor {
     @Override
     public Response intercept(Chain chain) throws IOException {
         Request original = chain.request();
 
+        HttpUrl url = original.url().newBuilder()
+                .addQueryParameter("token", "eATQzos9vG9hFK4Uk218")
+                .addQueryParameter("user_key", "da4811fa-4526-4168-a598-2a7ceb942982")
+                .build();
+
         Request request = original.newBuilder()
-                .header("User-Agent", "ttdevs")
+                .header("User-Agent", "ttdevs") //https://developer.github.com/v3/#user-agent-required
                 .header("Content-Type", "application/json; charset=utf-8")
                 .header("Accept", "application/json")
-                .header("token", "XXXOOO")
+                .header("Accept", "application/vnd.github.v3+json") //https://developer.github.com/v3/#current-version
+                .header("token", "eATQzos9vG9hFK4Uk218")
+                .header("Time-Zone", "Asia/Shanghai") //https://developer.github.com/v3/#timezones
                 .header("user_key", "haha")
                 .method(original.method(), original.body())
+                .url(url)
                 .build();
 
 
@@ -48,8 +60,12 @@ public class HeadersInterceptor implements Interceptor {
                 response.request().url(),
                 (t2 - t1) / 1e6d, response.headers()
         );
-        System.out.println(responseHeader);
-
+//        System.out.println(responseHeader);
+        if (response.code() >= 400) {
+            String body = response.body().string();
+            Error message = new Gson().fromJson(body, Error.class);
+            System.err.println(message.getMessage());
+        }
         System.out.println("=====================================================");
         return response;
     }

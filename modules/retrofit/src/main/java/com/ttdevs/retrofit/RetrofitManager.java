@@ -7,9 +7,12 @@
 
 package com.ttdevs.retrofit;
 
-import okhttp3.Call;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.ttdevs.retrofit.client.DefaultInterceptor;
+
+import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
-import okhttp3.Request;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -20,19 +23,52 @@ public class RetrofitManager {
 
     private static final String GIT_HUB = "http://api.github.com/";
 
-    private static final OkHttpClient CLIENT = new OkHttpClient.Builder()
-            .addInterceptor(new HeadersInterceptor())
-            .build();
-
-    private static final Retrofit.Builder BUILDER = new Retrofit.Builder()
-            .client(CLIENT)
-            .addConverterFactory(GsonConverterFactory.create());
-
-    public static Retrofit getRetrofit(String url) {
-        return BUILDER.baseUrl(url).build();
+    public static OkHttpClient getDefaultClient() {
+        return getClient(null);
     }
 
-//    public static <T> T createService(Class<T> serviceClass) {
-//        return getRetrofit(GIT_HUB).create(serviceClass);
-//    }
+    public static OkHttpClient getClient(Interceptor interceptor) {
+        OkHttpClient.Builder builder = new OkHttpClient.Builder();
+        if (null != interceptor) {
+            builder.addInterceptor(interceptor);
+        }
+        return builder.build();
+    }
+
+    public static Retrofit getRetrofit() {
+        return getRetrofit(GIT_HUB);
+    }
+
+    public static Retrofit getRetrofit(String url) {
+        return getRetrofit(url, getDefaultClient());
+    }
+
+    public static Retrofit getRetrofit(OkHttpClient client) {
+        return getRetrofit(GIT_HUB, client);
+    }
+
+    public static Retrofit getRetrofit(String url, OkHttpClient client) {
+        Gson gson = new GsonBuilder()
+                .setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
+                .create();
+        Retrofit.Builder builder = new Retrofit.Builder()
+                .addConverterFactory(GsonConverterFactory.create(gson));
+
+        if (null == client) {
+            builder.client(getDefaultClient());
+        } else {
+            builder.client(client);
+        }
+        // TODO: 16/7/14
+        if (null == url || url.length() == 0) {
+            builder.baseUrl(GIT_HUB);
+        } else {
+            builder.baseUrl(url);
+        }
+        return builder.build();
+    }
+
+    public static <T> T createService(Class<T> serviceClass) {
+        return getRetrofit().create(serviceClass);
+    }
 }

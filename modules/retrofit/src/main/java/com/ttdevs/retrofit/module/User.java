@@ -8,7 +8,7 @@
 package com.ttdevs.retrofit.module;
 
 /**
- * Created by ttdevs on 16/7/8.
+ * Github User
  */
 public class User {
 

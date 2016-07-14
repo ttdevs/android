@@ -1,0 +1,39 @@
+/*
+ * Created by ttdevs at 16-7-14 下午3:27.
+ * E-mail:ttdevs@gmail.com
+ * https://github.com/ttdevs
+ * Copyright (c) 2016 ttdevs
+ */
+
+package com.ttdevs.retrofit.service;
+
+
+import java.util.Map;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.http.GET;
+import retrofit2.http.Headers;
+import retrofit2.http.Query;
+import retrofit2.http.QueryMap;
+import retrofit2.http.Url;
+
+public interface ExampleService {
+
+    // http://www.weather.com.cn/adat/sk/101010100.html
+    @Headers("User-Agent: Your-App-Name")
+    @GET
+    public Call<ResponseBody> weatherReport(@Url String url);
+
+    @Headers({
+            "Accept: application/json",
+            "User-Agent: ttdevs"
+    })
+    @GET
+    public Call<ResponseBody> requestWithHeader(@Url String url);
+
+    // http://119.29.29.29/d?dn=one.boohee.com
+    @GET("/d")
+    public Call<ResponseBody> requestWithParams(@Query("dn") String domain,
+                                                @QueryMap(encoded = false) Map<String, String> options);
+}
