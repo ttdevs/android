@@ -13,6 +13,7 @@ import java.util.Map;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.HeaderMap;
 import retrofit2.http.Headers;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
@@ -36,4 +37,14 @@ public interface ExampleService {
     @GET("/d")
     public Call<ResponseBody> requestWithParams(@Query("dn") String domain,
                                                 @QueryMap(encoded = false) Map<String, String> options);
+
+    // http://119.29.29.29/d?dn=ttdevs.vicp.com
+    @GET("/d")
+    public Call<ResponseBody> singleParams(@Query("dn") String domain);
+
+    @GET("/record")
+    public Call<ResponseBody> multiParams(@QueryMap(encoded = false) Map<String, String> options);
+
+    @GET
+    public Call<ResponseBody> requestWithHeaderMap(@Url String url, @HeaderMap Map<String, String> header);
 }

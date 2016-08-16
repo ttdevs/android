@@ -23,4 +23,5 @@
     <string name="title_activity_view_fillper">ViewFillperActivity</string>
     <string name="title_activity_jni">JNIActivity</string>
     <string name="title_activity_router">RouterActivity</string>
+    <string name="title_activity_hybrid_view">HybridViewActivity</string>
 </resources>

@@ -74,4 +74,5 @@ dependencies {
     compile project(':modules:markdown')
     compile project(':modules:reactive')
     compile project(':modules:indicator')
+    compile project(':modules:hybrid')
 }

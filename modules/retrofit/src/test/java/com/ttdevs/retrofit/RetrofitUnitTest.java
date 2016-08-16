@@ -25,6 +25,7 @@ import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.ResponseBody;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -205,7 +206,80 @@ public class RetrofitUnitTest {
         print(response.body().getName());
     }
 
+    @Test
+    public void requestLogging() throws Exception {
+        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+        logging.setLevel(HttpLoggingInterceptor.Level.BASIC);
+//        logging.setLevel(HttpLoggingInterceptor.Level.HEADERS);
+//        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+
+        OkHttpClient client = RetrofitManager.getClient(logging);
+
+        Retrofit retrofit = RetrofitManager.getRetrofit(client);
+        ExampleService service = retrofit.create(ExampleService.class);
+
+        String url = "http://www.weather.com.cn/adat/sk/101020100.html";
+        Call<ResponseBody> example = service.requestWithHeader(url);
+
+        final CountDownLatch countDownLatch = new CountDownLatch(1);
+        example.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    print(response.body().string());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                countDownLatch.countDown();
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                countDownLatch.countDown();
+            }
+        });
+        countDownLatch.await();
+    }
+
+    /**
+     * 使用：<br/>
+     * <pre>
+     *     @HeaderMap Map<String, String> header
+     * </pre>
+     *
+     * @throws Exception
+     */
+    @Test
+    public void requestWithHeaderMap() throws Exception {
+        Retrofit retrofit = RetrofitManager.getRetrofit();
+        ExampleService service = retrofit.create(ExampleService.class);
+
+        Map<String, String> header = new HashMap<>();
+        header.put("model", "MX4 Pro");
+        header.put("version", "Android 5.1.1");
+
+        String url = "http://www.weather.com.cn/adat/sk/101020100.html";
+        Call<ResponseBody> example = service.requestWithHeaderMap(url, header);
+        Response<ResponseBody> response = example.execute();
+        print(response.body().string());
+    }
+
     public static void print(String message) {
         System.out.println(message);
+    }
+
+
+    @Test
+    public void javaTest() throws Exception {
+        final String[] keys = {"carbohydrate,碳水化合物"};
+
+        for (String keyValue : keys) {
+            System.out.println(keyValue);
+            String key = keyValue.split(",")[0];
+            String value = keyValue.split(",")[1];
+            System.out.println(key );
+            System.out.println(value);
+        }
     }
 }
