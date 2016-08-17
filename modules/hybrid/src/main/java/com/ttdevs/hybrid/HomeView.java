@@ -14,6 +14,7 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.LinearInterpolator;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -48,6 +49,7 @@ public class HomeView extends LinearLayout {
         setOrientation(VERTICAL);
 
         mChildHeader = new ChildView(context);
+        mChildHeader.setVerticalScrollBarEnabled(true);
         mWebView = new ChildWebView(context);
 
         addView(mChildHeader, new LayoutParams(
@@ -121,37 +123,13 @@ public class HomeView extends LinearLayout {
         countViewSize(mChildHeader);
     }
 
+    private int mActivePointerId;
+    private float mLastMotionY;
+    private int mMove;
+
     @Override
     public boolean onInterceptTouchEvent(MotionEvent event) {
         print("dispatchTouchEvent:" + event.getAction());
-        printViewHeight();
-
-        // TODO: 16/8/15
-        // header可见，     webview不可见：     不处理
-        // header可见，     webview可见：      （上滑：webview停靠顶端；下滑：webview消失）
-        // header不可见，   webview可见：     （上滑：webview处理；下滑：header显示）
-        final int action = event.getAction();
-        switch (action) {
-            case MotionEvent.ACTION_DOWN:
-                break;
-            case MotionEvent.ACTION_MOVE:
-                break;
-            case MotionEvent.ACTION_UP:
-                break;
-
-            default:
-                break;
-        }
-        return super.onInterceptTouchEvent(event);
-    }
-
-    private int mActivePointerId;
-    private float mLastMotionY;
-    private float mMove;
-
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        print("onTouchEvent:" + event.getAction());
 
         final int action = event.getAction();
         switch (action) {
@@ -163,42 +141,58 @@ public class HomeView extends LinearLayout {
                 int activePointerIndex = event.findPointerIndex(mActivePointerId);
                 float y = event.getY(activePointerIndex);
                 int move = (int) (y - mLastMotionY); //向上滑move<0,累积的mMove<0
-                print(String.format("move:%d mMove:%f", move, mMove));
-
-                if (mMove + move > 0) { //接近初始位置归位，防止向上滑多了
-                    mChildHeader.scrollTo(0, 0);
-                    mWebView.scrollTo(0, 0);
-                    mMove = 0;
-                    break;
-                }
-
-                print(String.format("mChildHeader.getHeight():%d mMove:%f", mChildHeader.getHeight(), mMove));
-                if (mChildHeader.getHeight() + mMove < 10) {
-                    if (mMove != mChildHeader.getHeight()) {
-                        scrollTo(0, mChildHeader.getHeight());
-                        mMove = -mChildHeader.getHeight();
-//                        mChildHeader.scrollBy(0, -move);
-//                        mWebView.scrollBy(0, -move);
-                    }
-                    return super.onTouchEvent(event);
-                }
-                mChildHeader.scrollBy(0, -move);
-                mWebView.scrollBy(0, -move);
-//                scrollBy(0, -move);
+                print("onInterceptTouchEvent move: " + move);
                 mMove += move;
 
-                mLastMotionY = y;
+                switch (mStatus) {
+                    case one:
+                        if (mChildHeader.isScrollBottom() && move < -10) { // header滑到底部然后继续下滑
+                            scrollTo(0, mChildHeader.getMeasuredHeight());
+                            mStatus = Status.two;
+                            return true;
+                        }
+                        break;
+                    case two:
+                        if (mWebView.isScrollTop() && move > -10) {
+                            scrollTo(0, 0);
+                            mStatus = Status.one;
+                            return true;
+                        }
+                        break;
+                    case three:
+
+                        break;
+
+                    default:
+                        break;
+                }
                 break;
             case MotionEvent.ACTION_UP:
-                print("mMove:" + mMove);
                 break;
 
             default:
                 break;
         }
-        return true;
-//        return super.onTouchEvent(event);
+        return super.onInterceptTouchEvent(event);
     }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        return super.onTouchEvent(event);
+    }
+
+//    private void scrollToPos(int x, int y) {
+//        int scrollY = getScrollY();
+//        float des = Math.abs(y - scrollY) / 10;
+//        for (int i = 0; i < 10; i++) {
+//            if (y > scrollY) {
+//                scrollTo(0, (int) (scrollY + des * i));
+//            } else {
+//                scrollTo(0, (int) (scrollY - des * i));
+//            }
+//
+//        }
+//    }
 
     /////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////

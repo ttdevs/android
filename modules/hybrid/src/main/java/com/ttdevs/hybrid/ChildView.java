@@ -29,7 +29,7 @@ public class ChildView extends ScrollView implements IScrollStatus {
 
     @Override
     public boolean isScrollTop() {
-        return getScrollY() == 0 ? true : false;
+        return getScrollY() == 0;
     }
 
     @Override

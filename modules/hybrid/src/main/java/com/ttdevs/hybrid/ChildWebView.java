@@ -32,7 +32,7 @@ public class ChildWebView extends WebView implements IScrollStatus {
     protected void onScrollChanged(int l, int t, int oldl, int oldt) {
         super.onScrollChanged(l, t, oldl, oldt);
 
-        // TODO: 16/8/16
+        // TODO: 16/8/16 food
         float webViewContentHeight = this.getContentHeight() * this.getScale();
         float webViewCurrentHeight = (this.getHeight() + this.getScrollY());
         if ((webViewContentHeight - webViewCurrentHeight) <= 2.0F) {
