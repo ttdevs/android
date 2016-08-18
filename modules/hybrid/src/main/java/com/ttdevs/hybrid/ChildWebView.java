@@ -12,30 +12,27 @@ import android.util.AttributeSet;
 import android.webkit.WebView;
 
 public class ChildWebView extends WebView implements IScrollStatus {
-
     private boolean isScrollBottom;
 
     public ChildWebView(Context context) {
-        super(context);
+        this(context, null);
     }
 
     public ChildWebView(Context context, AttributeSet attrs) {
-        super(context, attrs);
+        this(context, attrs, 0);
     }
 
     public ChildWebView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-
     }
 
     @Override
     protected void onScrollChanged(int l, int t, int oldl, int oldt) {
         super.onScrollChanged(l, t, oldl, oldt);
-
-        // TODO: 16/8/16 food
-        float webViewContentHeight = this.getContentHeight() * this.getScale();
-        float webViewCurrentHeight = (this.getHeight() + this.getScrollY());
-        if ((webViewContentHeight - webViewCurrentHeight) <= 2.0F) {
+        // from: food
+        float contentHeight = getContentHeight() * getScale();
+        float currentHeight = getHeight() + getScrollY();
+        if ((contentHeight - currentHeight) <= DISTANCE) {
             isScrollBottom = true;
         } else {
             isScrollBottom = false;

@@ -10,7 +10,6 @@ package com.ttdevs.hybrid;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
 public class ChildView extends ScrollView implements IScrollStatus {
@@ -24,7 +23,6 @@ public class ChildView extends ScrollView implements IScrollStatus {
 
     public ChildView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-
     }
 
     @Override
@@ -35,8 +33,11 @@ public class ChildView extends ScrollView implements IScrollStatus {
     @Override
     public boolean isScrollBottom() {
         View childView = getChildAt(0);
-        int current = getScrollY() + getHeight();
-        boolean result = childView.getMeasuredHeight() - current < 10;
-        return result; // TODO: 16/8/16 10
+        if (null == childView) {
+            return false;
+        }
+        int currentScroll = getHeight() + getScrollY();
+        int distance = childView.getMeasuredHeight() - currentScroll;
+        return distance < DISTANCE;
     }
 }

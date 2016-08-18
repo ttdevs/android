@@ -8,26 +8,23 @@
 package com.ttdevs.hybrid;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.Rect;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.animation.LinearInterpolator;
-import android.webkit.WebChromeClient;
-import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.LinearLayout;
+import android.widget.Scroller;
 
 public class HomeView extends LinearLayout {
-    public enum Status {
-        one, two, three;
+    private static final int DELAY = 300;
+
+    private enum Status {
+        one, two;
     }
 
+    private Scroller mScroller;
     private Status mStatus = Status.one;
-
     private ChildView mChildHeader;
     private ChildWebView mWebView;
 
@@ -42,85 +39,91 @@ public class HomeView extends LinearLayout {
     public HomeView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
+        mScroller = new Scroller(context);
+
         initView(context);
     }
 
     private void initView(Context context) {
         setOrientation(VERTICAL);
+        setLayoutParams(new LayoutParams(
+                LayoutParams.MATCH_PARENT,
+                LayoutParams.MATCH_PARENT));
 
         mChildHeader = new ChildView(context);
-        mChildHeader.setVerticalScrollBarEnabled(true);
         mWebView = new ChildWebView(context);
 
-        addView(mChildHeader, new LayoutParams(
-                LayoutParams.MATCH_PARENT,
-                LayoutParams.WRAP_CONTENT));
-        addView(mWebView, new LayoutParams(
-                LayoutParams.MATCH_PARENT,
-                LayoutParams.WRAP_CONTENT));
+        addView(mChildHeader);
+        addView(mWebView);
 
         mWebView.getSettings().setJavaScriptEnabled(true);
-        mWebView.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
-        mWebView.setVerticalScrollBarEnabled(true);
-        mWebView.setHorizontalScrollBarEnabled(false);
-        mWebView.setWebViewClient(new WebViewClient() {
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                return super.shouldOverrideUrlLoading(view, url);
-            }
-
-            @Override
-            public void onPageStarted(WebView view, String url, Bitmap favicon) {
-                super.onPageStarted(view, url, favicon);
-            }
-
-            @Override
-            public void onPageFinished(WebView view, String url) {
-                super.onPageFinished(view, url);
-
-                Rect rect = new Rect();
-                getDrawingRect(rect);
-                int height = rect.bottom - rect.top;
-                print("onPageFinished: " + height);
-                mWebView.getLayoutParams().height = height;
-                removeView(mWebView);
-                addView(mWebView, 1, new LayoutParams(LayoutParams.MATCH_PARENT, height));
-            }
-        });
-        mWebView.setWebChromeClient(new WebChromeClient() {
-            @Override
-            public void onProgressChanged(WebView view, int newProgress) {
-                super.onProgressChanged(view, newProgress);
-            }
-        });
+//        mWebView.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+//        mWebView.setVerticalScrollBarEnabled(true);
+//        mWebView.setHorizontalScrollBarEnabled(false);
+//        mWebView.setWebViewClient(new WebViewClient() {
+//            @Override
+//            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+//                return super.shouldOverrideUrlLoading(view, url);
+//            }
+//
+//            @Override
+//            public void onPageStarted(WebView view, String url, Bitmap favicon) {
+//                super.onPageStarted(view, url, favicon);
+//            }
+//
+//            @Override
+//            public void onPageFinished(WebView view, String url) {
+//                super.onPageFinished(view, url);
+//            }
+//        });
+//        mWebView.setWebChromeClient(new WebChromeClient() {
+//            @Override
+//            public void onProgressChanged(WebView view, int newProgress) {
+//                super.onProgressChanged(view, newProgress);
+//            }
+//        });
     }
 
+    /**
+     * 载入网页
+     *
+     * @param url
+     */
     public void loadUrl(String url) {
-        if (null != mWebView && !TextUtils.isEmpty(url)) {
+        if (!TextUtils.isEmpty(url)) {
             mWebView.loadUrl(url);
         }
-
-        countViewSize(mWebView); // TODO: 16/8/16
     }
 
+    /**
+     * 添加header
+     *
+     * @param header
+     */
     public void setHeaderView(View header) {
         if (null != header) {
-            mChildHeader.addView(
-                    header,
-                    new LayoutParams(
-                            LayoutParams.MATCH_PARENT,
-                            LayoutParams.WRAP_CONTENT
-                    )
-            );
-            header.invalidate();
+            mChildHeader.removeAllViews();
+            mChildHeader.addView(header);
         }
+    }
+
+    public WebView getWebView() {
+        return mWebView;
     }
 
     @Override
-    public void onScreenStateChanged(int screenState) {
-        super.onScreenStateChanged(screenState);
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
 
-        countViewSize(mChildHeader);
+        mWebView.getLayoutParams().height = h;
+    }
+
+    @Override
+    public void computeScroll() {
+        if (mScroller.computeScrollOffset()) {
+            scrollTo(mScroller.getCurrX(), mScroller.getCurrY());
+            invalidate();
+        }
     }
 
     private int mActivePointerId;
@@ -129,8 +132,6 @@ public class HomeView extends LinearLayout {
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent event) {
-        print("dispatchTouchEvent:" + event.getAction());
-
         final int action = event.getAction();
         switch (action) {
             case MotionEvent.ACTION_DOWN:
@@ -140,27 +141,20 @@ public class HomeView extends LinearLayout {
             case MotionEvent.ACTION_MOVE:
                 int activePointerIndex = event.findPointerIndex(mActivePointerId);
                 float y = event.getY(activePointerIndex);
-                int move = (int) (y - mLastMotionY); //向上滑move<0,累积的mMove<0
-                print("onInterceptTouchEvent move: " + move);
-                mMove += move;
+                int move = (int) (y - mLastMotionY);    // 向上滑move<0
 
                 switch (mStatus) {
                     case one:
-                        if (mChildHeader.isScrollBottom() && move < -10) { // header滑到底部然后继续下滑
-                            scrollTo(0, mChildHeader.getMeasuredHeight());
-                            mStatus = Status.two;
+                        if (mChildHeader.isScrollBottom() && move < 0) {
                             return true;
                         }
                         break;
                     case two:
-                        if (mWebView.isScrollTop() && move > -10) {
-                            scrollTo(0, 0);
-                            mStatus = Status.one;
-                            return true;
+                        if (mChildHeader.isScrollBottom() && mWebView.isScrollTop()) { //mWebView显示在最上
+                            if (move > 0) {
+                                return true;
+                            }
                         }
-                        break;
-                    case three:
-
                         break;
 
                     default:
@@ -168,6 +162,7 @@ public class HomeView extends LinearLayout {
                 }
                 break;
             case MotionEvent.ACTION_UP:
+            case MotionEvent.ACTION_CANCEL:
                 break;
 
             default:
@@ -178,53 +173,59 @@ public class HomeView extends LinearLayout {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        final int action = event.getAction();
+        switch (action) {
+            case MotionEvent.ACTION_DOWN:
+                mActivePointerId = event.getPointerId(0);
+                mLastMotionY = event.getY();
+                break;
+            case MotionEvent.ACTION_MOVE:
+                int activePointerIndex = event.findPointerIndex(mActivePointerId);
+                float y = event.getY(activePointerIndex);
+                int move = (int) (y - mLastMotionY);    // 向上滑move<0
+
+                if (getScrollY() - getHeight() > IScrollStatus.DISTANCE) {
+                    return true; // 当webview的事件被拦截时，禁止上滑
+                }
+
+                mMove += move;
+                mLastMotionY = y;
+                scrollBy(0, -move);
+
+                return true;
+            case MotionEvent.ACTION_UP:
+            case MotionEvent.ACTION_CANCEL:
+                if (Math.abs(mMove) > IScrollStatus.DISTANCE) {
+                    if (mMove > 0) { // 下滑
+                        scrollToOne();
+                    } else { // 上滑
+                        scrollToTwo();
+                    }
+                }
+                break;
+
+            default:
+                break;
+        }
+
         return super.onTouchEvent(event);
     }
 
-//    private void scrollToPos(int x, int y) {
-//        int scrollY = getScrollY();
-//        float des = Math.abs(y - scrollY) / 10;
-//        for (int i = 0; i < 10; i++) {
-//            if (y > scrollY) {
-//                scrollTo(0, (int) (scrollY + des * i));
-//            } else {
-//                scrollTo(0, (int) (scrollY - des * i));
-//            }
-//
-//        }
-//    }
+    private void scrollToOne() {
+        // scrollTo(0, 0);
+        mStatus = Status.one;
+        mMove = 0;
 
-    /////////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////////
-    private void printViewHeight() {
-        String result = "Home:" + getHeight();
-        result += " measure:" + getMeasuredHeight();
-        result += " Header:" + mChildHeader.getHeight();
-        result += " webview:" + mWebView.getHeight();
-        print(result);
+        mScroller.startScroll(0, getScrollY(), 0, -getScrollY(), DELAY);
+        invalidate();
     }
 
-    private void print(String msg) {
-        String result = String.format(">>>>>%s", msg);
-        System.err.println(result);
-    }
+    private void scrollToTwo() {
+        // scrollTo(0, mChildHeader.getMeasuredHeight());
+        mStatus = Status.two;
+        mMove = 0;
 
-    private void countViewSize(final View view) {
-        Rect rect = new Rect();
-        view.getWindowVisibleDisplayFrame(rect);
-        print(String.format("left:%d, top:%d, bottom:%d, right:%d", rect.left, rect.top, rect.bottom, rect.right));
-
-        postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Rect rect = new Rect();
-                view.getWindowVisibleDisplayFrame(rect);
-                print(String.format("getWindowVisibleDisplayFrame left:%d, top:%d, bottom:%d, right:%d", rect.left, rect.top, rect.bottom, rect.right));
-
-                view.getDrawingRect(rect);
-                print(String.format("getDrawingRect left:%d, top:%d, bottom:%d, right:%d", rect.left, rect.top, rect.bottom, rect.right));
-            }
-        }, 2000);
+        mScroller.startScroll(0, getScrollY(), 0, mChildHeader.getMeasuredHeight() - getScrollY(), DELAY);
+        invalidate();
     }
 }

@@ -12,6 +12,8 @@ package com.ttdevs.hybrid;
  */
 public interface IScrollStatus {
 
+    public static final float DISTANCE = 10f;
+
     public boolean isScrollTop();
 
     public boolean isScrollBottom();
