@@ -1,16 +1,18 @@
 /*
- * Created by ttdevs at 16-8-12 下午6:26.
+ * Created by ttdevs at 16-8-19 下午4:00.
  * E-mail:ttdevs@gmail.com
  * https://github.com/ttdevs
  * Copyright (c) 2016 ttdevs
  */
 
-package com.ttdevs.hybrid;
+package com.ttdevs.hybrid.nested;
 
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ScrollView;
+
+import com.ttdevs.hybrid.scroller.IScrollStatus;
 
 public class ChildView extends ScrollView implements IScrollStatus {
     public ChildView(Context context) {

@@ -15,7 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.ttdevs.hybrid.HomeView;
+import com.ttdevs.hybrid.scroller.HomeView;
 
 public class HybridViewActivity extends BaseActivity {
     public static final String URL = "http://one.boohee.com/api/v1/goods/908/detail.html?app_device=Android&os_version=5.1.1&app_version=5.5.9-debug&version_code=104&channel=&app_key=one&token=ypPePNVnyzdJaezP3tzh";

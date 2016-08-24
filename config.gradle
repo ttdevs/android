@@ -43,7 +43,8 @@ ext {
             "conceal"             : "com.facebook.conceal:conceal:1.0.1@aar",
             "ucrop"               : "com.yalantis:ucrop:1.2.3",
             "markdownview"        : "us.feras.mdv:markdownview:1.1.0",
-            "retrofit2"           : "com.squareup.retrofit2:retrofit:2.1.0"
+            "retrofit2"           : "com.squareup.retrofit2:retrofit:2.1.0",
+            "java_websocket"      : "org.java-websocket:Java-WebSocket:1.3.0"
     ]
 }
 

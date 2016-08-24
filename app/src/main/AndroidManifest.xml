@@ -73,6 +73,10 @@
             android:name=".HybridViewActivity"
             android:label="@string/title_activity_hybrid_view"
             android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".WebSocketActivity"
+            android:label="@string/title_activity_web_socket"
+            android:windowSoftInputMode="stateHidden" />
     </application>
 
 </manifest>

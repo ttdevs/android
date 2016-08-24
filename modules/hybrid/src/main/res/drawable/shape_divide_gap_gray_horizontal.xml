@@ -1,0 +1,17 @@
+<!--
+  ~ Created by ttdevs at 16-8-18 下午2:59.
+  ~ E-mail:ttdevs@gmail.com
+  ~ https://github.com/ttdevs
+  ~ Copyright (c) 2016 ttdevs
+  -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="line">
+
+    <stroke
+        android:width="1px"
+        android:color="#FFDFDFDF"
+        android:dashGap="1dp"
+        android:dashWidth="3dp" />
+
+    <size android:height="1px" />
+</shape>

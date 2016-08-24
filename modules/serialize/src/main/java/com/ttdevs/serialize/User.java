@@ -10,7 +10,6 @@ package com.ttdevs.serialize;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-
 public class User implements Parcelable {
     public String userName;
     public int age;

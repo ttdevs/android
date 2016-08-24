@@ -1,11 +1,11 @@
 /*
- * Created by ttdevs at 16-8-16 下午4:37.
+ * Created by ttdevs at 16-8-18 下午1:56.
  * E-mail:ttdevs@gmail.com
  * https://github.com/ttdevs
  * Copyright (c) 2016 ttdevs
  */
 
-package com.ttdevs.hybrid;
+package com.ttdevs.hybrid.scroller;
 
 /**
  * Created by ttdevs on 16/8/16.

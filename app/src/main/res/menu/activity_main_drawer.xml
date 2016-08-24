@@ -36,6 +36,10 @@
             android:id="@+id/nav_hybrid_view"
             android:icon="@drawable/ic_menu_send"
             android:title="Hybrid View" />
+        <item
+            android:id="@+id/nav_web_socket"
+            android:icon="@drawable/ic_menu_send"
+            android:title="WebSocket" />
     </group>
 
     <item android:title="Communicate">

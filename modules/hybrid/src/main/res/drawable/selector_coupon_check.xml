@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Created by ttdevs at 16-8-19 上午10:29.
+  ~ E-mail:ttdevs@gmail.com
+  ~ https://github.com/ttdevs
+  ~ Copyright (c) 2016 ttdevs
+  -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/ic_arrows_up" android:state_checked="true" />
+    <item android:drawable="@drawable/ic_arrows_down" />
+</selector>

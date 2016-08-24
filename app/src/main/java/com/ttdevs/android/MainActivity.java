@@ -128,6 +128,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_hybrid_view:
                 Utils.comeOnBaby(this, HybridViewActivity.class);
                 break;
+            case R.id.nav_web_socket:
+                Utils.comeOnBaby(this, WebSocketActivity.class);
+                break;
 
             default:
                 break;

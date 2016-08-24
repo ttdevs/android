@@ -55,6 +55,8 @@ android {
     }
     compileOptions {
         incremental false
+        // sourceCompatibility JavaVersion.VERSION_1_8
+        // targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
@@ -69,6 +71,7 @@ dependencies {
     compile libs.conceal
     compile libs.ucrop
     compile libs.markdownview
+    compile libs.java_websocket
 
     compile project(':modules:jniutils')
     compile project(':modules:markdown')

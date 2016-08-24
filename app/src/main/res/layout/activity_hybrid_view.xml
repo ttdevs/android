@@ -40,7 +40,7 @@
         android:layout_height="1px"
         android:background="@android:color/darker_gray" />
 
-    <com.ttdevs.hybrid.HomeView
+    <com.ttdevs.hybrid.scroller.HomeView
         android:id="@+id/homeView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
