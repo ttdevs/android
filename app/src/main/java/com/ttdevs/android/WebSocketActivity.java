@@ -21,6 +21,10 @@ import android.widget.TextView;
 
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.drafts.Draft;
+import org.java_websocket.drafts.Draft_10;
+import org.java_websocket.drafts.Draft_17;
+import org.java_websocket.drafts.Draft_75;
+import org.java_websocket.drafts.Draft_76;
 import org.java_websocket.handshake.ServerHandshake;
 
 import java.net.URI;
@@ -35,11 +39,6 @@ public class WebSocketActivity extends BaseActivity {
     private static final int STATUS_CLOSE = 0;
     private static final int STATUS_CONNECT = 1;
     private static final int STATUS_MESSAGE = 2;
-
-    private static final int PORT = 2333;
-    private static final String PROTOCOL = "ws";
-    private static final String HOST = "localhost";
-    private static final String URI = PROTOCOL + "://" + HOST + ":" + PORT;
 
     @Bind(R.id.etIP)
     EditText etIP;
@@ -148,14 +147,34 @@ public class WebSocketActivity extends BaseActivity {
             return;
         }
         String address = String.format("ws://%s:%s", ip, port);
+        Draft draft = null;
+        switch (rgVersion.getCheckedRadioButtonId()) {
+            case R.id.rbDraft10:
+                draft = new Draft_10();
+                break;
+            case R.id.rbDraft17:
+                draft = new Draft_17();
+                break;
+            case R.id.rbDraft75:
+                draft = new Draft_75();
+                break;
+            case R.id.rbDraft76:
+                draft = new Draft_76();
+                break;
+
+            default:
+                draft = new Draft_17();
+                break;
+        }
         try {
             URI uri = new URI(address);
-            mClient = new Client(uri);
+            mClient = new Client(uri, draft);
             mClient.connect();
         } catch (URISyntaxException e) {
             e.printStackTrace();
             return;
         }
+
         tvStatus.setText(address);
     }
 
