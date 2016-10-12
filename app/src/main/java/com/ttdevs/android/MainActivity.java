@@ -18,7 +18,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.ttdevs.android.utils.FileUtils;
 import com.ttdevs.android.utils.Utils;
@@ -51,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
+        drawer.addDrawerListener(toggle);
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -86,8 +85,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         if (id == R.id.action_about) {
-            loadReadmeData(); // TODO
-            Toast.makeText(this, getString(R.string.action_about), Toast.LENGTH_SHORT).show();
+            Utils.comeOnBaby(this, AboutActivity.class);
             return true;
         }
 
@@ -101,35 +99,29 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_conceal:
                 Utils.comeOnBaby(this, ConcealActivity.class);
                 break;
-            case R.id.nav_endless:
-                Utils.comeOnBaby(this, EndLessActivity.class);
-                break;
-            case R.id.nav_ucrop:
-                Utils.comeOnBaby(this, UCropActivity.class);
-                break;
-            case R.id.nav_tablayout:
-                Utils.comeOnBaby(this, TabLayoutActivity.class);
-                break;
-            case R.id.nav_markdown:
-                Utils.comeOnBaby(this, MarkdownActivity.class);
-                break;
             case R.id.nav_reactive:
                 Utils.comeOnBaby(this, ReactiveActivity.class);
-                break;
-            case R.id.nav_flipper:
-                Utils.comeOnBaby(this, ViewFlipperActivity.class);
                 break;
             case R.id.nav_jni:
                 Utils.comeOnBaby(this, JNIActivity.class);
                 break;
-            case R.id.nav_draw_circle:
-                Utils.comeOnBaby(this, IndicatorViewActivity.class);
-                break;
-            case R.id.nav_hybrid_view:
-                Utils.comeOnBaby(this, HybridViewActivity.class);
-                break;
             case R.id.nav_web_socket:
                 Utils.comeOnBaby(this, WebSocketActivity.class);
+                break;
+            case R.id.nav_custom_view:
+                Utils.comeOnBaby(this, CustomViewActivity.class);
+                break;
+            case R.id.nav_markdown:
+                Utils.comeOnBaby(this, MarkdownActivity.class);
+                break;
+            case R.id.nav_ucrop:
+                Utils.comeOnBaby(this, UCropActivity.class);
+                break;
+            case R.id.nav_flipper:
+                Utils.comeOnBaby(this, ViewFlipperActivity.class);
+                break;
+            case R.id.nav_tablayout:
+                Utils.comeOnBaby(this, TabLayoutActivity.class);
                 break;
 
             default:

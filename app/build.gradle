@@ -49,14 +49,14 @@ android {
         unitTests.returnDefaultValues = true
     }
     dexOptions {
-        incremental true
+//        incremental true
         maxProcessCount 4
         javaMaxHeapSize '4g'
     }
     compileOptions {
         incremental false
-        // sourceCompatibility JavaVersion.VERSION_1_8
-        // targetCompatibility JavaVersion.VERSION_1_8
+//         sourceCompatibility JavaVersion.VERSION_1_8
+//         targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
