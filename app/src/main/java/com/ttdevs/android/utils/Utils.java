@@ -9,7 +9,9 @@ package com.ttdevs.android.utils;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Rect;
 import android.util.TypedValue;
+import android.view.View;
 
 import com.ttdevs.android.AndroidApplication;
 
@@ -43,5 +45,23 @@ public class Utils {
         TypedValue tv = new TypedValue();
         context.getTheme().resolveAttribute(android.R.attr.actionBarSize, tv, true);
         return context.getResources().getDimensionPixelSize(tv.resourceId);
+    }
+
+    private static void countViewSize(final View view) {
+        Rect rect = new Rect();
+        view.getWindowVisibleDisplayFrame(rect);
+        System.out.println(String.format("left:%d, top:%d, bottom:%d, right:%d", rect.left, rect.top, rect.bottom, rect.right));
+
+        view.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Rect rect = new Rect();
+                view.getWindowVisibleDisplayFrame(rect);
+                System.out.println(String.format("getWindowVisibleDisplayFrame left:%d, top:%d, bottom:%d, right:%d", rect.left, rect.top, rect.bottom, rect.right));
+
+                view.getDrawingRect(rect);
+                System.out.println(String.format("getDrawingRect left:%d, top:%d, bottom:%d, right:%d", rect.left, rect.top, rect.bottom, rect.right));
+            }
+        }, 2000);
     }
 }

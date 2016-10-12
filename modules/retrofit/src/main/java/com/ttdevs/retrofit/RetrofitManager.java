@@ -21,16 +21,18 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class RetrofitManager {
 
-    private static final String GIT_HUB = "http://api.github.com/";
+    private static final String GIT_HUB = "https://api.github.com/";
 
     public static OkHttpClient getDefaultClient() {
         return getClient(null);
     }
 
-    public static OkHttpClient getClient(Interceptor interceptor) {
+    public static OkHttpClient getClient(Interceptor... interceptor) {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
-        if (null != interceptor) {
-            builder.addInterceptor(interceptor);
+        if (null != interceptor && interceptor.length > 0) {
+            for (int i = 0; i < interceptor.length; i++) {
+                builder.addInterceptor(interceptor[i]);
+            }
         }
         return builder.build();
     }

@@ -13,14 +13,6 @@
             android:icon="@drawable/ic_menu_send"
             android:title="Conceal" />
         <item
-            android:id="@+id/nav_markdown"
-            android:icon="@drawable/ic_menu_send"
-            android:title="markdown" />
-        <item
-            android:id="@+id/nav_endless"
-            android:icon="@drawable/ic_menu_send"
-            android:title="Endless" />
-        <item
             android:id="@+id/nav_reactive"
             android:icon="@drawable/ic_menu_send"
             android:title="reactive" />
@@ -29,22 +21,26 @@
             android:icon="@drawable/ic_menu_send"
             android:title="NDK JNI" />
         <item
-            android:id="@+id/nav_draw_circle"
+            android:id="@+id/nav_web_socket"
             android:icon="@drawable/ic_menu_send"
-            android:title="Draw Circle" />
+            android:title="WebSocket" />
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="Custom View">
         <menu>
             <item
-                android:id="@+id/nav_flipper"
+                android:id="@+id/nav_custom_view"
                 android:icon="@drawable/ic_menu_send"
-                android:title="flipper" />
+                android:title="Custom View" />
+        </menu>
+    </item>
 
+    <item android:title="Third Part">
+        <menu>
             <item
-                android:id="@+id/nav_tablayout"
+                android:id="@+id/nav_markdown"
                 android:icon="@drawable/ic_menu_send"
-                android:title="tabLayout" />
+                android:title="Markdown" />
             <item
                 android:id="@+id/nav_ucrop"
                 android:icon="@drawable/ic_menu_send"
@@ -52,4 +48,16 @@
         </menu>
     </item>
 
+    <item android:title="System View">
+        <menu>
+            <item
+                android:id="@+id/nav_flipper"
+                android:icon="@drawable/ic_menu_send"
+                android:title="flipper" />
+            <item
+                android:id="@+id/nav_tablayout"
+                android:icon="@drawable/ic_menu_send"
+                android:title="tabLayout" />
+        </menu>
+    </item>
 </menu>
