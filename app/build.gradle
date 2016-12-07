@@ -78,4 +78,5 @@ dependencies {
     compile project(':modules:reactive')
     compile project(':modules:indicator')
     compile project(':modules:hybrid')
+    compile project(':modules:jcvideo')
 }

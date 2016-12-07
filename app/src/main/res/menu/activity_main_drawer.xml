@@ -60,4 +60,17 @@
                 android:title="tabLayout" />
         </menu>
     </item>
+
+    <item android:title="Video Player">
+        <menu>
+            <item
+                android:id="@+id/nav_jcplayer"
+                android:icon="@drawable/ic_menu_send"
+                android:title="JieCaoPlayer" />
+            <item
+                android:id="@+id/nav_vlc"
+                android:icon="@drawable/ic_menu_send"
+                android:title="VLC" />
+        </menu>
+    </item>
 </menu>

@@ -21,6 +21,7 @@ import android.view.View;
 
 import com.ttdevs.android.utils.FileUtils;
 import com.ttdevs.android.utils.Utils;
+import com.ttdevs.jcvideo.PlayActivity;
 import com.ttdevs.markdown.MarkDownView;
 
 import butterknife.Bind;
@@ -39,13 +40,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setSupportActionBar(toolbar);
         ButterKnife.bind(this);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
+//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//            }
+//        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -122,6 +123,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.nav_tablayout:
                 Utils.comeOnBaby(this, TabLayoutActivity.class);
+                break;
+            case R.id.nav_jcplayer:
+                Utils.comeOnBaby(this, PlayActivity.class);
                 break;
 
             default:

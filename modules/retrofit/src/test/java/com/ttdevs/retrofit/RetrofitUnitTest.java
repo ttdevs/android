@@ -13,6 +13,9 @@ import com.ttdevs.retrofit.module.User;
 import com.ttdevs.retrofit.service.ExampleService;
 import com.ttdevs.retrofit.service.GitHubService;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -22,8 +25,10 @@ import java.util.concurrent.CountDownLatch;
 
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
@@ -278,8 +283,87 @@ public class RetrofitUnitTest {
             System.out.println(keyValue);
             String key = keyValue.split(",")[0];
             String value = keyValue.split(",")[1];
-            System.out.println(key );
+            System.out.println(key);
             System.out.println(value);
         }
+    }
+
+
+    @Test
+    public void modelPost() throws Exception {
+        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+        logging.setLevel(HttpLoggingInterceptor.Level.BASIC);
+
+        OkHttpClient client = RetrofitManager.getClient(logging);
+
+        Retrofit retrofit = RetrofitManager.getRetrofit(client);
+        ExampleService service = retrofit.create(ExampleService.class);
+
+        String url = "http://www.weather.com.cn/adat/sk/101020100.html";
+        User user = new User();
+        user.setName("ttdevs");
+        Call<ResponseBody> example = service.modelPost(url, user);
+
+        final CountDownLatch countDownLatch = new CountDownLatch(1);
+        example.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    print(response.body().string());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                countDownLatch.countDown();
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                countDownLatch.countDown();
+            }
+        });
+        countDownLatch.await();
+    }
+
+    @Test
+    public void withRequestBody() throws Exception {
+        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+        logging.setLevel(HttpLoggingInterceptor.Level.BASIC);
+
+        OkHttpClient client = RetrofitManager.getClient(logging);
+
+        Retrofit retrofit = RetrofitManager.getRetrofit(client);
+        ExampleService service = retrofit.create(ExampleService.class);
+
+        String url = "http://www.weather.com.cn/adat/sk/101020100.html";
+
+        JSONObject result = new JSONObject();
+        try {
+            result.put("record", "hello");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        RequestBody body = RequestBody.create(MediaType.parse("application/json"), result.toString());
+        Call<ResponseBody> example = service.withRequestBody(url, body);
+
+        final CountDownLatch countDownLatch = new CountDownLatch(1);
+        example.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    print(response.body().string());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                countDownLatch.countDown();
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                countDownLatch.countDown();
+            }
+        });
+        countDownLatch.await();
     }
 }

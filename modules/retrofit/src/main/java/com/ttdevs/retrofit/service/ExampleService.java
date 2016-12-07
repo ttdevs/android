@@ -8,13 +8,18 @@
 package com.ttdevs.retrofit.service;
 
 
+import com.ttdevs.retrofit.module.User;
+
 import java.util.Map;
 
+import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.HeaderMap;
 import retrofit2.http.Headers;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 import retrofit2.http.Url;
@@ -47,4 +52,10 @@ public interface ExampleService {
 
     @GET
     public Call<ResponseBody> requestWithHeaderMap(@Url String url, @HeaderMap Map<String, String> header);
+
+    @POST("/send")
+    public Call<ResponseBody> modelPost(@Url String url, @Body User user);
+
+    @POST("/upload")
+    public Call<ResponseBody> withRequestBody(@Url String url, @Body RequestBody body);
 }
