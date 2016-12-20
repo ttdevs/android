@@ -1,20 +1,24 @@
+/*
+ * Created by ttdevs at 16-12-20 下午3:47.
+ * E-mail:ttdevs@gmail.com
+ * https://github.com/ttdevs
+ * Copyright (c) 2016 ttdevs
+ */
+
 apply plugin: 'com.android.library'
 
-def cfg = rootProject.ext.projectConfig
-def support = rootProject.ext.projectSupport
-def libs = rootProject.ext.projectLibraries
-
 android {
-    compileSdkVersion cfg.compileSdkVersion
-    buildToolsVersion cfg.buildToolsVersion
+    compileSdkVersion 25
+    buildToolsVersion "25.0.0"
 
     defaultConfig {
-        minSdkVersion cfg.minSdkVersion
-        targetSdkVersion cfg.targetSdkVersion
+        minSdkVersion 16
+        targetSdkVersion 25
         versionCode 1
         versionName "1.0"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
     }
     buildTypes {
         release {
@@ -31,6 +35,4 @@ dependencies {
     })
     compile 'com.android.support:appcompat-v7:25.0.1'
     testCompile 'junit:junit:4.12'
-
-    compile 'fm.jiecao:jiecaovideoplayer:4.8.3'
 }

@@ -8,7 +8,7 @@
 // main application
 include ':app'
 
-// application
+// sub application
 include ':apps:bolts'
 include ':apps:sqlcipher'
 include ':apps:github'
@@ -23,3 +23,5 @@ include 'modules:serialize'
 include 'modules:hybrid'
 include 'modules:webscoket'
 include 'modules:jcvideo'
+include 'modules:dagger'
+include 'modules:guava'

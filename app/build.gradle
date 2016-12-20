@@ -72,6 +72,7 @@ dependencies {
     compile libs.ucrop
     compile libs.markdownview
     compile libs.java_websocket
+    compile libs.guava
 
     compile project(':modules:jniutils')
     compile project(':modules:markdown')
@@ -79,4 +80,5 @@ dependencies {
     compile project(':modules:indicator')
     compile project(':modules:hybrid')
     compile project(':modules:jcvideo')
+    compile project(':modules:dagger')
 }
