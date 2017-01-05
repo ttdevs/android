@@ -80,6 +80,7 @@
         <activity android:name=".SweepGradientActivity" />
         <activity android:name=".CustomViewActivity" />
         <activity android:name=".AboutActivity" />
+        <activity android:name=".SocketActivity"></activity>
     </application>
 
 </manifest>
