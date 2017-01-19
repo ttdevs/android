@@ -10,6 +10,7 @@ Android
 |--apps
 |----bolts
 |----sqlcipher
+|----things
 |--doc
 |----image
 |--modules
@@ -17,6 +18,7 @@ Android
 |----jniutils
 |----markdown
 |----reactive
+|----websocket
 |--android.jks
 |--build.gradle
 |--config.gradle
