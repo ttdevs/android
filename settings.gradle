@@ -13,6 +13,7 @@ include ':apps:bolts'
 include ':apps:sqlcipher'
 include ':apps:github'
 include ':apps:things'
+include ':apps:air'
 
 // module
 include 'modules:jniutils'

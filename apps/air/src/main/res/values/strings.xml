@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Air</string>
+
+    <string name="action_scan">Scan</string>
+    <string name="action_settings">Settings</string>
+</resources>
