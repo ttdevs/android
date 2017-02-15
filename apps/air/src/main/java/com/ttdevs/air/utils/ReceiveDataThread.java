@@ -4,6 +4,7 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.os.Handler;
 import android.os.Message;
+import android.os.ParcelUuid;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -32,8 +33,13 @@ public class ReceiveDataThread extends BaseWorkerThread {
     @Override
     public boolean workerBefore() {
         try {
-            if(null == mSocket){
-                mSocket = mDevice.createRfcommSocketToServiceRecord(DEFAULT_UUID);
+            if (null == mSocket) {
+                UUID uuid = DEFAULT_UUID;
+                ParcelUuid[] uuids = mDevice.getUuids();
+                if (null != uuids && uuids.length > 0) {
+                    uuid = uuids[0].getUuid();
+                }
+                mSocket = mDevice.createRfcommSocketToServiceRecord(uuid);
             }
             mSocket.connect(); // 阻塞的
 
@@ -68,7 +74,7 @@ public class ReceiveDataThread extends BaseWorkerThread {
         super.workerAfter();
 
         try {
-            if(null != mSocket){
+            if (null != mSocket) {
                 mSocket.close();
                 mSocket = null;
             }

@@ -26,6 +26,11 @@
             android:name=".service.BluetoothService"
             android:enabled="true"
             android:exported="true" />
+
+        <activity
+            android:name=".ScanActivity"
+            android:label="@string/title_activity_scan"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

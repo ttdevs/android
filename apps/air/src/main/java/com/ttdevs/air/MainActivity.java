@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.ParcelUuid;
 import android.view.View;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -94,8 +95,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_settings) {
+
             return true;
         } else if (id == R.id.action_scan) {
+            ScanActivity.comeOnBaby(this);
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -176,6 +179,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 mDevice = mBluetoothAdapter.getRemoteDevice(DEFAULT_MAC);
             }
 
+            showUUID();
+
             mWorker = new ReceiveDataThread(mDevice, mHandler);
             mWorker.startThread();
         } catch (Exception e) {
@@ -183,5 +188,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } finally {
             btStart.setEnabled(true);
         }
+    }
+
+    private void showUUID() {
+        StringBuilder builder = new StringBuilder();
+
+        ParcelUuid[] uuids = mDevice.getUuids();
+        if (null == uuids) {
+            return;
+        }
+        for (int i = 0; i < uuids.length; i++) {
+            ParcelUuid uuid = uuids[i];
+            builder.append(uuid.getUuid().toString());
+        }
+
+        tvContent.setText(builder.toString());
     }
 }
