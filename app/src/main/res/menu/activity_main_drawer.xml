@@ -73,4 +73,13 @@
                 android:title="VLC" />
         </menu>
     </item>
+
+    <item android:title="Temp Test">
+        <menu>
+            <item
+                android:id="@+id/nav_include_text"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Test Text View" />
+        </menu>
+    </item>
 </menu>

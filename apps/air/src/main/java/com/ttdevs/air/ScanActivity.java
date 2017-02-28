@@ -24,6 +24,8 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -49,6 +51,8 @@ public class ScanActivity extends AppCompatActivity {
         initBluetooth();
 
         IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
+        filter.addAction(BluetoothDevice.ACTION_BOND_STATE_CHANGED);
+        filter.addAction(BluetoothDevice.ACTION_PAIRING_REQUEST);
         registerReceiver(mReceiver, filter);
     }
 
@@ -112,6 +116,10 @@ public class ScanActivity extends AppCompatActivity {
 
                 mDataList.add(device);
                 mAdapter.notifyDataSetChanged();
+            } else if (BluetoothDevice.ACTION_BOND_STATE_CHANGED.equals(action)) {
+                System.out.println(">>>>>>change");
+            } else if (BluetoothDevice.ACTION_PAIRING_REQUEST.equals(action)) {
+                System.out.println(">>>>>>pairing");
             }
         }
     };
@@ -172,11 +180,19 @@ public class ScanActivity extends AppCompatActivity {
                     .setTitle(device.getName() + "  " + device.getAddress())
                     .setPositiveButton("连接", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
+
+//                            try {
+//                                device.createBond();
+//                            } catch (Exception e) {
+//                                e.printStackTrace();
+//                            }
+
                             try {
-                                UUID uuid = null;
+                                //UUID uuid = UUID.fromString("00001000-0000-1000-8000-00805F9B34FB");
+                                UUID uuid = UUID.fromString("fa87c0d0-afac-11de-8a39-0800200c9a66");
                                 ParcelUuid[] uuids = device.getUuids();
                                 if (null != uuids && uuids.length > 0) {
-                                    uuid = device.getUuids()[0].getUuid();
+                                    uuid = device.getUuids()[which].getUuid();
                                 }
                                 device.createRfcommSocketToServiceRecord(uuid).connect();
                             } catch (IOException e) {

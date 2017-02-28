@@ -125,6 +125,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_jcplayer:
                 PlayerActivity.playTest(this);
                 break;
+            case R.id.nav_include_text:
+                Utils.comeOnBaby(this, TempActivity.class);
+                break;
 
             default:
                 break;
