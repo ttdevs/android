@@ -128,6 +128,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_include_text:
                 Utils.comeOnBaby(this, TempActivity.class);
                 break;
+            case R.id.nav_argb_evaluator:
+                Utils.comeOnBaby(this, ArgbEvaluatorActivity.class);
+                break;
 
             default:
                 break;

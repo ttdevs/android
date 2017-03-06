@@ -74,6 +74,15 @@
         </menu>
     </item>
 
+    <item android:title="API Tools">
+        <menu>
+            <item
+                android:id="@+id/nav_argb_evaluator"
+                android:icon="@drawable/ic_menu_send"
+                android:title="ArgbEvaluator" />
+        </menu>
+    </item>
+
     <item android:title="Temp Test">
         <menu>
             <item

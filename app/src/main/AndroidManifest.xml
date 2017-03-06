@@ -81,7 +81,8 @@
         <activity android:name=".CustomViewActivity" />
         <activity android:name=".AboutActivity" />
         <activity android:name=".SocketActivity" />
-        <activity android:name=".TempActivity"></activity>
+        <activity android:name=".TempActivity" />
+        <activity android:name=".ArgbEvaluatorActivity"></activity>
     </application>
 
 </manifest>
