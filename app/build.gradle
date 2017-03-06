@@ -33,7 +33,7 @@ android {
     buildTypes {
         debug {
             debuggable true
-            jniDebuggable true
+            jniDebuggable false
         }
         release {
             minifyEnabled false
