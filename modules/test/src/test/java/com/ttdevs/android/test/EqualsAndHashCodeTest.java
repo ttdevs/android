@@ -1,4 +1,4 @@
-package com.ttdevs.android;
+package com.ttdevs.android.test;
 
 import org.junit.Test;
 
@@ -9,22 +9,13 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
 /**
+ * equals 和 hashCode
+ * <p>
  * Created by ttdevs
  * 2017-03-03 (android)
  * https://github.com/ttdevs
  */
 public class EqualsAndHashCodeTest {
-    @Test
-    public void equals() throws Exception {
-        String s1 = "nihao";
-        String s2 = "nihao";
-        String s3 = new String("nihao");
-        assertEquals(s1, s2);
-        assertNotEquals(s1, s3);
-
-        System.out.println(s1 == s2);    //    true
-        System.out.println(s1 == s3);    //    false
-    }
 
     class Student {
         private int id;
@@ -57,11 +48,8 @@ public class EqualsAndHashCodeTest {
 
         @Override
         public int hashCode() {
-            return this.id;
-            // return super.hashCode();
+            return this.id; // return super.hashCode();
         }
-
-        // ... getter and setter
     }
 
     @Test
@@ -69,7 +57,6 @@ public class EqualsAndHashCodeTest {
         Student st1 = new Student(2333);
         Student st2 = new Student(2333);
         assertEquals(st1, st2);
-        // assertNotEquals(st1, st2);
     }
 
     @Test
@@ -77,22 +64,18 @@ public class EqualsAndHashCodeTest {
         Student st1 = new Student(2333);
         Student st2 = new Student(2333);
 
-        Set<Student> stds = new HashSet<>();
-        stds.add(st1);
-        stds.add(st2);
-        assertEquals(1, stds.size());
+        Set<Student> students = new HashSet<>();
+        students.add(st1);
+        students.add(st2);
+        assertEquals(1, students.size());
     }
 
     @Test
-    public void stringTest() throws Exception {
-        String str1 = "abc";
-        String str2 = "abc";
-        String str3 = new String("abc");
-
-        System.out.println(str1 == str2);
-        System.out.println(str1 == str3);
-
-        assertEquals(str1, str2);
-        assertEquals(str1, str3);
+    public void equals() throws Exception {
+        String s1 = "hello";
+        String s2 = "hello";
+        String s3 = new String("hello");
+        assertEquals(s1, s2);
+        assertNotEquals(s1, s3);
     }
 }

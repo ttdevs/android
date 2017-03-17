@@ -1,10 +1,3 @@
-/*
- * Created by ttdevs at 16-8-24 上午10:55.
- * E-mail:ttdevs@gmail.com
- * https://github.com/ttdevs
- * Copyright (c) 2016 ttdevs
- */
-
 package com.ttdevs.android;
 
 import android.os.Bundle;
@@ -19,28 +12,24 @@ import android.widget.RadioGroup;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import org.java_websocket.WebSocket;
-import org.java_websocket.client.WebSocketClient;
-import org.java_websocket.drafts.Draft;
-import org.java_websocket.drafts.Draft_10;
-import org.java_websocket.drafts.Draft_17;
-import org.java_websocket.drafts.Draft_75;
-import org.java_websocket.drafts.Draft_76;
-import org.java_websocket.exceptions.InvalidDataException;
-import org.java_websocket.framing.Framedata;
-import org.java_websocket.framing.FramedataImpl1;
-import org.java_websocket.handshake.ServerHandshake;
-
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.nio.ByteBuffer;
-import java.nio.channels.NotYetConnectedException;
+import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+import okhttp3.ResponseBody;
+import okhttp3.ws.WebSocket;
+import okhttp3.ws.WebSocketCall;
+import okhttp3.ws.WebSocketListener;
+import okio.Buffer;
 
-public class WebSocketActivity extends BaseActivity {
+public class WebSocketOKActivity extends BaseActivity {
     private static final int STATUS_CLOSE = 0;
     private static final int STATUS_CONNECT = 1;
     private static final int STATUS_MESSAGE = 2;
@@ -69,6 +58,10 @@ public class WebSocketActivity extends BaseActivity {
     @Bind(R.id.btSend)
     Button btSend;
 
+    private OKClient mClient;
+    private WebSocket mWebSocket;
+    private String mAddress;
+
     @OnClick({R.id.btConnect, R.id.btDisconnect, R.id.btSend, R.id.btPing})
     public void onClick(View view) {
         switch (view.getId()) {
@@ -76,8 +69,12 @@ public class WebSocketActivity extends BaseActivity {
                 connectToServer();
                 break;
             case R.id.btDisconnect:
-                if (null != mClient) {
-                    mClient.close();
+                try {
+                    if (null != mWebSocket) {
+                        mWebSocket.close(-1, "From client, Bye!");
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
                 break;
             case R.id.btSend:
@@ -85,8 +82,9 @@ public class WebSocketActivity extends BaseActivity {
                     String msg = etMessage.getText().toString();
                     if (!TextUtils.isEmpty(msg)) {
                         try {
-                            mClient.send(msg);
-                        } catch (NotYetConnectedException e) {
+                            RequestBody body = RequestBody.create(MediaType.parse(""), msg);
+                            mWebSocket.sendMessage(body);
+                        } catch (Exception e) {
                             e.printStackTrace();
                             return;
                         }
@@ -95,15 +93,12 @@ public class WebSocketActivity extends BaseActivity {
                 }
                 break;
             case R.id.btPing:
-                ByteBuffer buffer = ByteBuffer.wrap("Hello".getBytes());
-                FramedataImpl1 resp = new FramedataImpl1(Framedata.Opcode.PING);
-                resp.setFin(true);
                 try {
-                    resp.setPayload(buffer);
-                } catch (InvalidDataException e) {
+                    Buffer buffer = new Buffer().writeUtf8("hello");
+                    mWebSocket.sendPing(buffer);
+                } catch (IOException e) {
                     e.printStackTrace();
                 }
-                mClient.getConnection().sendFrame(resp);
                 break;
 
             default:
@@ -111,7 +106,6 @@ public class WebSocketActivity extends BaseActivity {
         }
     }
 
-    private Client mClient;
     private Handler mHandle = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -147,7 +141,7 @@ public class WebSocketActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_web_socket);
+        setContentView(R.layout.activity_web_socket_ok);
         ButterKnife.bind(this);
 
 
@@ -162,77 +156,51 @@ public class WebSocketActivity extends BaseActivity {
             Snackbar.make(viewMain, "IP and Port 不能为空", Snackbar.LENGTH_LONG).show();
             return;
         }
-        String address = String.format("ws://%s:%s", ip, port);
-        Draft draft = null;
-        switch (rgVersion.getCheckedRadioButtonId()) {
-            case R.id.rbDraft10:
-                draft = new Draft_10();
-                break;
-            case R.id.rbDraft17:
-                draft = new Draft_17();
-                break;
-            case R.id.rbDraft75:
-                draft = new Draft_75();
-                break;
-            case R.id.rbDraft76:
-                draft = new Draft_76();
-                break;
 
-            default:
-                draft = new Draft_17();
-                break;
-        }
-        try {
-            URI uri = new URI(address);
-            mClient = new Client(uri, draft);
-            mClient.connect();
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-            return;
-        }
+        mClient = new OKClient();
 
-        tvStatus.setText(address);
+        mAddress = String.format("ws://%s:%s", ip, port);
+
+        OkHttpClient.Builder builder = new OkHttpClient.Builder().readTimeout(0, TimeUnit.NANOSECONDS);
+        OkHttpClient okHttpClient = builder.build();
+        Request request = new Request.Builder()
+                .url(mAddress)
+                .build();
+        WebSocketCall socketCall = WebSocketCall.create(okHttpClient, request);
+        socketCall.enqueue(mClient);
+
+        tvStatus.setText(mAddress);
     }
 
-    private class Client extends WebSocketClient {
 
-        public Client(URI serverURI) {
-            super(serverURI);
-        }
-
-        public Client(URI serverUri, Draft draft) {
-            super(serverUri, draft);
-        }
+    private class OKClient implements WebSocketListener {
 
         @Override
-        public void onOpen(ServerHandshake handShakeData) {
+        public void onOpen(WebSocket webSocket, Response response) {
+            mWebSocket = webSocket;
+
             Message msg = new Message();
             msg.what = STATUS_CONNECT;
-            msg.obj = String.format("[Welcome：%s]", getURI());
+            msg.obj = String.format("[Welcome：%s]", mAddress);
             mHandle.sendMessage(msg);
         }
 
         @Override
-        public void onMessage(String message) {
+        public void onFailure(IOException e, Response response) {
+            e.printStackTrace();
+        }
+
+        @Override
+        public void onMessage(ResponseBody message) throws IOException {
             Message msg = new Message();
             msg.what = STATUS_MESSAGE;
-            msg.obj = message;
+            msg.obj = message.string();
             mHandle.sendMessage(msg);
         }
 
         @Override
-        public void onClose(int code, String reason, boolean remote) {
-            Message msg = new Message();
-            msg.what = STATUS_CLOSE;
-            msg.obj = String.format("[Bye：%s]", getURI());
-            mHandle.sendMessage(msg);
-        }
-
-        @Override
-        public void onWebsocketPong(WebSocket conn, Framedata f) {
-            super.onWebsocketPong(conn, f);
-
-            String value = parseFramedata(f);
+        public void onPong(Buffer payload) {
+            String value = parseBuffer(payload);
 
             Message msg = new Message();
             msg.what = STATUS_MESSAGE;
@@ -241,30 +209,20 @@ public class WebSocketActivity extends BaseActivity {
         }
 
         @Override
-        public void onWebsocketPing(WebSocket conn, Framedata f) {
-            super.onWebsocketPing(conn, f);
-
-            String value = parseFramedata(f);
-
+        public void onClose(int code, String reason) {
             Message msg = new Message();
-            msg.what = STATUS_MESSAGE;
-            msg.obj = "ping:" + value;
+            msg.what = STATUS_CLOSE;
+            msg.obj = String.format("[Bye：%s \n %s]", mAddress, reason);
             mHandle.sendMessage(msg);
         }
 
-        @Override
-        public void onError(Exception ex) {
-            ex.printStackTrace();
-        }
-
-        public String parseFramedata(Framedata framedata){
+        public String parseBuffer(Buffer buffer) {
             String result = "null";
-            ByteBuffer buffer = framedata.getPayloadData();
-            if(null == buffer){
+            if (null == buffer) {
                 return result;
             }
-            byte[] data = buffer.array();
-            if(null != data && data.length > 0){
+            byte[] data = buffer.readByteArray();
+            if (null != data && data.length > 0) {
                 return new String(data);
             }
             return result;

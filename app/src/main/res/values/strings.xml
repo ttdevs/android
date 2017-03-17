@@ -25,4 +25,5 @@
     <string name="title_activity_router">RouterActivity</string>
     <string name="title_activity_hybrid_view">HybridViewActivity</string>
     <string name="title_activity_web_socket">WebSocketActivity</string>
+    <string name="title_activity_web_socket_ok">OKWebSocketActivity</string>
 </resources>

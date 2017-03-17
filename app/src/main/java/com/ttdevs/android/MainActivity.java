@@ -107,6 +107,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_web_socket:
                 Utils.comeOnBaby(this, WebSocketActivity.class);
                 break;
+            case R.id.nav_web_socket_ok:
+                Utils.comeOnBaby(this, WebSocketOKActivity.class);
+                break;
             case R.id.nav_custom_view:
                 Utils.comeOnBaby(this, CustomViewActivity.class);
                 break;
@@ -130,6 +133,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.nav_argb_evaluator:
                 Utils.comeOnBaby(this, ArgbEvaluatorActivity.class);
+                break;
+            case R.id.nav_spannable:
+                Utils.comeOnBaby(this, SpannableActivity.class);
                 break;
 
             default:

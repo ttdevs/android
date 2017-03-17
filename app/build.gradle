@@ -73,8 +73,9 @@ dependencies {
     compile libs.markdownview
     compile libs.java_websocket
     compile libs.guava
+    compile libs.okhttp3ws
 
-    compile project(':modules:jniutils')
+    // compile project(':modules:jniutils')
     compile project(':modules:markdown')
     compile project(':modules:reactive')
     compile project(':modules:indicator')

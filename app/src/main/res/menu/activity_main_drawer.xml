@@ -24,6 +24,10 @@
             android:id="@+id/nav_web_socket"
             android:icon="@drawable/ic_menu_send"
             android:title="WebSocket" />
+        <item
+            android:id="@+id/nav_web_socket_ok"
+            android:icon="@drawable/ic_menu_send"
+            android:title="WebSocketOK" />
     </group>
 
     <item android:title="Custom View">
@@ -80,6 +84,10 @@
                 android:id="@+id/nav_argb_evaluator"
                 android:icon="@drawable/ic_menu_send"
                 android:title="ArgbEvaluator" />
+            <item
+                android:id="@+id/nav_spannable"
+                android:icon="@drawable/ic_menu_send"
+                android:title="SpannableString" />
         </menu>
     </item>
 

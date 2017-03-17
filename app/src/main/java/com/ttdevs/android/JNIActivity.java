@@ -13,7 +13,7 @@ import android.view.View;
 import android.widget.ScrollView;
 
 import com.ttdevs.android.utils.SysUtils;
-import com.ttdevs.jniutils.CipherUtils;
+//import com.ttdevs.jniutils.CipherUtils;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -32,11 +32,11 @@ public class JNIActivity extends BaseActivity {
         switch (view.getId()) {
             case R.id.bt_authenticate:
                 SysUtils.getAppSignature(this);
-                CipherUtils.authenticate(this);
+//                CipherUtils.authenticate(this);
                 break;
             case R.id.bt_base64_encode:
                 String str = "{\"bucket\":\"onetest\",\"keys\":[\"/one/2016-08-09/160402b4-0470-49e0-b408-b580675cf910.png\",\"/bingo/2015-12-09/160402b4-0470-49e0-b408-b580675cf910.png\",\"/status/2014-10-09/160402b4-0470-49e0-b408-b580675cf910.png\",\"/food/2014-10-09/160402b4-0470-49e0-b408-b580675cf910.png\"]}";
-                showSnackbar(viewMain, CipherUtils.base64Encode(str));
+//                showSnackbar(viewMain, CipherUtils.base64Encode(str));
                 break;
             case R.id.bt_device_info:
                 SysUtils.printSystemInfo(this);

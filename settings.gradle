@@ -16,7 +16,7 @@ include ':apps:things'
 include ':apps:air'
 
 // module
-include 'modules:jniutils'
+// include 'modules:jniutils'
 include 'modules:markdown'
 include 'modules:reactive'
 include 'modules:indicator'
@@ -27,3 +27,4 @@ include 'modules:webscoket'
 include 'modules:jcvideo'
 include 'modules:dagger'
 include 'modules:guava'
+include 'modules:test'

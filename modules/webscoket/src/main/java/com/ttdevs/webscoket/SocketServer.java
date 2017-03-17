@@ -8,6 +8,8 @@
 package com.ttdevs.webscoket;
 
 import org.java_websocket.WebSocket;
+import org.java_websocket.framing.Framedata;
+import org.java_websocket.framing.FramedataImpl1;
 import org.java_websocket.handshake.ClientHandshake;
 import org.java_websocket.server.WebSocketServer;
 
@@ -35,6 +37,13 @@ public class SocketServer extends WebSocketServer {
 
         InputStreamReader in = new InputStreamReader(System.in);
         BufferedReader reader = new BufferedReader(in);
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+            }
+        }).start();
 
         while (true) {
             try {
@@ -71,11 +80,33 @@ public class SocketServer extends WebSocketServer {
     }
 
     @Override
-    public void onMessage(WebSocket webSocket, String msg) {
+    public void onMessage(final WebSocket webSocket, String msg) {
         String address = webSocket.getRemoteSocketAddress().getAddress().getHostAddress();
         String message = String.format("(%s) %s", address, msg);
         broadcastMessage(message);
         print(message);
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(1000 * 3);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                FramedataImpl1 resp = new FramedataImpl1(Framedata.Opcode.PING);
+                resp.setFin(true);
+                webSocket.sendFrame(resp);
+            }
+        }).start();
+    }
+
+    @Override
+    public void onWebsocketPong(WebSocket conn, Framedata f) {
+        super.onWebsocketPong(conn, f);
+
+        print("pong");
     }
 
     @Override

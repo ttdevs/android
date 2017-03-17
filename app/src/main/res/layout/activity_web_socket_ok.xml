@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?><!--
-  ~ Created by ttdevs at 16-8-24 上午10:55.
+  ~ Created by ttdevs at 17-03-15 下午17:26.
   ~ E-mail:ttdevs@gmail.com
   ~ https://github.com/ttdevs
-  ~ Copyright (c) 2016 ttdevs
+  ~ Copyright (c) 2017 ttdevs
   -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -13,7 +13,7 @@
     android:orientation="vertical"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    tools:context="com.ttdevs.android.WebSocketActivity">
+    tools:context=".WebSocketActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -48,40 +48,6 @@
             android:maxLines="1"
             android:text="2333" />
     </LinearLayout>
-
-
-    <RadioGroup
-        android:id="@+id/rgVersion"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:orientation="horizontal">
-
-        <RadioButton
-            android:id="@+id/rbDraft10"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Draft_10" />
-
-        <RadioButton
-            android:id="@+id/rbDraft17"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="true"
-            android:text="Draft_17" />
-
-        <RadioButton
-            android:id="@+id/rbDraft75"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Draft_75" />
-
-        <RadioButton
-            android:id="@+id/rbDraft76"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Draft_76" />
-    </RadioGroup>
 
     <LinearLayout
         android:layout_width="match_parent"

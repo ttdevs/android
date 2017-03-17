@@ -2,6 +2,15 @@ package com.ttdevs.android;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.Vector;
+
 /**
  * Created by ttdevs
  * 2017-03-03 (android)
@@ -54,5 +63,108 @@ public class JavaTest {
         System.out.println(new Student(2).getClass());
         System.out.println(new Jim(1).getClass());
         System.out.println(new Jim(1).getClass().getSuperclass());
+    }
+
+    @Test
+    public void testHeap() throws Exception {
+        recursion();
+    }
+
+    int i = 0;
+
+    private void recursion() {
+        System.out.println("i:" + i++);
+        recursion();
+    }
+
+
+    @Test
+    public void testOOM() throws Exception {
+        List<Object> dataList = new ArrayList<>();
+        while (true) {
+            dataList.add(String.valueOf(Math.random()).intern());
+
+            System.out.println(dataList.size());
+        }
+    }
+
+    @Test
+    public void testString() throws Exception {
+        String ss = "123456";
+        System.out.println("ss = " + ss);
+        String bb = ss.replace('1', '0');
+        System.out.println("ss = " + ss);
+        System.out.println("bb = " + bb);
+        ss.intern();
+        // ss.concat()
+    }
+
+    @Test
+    public void testHashMap() throws Exception {
+        Map<String, String> map = new HashMap<>();
+        map.put("first", "test");
+        map.put(null, "one");
+        map.put(null, "two");
+        map.put(null, "three");
+        map.put("name", "Whh");
+
+        Iterator<Map.Entry<String, String>> iterator = map.entrySet().iterator();
+        while (iterator.hasNext()) {
+            Map.Entry<String, String> item = iterator.next();
+            System.out.println(item.getKey() + "|" + item.getValue() + "|" + item.hashCode());
+        }
+    }
+
+    class Person {
+        public String name;
+        public int age;
+
+        public Person(String name) {
+            this.name = name;
+        }
+    }
+
+    @Test
+    public void testSet() throws Exception {
+        Person p1 = new Person("one");
+        Person p2 = new Person("two");
+
+        Set<Person> sets = new HashSet<>();
+        sets.add(p1);
+        sets.add(p2);
+        System.out.println(sets.size());
+
+        sets.add(p2);
+        System.out.println(sets.size());
+
+        System.out.println(p2.hashCode());
+        p2.name = "two_new";
+        System.out.println(p2.hashCode());
+
+        sets.remove(p2);
+        sets.add(p2);
+        System.out.println(sets.size());
+
+        for (Person person : sets) {
+            System.out.println(person.name);
+        }
+
+        for (Iterator<Person> it = sets.iterator(); it.hasNext(); ) {
+            System.out.println(it.next().name);
+        }
+    }
+
+    @Test
+    public void testOOM1() {
+        Vector v = new Vector(10);
+        for (int i = 1; i < 100; i++) {
+            Object o = new Object();
+            v.add(o);
+            o = null;
+        }
+
+        // 监听器
+        // 各种链接：数据库链接
+        // 单例模式
     }
 }
