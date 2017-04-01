@@ -60,7 +60,7 @@ public class BLEService extends Service {
         if (null != mBluetoothAdapter) {
             BluetoothDevice device = mBluetoothAdapter.getRemoteDevice(mMAC);
             if (null != device) {
-                mBluetoothGatt = device.connectGatt(this, true, mCallBack);
+                mBluetoothGatt = device.connectGatt(this, false, mCallBack);
                 mBluetoothGatt.connect();
                 return START_STICKY;
             }
@@ -84,8 +84,8 @@ public class BLEService extends Service {
 
     private void closeConnect() {
         if (null != mBluetoothGatt) {
-            mBluetoothGatt.disconnect();
             mBluetoothGatt.close();
+            mBluetoothGatt.disconnect();
             mBluetoothGatt = null;
         }
     }
@@ -93,6 +93,8 @@ public class BLEService extends Service {
     private final BluetoothGattCallback mCallBack = new BluetoothGattCallback() {
         @Override
         public void onConnectionStateChange(BluetoothGatt gatt, int status, int newState) {
+            super.onConnectionStateChange(gatt, status, newState);
+
             switch (newState) {
                 case BluetoothProfile.STATE_CONNECTED:
                     print("连接GATT服务成功，开始Service搜索...");
@@ -110,6 +112,8 @@ public class BLEService extends Service {
 
         @Override
         public void onServicesDiscovered(BluetoothGatt gatt, int status) {
+            super.onServicesDiscovered(gatt, status);
+
             print("发现服务...");
 
             if (BluetoothGatt.GATT_SUCCESS == status) {
@@ -133,10 +137,10 @@ public class BLEService extends Service {
 
         @Override
         public void onCharacteristicRead(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic, int status) {
-            if (BluetoothGatt.GATT_SUCCESS == status) {
-                byte[] data = characteristic.getValue();
-                parseData(data);
-            }
+            super.onCharacteristicRead(gatt, characteristic, status);
+
+            byte[] data = characteristic.getValue();
+            parseData(data);
         }
 
         @Override
@@ -147,6 +151,9 @@ public class BLEService extends Service {
         @Override
         public void onCharacteristicChanged(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic) {
             super.onCharacteristicChanged(gatt, characteristic);
+
+            byte[] data = characteristic.getValue();
+            parseData(data);
         }
 
         @Override
