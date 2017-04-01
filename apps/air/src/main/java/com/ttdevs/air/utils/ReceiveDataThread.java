@@ -12,6 +12,9 @@ import java.util.UUID;
 
 public class ReceiveDataThread extends BaseWorkerThread {
     public static final UUID DEFAULT_UUID = UUID.fromString("00001101-0000-1000-8000-00805f9b34fb");
+
+    public static final UUID UUID_RECEIVE = UUID.fromString("00001801-0000-1000-8000-00805f9b34fb");
+    public static final UUID UUID_CONTROL = UUID.fromString("00001802-0000-1000-8000-00805f9b34fb");
     private static final int SIZE = 32;
 
     private Handler mHandler;
