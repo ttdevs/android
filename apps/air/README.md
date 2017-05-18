@@ -2,7 +2,7 @@
 
 ## 0x00 BLE简介
 
-![ble](ble.jpg)
+![ble](ble.png)
 
 [维基百科：低功耗蓝牙](https://zh.wikipedia.org/wiki/%E8%97%8D%E7%89%99#.E4.BD.8E.E8.80.97.E9.9B.BB.E8.97.8D.E7.89.99BLE.EF.BC.88Bluetooth_Low_Energy.EF.BC.89)
 

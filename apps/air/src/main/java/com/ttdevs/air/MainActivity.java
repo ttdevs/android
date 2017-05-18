@@ -24,6 +24,9 @@ public class MainActivity extends AppCompatActivity {
             case R.id.btBLE:
                 startActivity(new Intent(this, MainBLEActivity.class));
                 break;
+            case R.id.btBike:
+                startActivity(new Intent(this, BikeActivity.class));
+                break;
 
             default:
                 break;

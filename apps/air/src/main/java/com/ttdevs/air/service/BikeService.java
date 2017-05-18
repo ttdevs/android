@@ -12,39 +12,40 @@ import android.bluetooth.BluetoothManager;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Looper;
 import android.os.Message;
 import android.text.TextUtils;
 
+import com.ttdevs.air.utils.BLEUtils;
 import com.ttdevs.air.utils.HexUtils;
 
 import java.util.List;
 import java.util.UUID;
 
-public class BLEService extends Service {
+public class BikeService extends Service {
     public static final String KEY_MAC = "key_mac";
     public static final int KEY_LOG = 0x01;
-    public static final int KEY_PM25 = 0x02;
 
-    private static final String MAC_BT5 = "00:15:83:30:B4:70";
-    private static final String MAC_BIKE = "82:EA:CA:00:00:01";
+    //    public static final String MAC_BIKE = "82:EA:CA:00:00:01"; // bike
+    public static final String MAC_BIKE = "00:15:83:30:B4:70"; // bt5
 
-    private static final UUID UUID_RECEIVE = UUID.fromString("00001801-0000-1000-8000-00805f9b34fb");
-    private static final UUID UUID_CONTROL = UUID.fromString("00001802-0000-1000-8000-00805f9b34fb");
-    private static final String UUID_BT5_DATA = "0000ffe1-0000-1000-8000-00805f9b34fb";
+//    private static final UUID UUID_RECEIVE = UUID.fromString("00001801-0000-1000-8000-00805f9b34fb");
+//    private static final UUID UUID_CONTROL = UUID.fromString("00001802-0000-1000-8000-00805f9b34fb");
+    private static final UUID UUID_RECEIVE = UUID.fromString("0000ffe1-0000-1000-8000-00805f9b34fb");
 
     private BluetoothManager mBluetoothManager;
     private BluetoothAdapter mBluetoothAdapter;
 
     private BluetoothGatt mBluetoothGatt;
 
-    private String mMAC = MAC_BT5;
+    private String mMAC = MAC_BIKE;
 
-    private Handler mHandler = new Handler();
+    private Handler mHandler = new Handler(Looper.getMainLooper());
 
-    public BLEService() {
+    public BikeService() {
 
     }
 
@@ -54,22 +55,30 @@ public class BLEService extends Service {
             mMAC = intent.getStringExtra(KEY_MAC);
         }
         if (TextUtils.isEmpty(mMAC)) {
-            mMAC = MAC_BT5;
+            mMAC = MAC_BIKE;
         }
         mBluetoothManager = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
         mBluetoothAdapter = mBluetoothManager.getAdapter();
-
-        if (null != mBluetoothAdapter) {
-            BluetoothDevice device = mBluetoothAdapter.getRemoteDevice(mMAC);
-            if (null != device) {
-                mBluetoothGatt = device.connectGatt(this, false, mCallBack);
-                mBluetoothGatt.connect();
-                return START_STICKY;
-            }
+        if (null == mBluetoothAdapter) {
+            stopSelf();
+            return START_NOT_STICKY;
         }
 
-        stopSelf();
-        return START_NOT_STICKY;
+        BluetoothDevice device = mBluetoothAdapter.getRemoteDevice(mMAC);
+        if (null == device) {
+            stopSelf();
+            return START_NOT_STICKY;
+        }
+
+        closeConnect();
+
+        mBluetoothGatt = device.connectGatt(this, false, mCallBack);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) { //5.0设置的传输最大空间
+            mBluetoothGatt.requestConnectionPriority(BluetoothGatt.CONNECTION_PRIORITY_HIGH);
+            mBluetoothGatt.requestMtu(84);
+        }
+        print("Gatt connect");
+        return START_STICKY;
     }
 
     @Override
@@ -97,26 +106,32 @@ public class BLEService extends Service {
         public void onConnectionStateChange(BluetoothGatt gatt, int status, int newState) {
             super.onConnectionStateChange(gatt, status, newState);
 
+            print(String.format("status:%d, newState:%d", status, newState));
+
+            if (status != BluetoothGatt.GATT_SUCCESS) {
+                closeConnect();
+            }
+
             switch (newState) {
                 case BluetoothProfile.STATE_CONNECTED:
-                    print("连接GATT服务成功，开始Service搜索...");
+                    print("连接GATT服务成功，开始发现服务...");
                     gatt.discoverServices();
                     break;
                 case BluetoothProfile.STATE_DISCONNECTED:
-                    print("断开GATT Server连接.");
+                    print("断开GATT服务，Bye");
+                    closeConnect();
                     break;
 
                 default:
                     break;
             }
-
         }
 
         @Override
         public void onServicesDiscovered(BluetoothGatt gatt, int status) {
             super.onServicesDiscovered(gatt, status);
 
-            print("发现服务...");
+            print("发现服务：" + status);
 
             if (BluetoothGatt.GATT_SUCCESS == status) {
                 List<BluetoothGattService> gattServices = gatt.getServices();
@@ -124,23 +139,38 @@ public class BLEService extends Service {
                     return;
                 }
                 for (BluetoothGattService gattService : gattServices) {
+                    String serviceUUID = gattService.getUuid().toString();
+                    print("UUID GATT:" + serviceUUID);
                     List<BluetoothGattCharacteristic> characteristics = gattService.getCharacteristics();
                     for (BluetoothGattCharacteristic characteristic : characteristics) {
                         String uuid = characteristic.getUuid().toString();
-                        print("UUID    Cha:" + uuid);
-                        if (UUID_BT5_DATA.equalsIgnoreCase(uuid)) {
+                        print("UUID     Cha:" + uuid);
+                        print("UUID     Status:" + getProperties(characteristic));
+                        if (UUID_RECEIVE.toString().equalsIgnoreCase(uuid)) {
                             mBluetoothGatt.setCharacteristicNotification(characteristic, true);
-                            print("开始监听...");
+                            print("开始监听：" + uuid);
                         }
                     }
                 }
             }
         }
 
+        private String getProperties(BluetoothGattCharacteristic characteristic) {
+            String format = "Read:%b Write:%b";
+            return String.format(format,
+                    BLEUtils.isCharacteristicReadable(characteristic),
+                    BLEUtils.isCharacteristicWriteable(characteristic));
+        }
+
         @Override
         public void onCharacteristicRead(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic, int status) {
             super.onCharacteristicRead(gatt, characteristic, status);
 
+            print("onCharacteristicRead:" + status);
+
+            if (status == BluetoothGatt.GATT_SUCCESS) {
+                print("GATT_Success");
+            }
             byte[] data = characteristic.getValue();
             parseData(data);
         }
@@ -148,48 +178,57 @@ public class BLEService extends Service {
         @Override
         public void onCharacteristicWrite(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic, int status) {
             super.onCharacteristicWrite(gatt, characteristic, status);
+
+            print("onCharacteristicWrite:" + status);
         }
 
         @Override
         public void onCharacteristicChanged(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic) {
             super.onCharacteristicChanged(gatt, characteristic);
 
-            byte[] data = characteristic.getValue();
-            parseData(data);
+            print("onCharacteristicChanged");
+
+            parseData(characteristic.getValue());
         }
 
         @Override
         public void onDescriptorRead(BluetoothGatt gatt, BluetoothGattDescriptor descriptor, int status) {
             super.onDescriptorRead(gatt, descriptor, status);
+
+            print("onDescriptorRead:" + status);
         }
 
         @Override
         public void onDescriptorWrite(BluetoothGatt gatt, BluetoothGattDescriptor descriptor, int status) {
             super.onDescriptorWrite(gatt, descriptor, status);
+
+            print("onDescriptorWrite:" + status);
         }
 
         @Override
         public void onReliableWriteCompleted(BluetoothGatt gatt, int status) {
             super.onReliableWriteCompleted(gatt, status);
+
+            print("onReliableWriteCompleted:" + status);
         }
 
         @Override
         public void onReadRemoteRssi(BluetoothGatt gatt, int rssi, int status) {
             super.onReadRemoteRssi(gatt, rssi, status);
+
+            print(String.format("onReadRemoteRssi rssi:%d, status:%d", rssi, status));
         }
 
         @Override
         public void onMtuChanged(BluetoothGatt gatt, int mtu, int status) {
             super.onMtuChanged(gatt, mtu, status);
+
+            print(String.format("onMtuChanged mtu:%d, status:%d", mtu, status));
         }
     };
 
-
     private void parseData(byte[] data) {
-        String msg = HexUtils.bytesToHexString(data);
-        print(msg);
-//        String pm25 = parsePM25Data(data);
-//        print(KEY_PM25, pm25);
+        print(HexUtils.bytesToHexString(data));
     }
 
     private String parsePM25Data(byte[] data) {
@@ -203,20 +242,15 @@ public class BLEService extends Service {
         int EN_PM2_5 = 12;
         int EN_PM10_ = 14;
 
-        result.append(String.format(format, "PM1.0", byte2int(data[EN_PM1_0], data[EN_PM1_0 + 1])));
-        result.append(String.format(format, "PM2.5", byte2int(data[EN_PM2_5], data[EN_PM2_5 + 1])));
-        result.append(String.format(format, "PM10 ", byte2int(data[EN_PM10_], data[EN_PM10_ + 1])));
+        result.append(String.format(format, "PM1.0", HexUtils.byte2int(data[EN_PM1_0], data[EN_PM1_0 + 1])));
+        result.append(String.format(format, "PM2.5", HexUtils.byte2int(data[EN_PM2_5], data[EN_PM2_5 + 1])));
+        result.append(String.format(format, "PM10 ", HexUtils.byte2int(data[EN_PM10_], data[EN_PM10_ + 1])));
         result.append("\n");
-        result.append(String.format(format, "dev PM1.0", byte2int(data[CF_PM1_0], data[CF_PM1_0 + 1])));
-        result.append(String.format(format, "dev PM2.5", byte2int(data[CF_PM2_5], data[CF_PM2_5 + 1])));
-        result.append(String.format(format, "dev PM10 ", byte2int(data[CF_PM10_], data[CF_PM10_ + 1])));
+        result.append(String.format(format, "dev PM1.0", HexUtils.byte2int(data[CF_PM1_0], data[CF_PM1_0 + 1])));
+        result.append(String.format(format, "dev PM2.5", HexUtils.byte2int(data[CF_PM2_5], data[CF_PM2_5 + 1])));
+        result.append(String.format(format, "dev PM10 ", HexUtils.byte2int(data[CF_PM10_], data[CF_PM10_ + 1])));
 
         return result.toString();
-    }
-
-    public static int byte2int(byte high, byte low) {
-        int targets = ((high << 8) & 0xff00) | (low & 0xff);
-        return targets;
     }
 
     private void print(String msg) {
@@ -229,12 +263,13 @@ public class BLEService extends Service {
         message.obj = msg;
         mHandler.sendMessage(message);
 
-        System.out.println(">>>>>" + msg);
+        System.out.println(System.currentTimeMillis() + ">>>>>" + msg);
     }
 
+
     public static void comeOnBaby(Context context, String mac) {
-        Intent service = new Intent(context, BLEService.class);
-        service.putExtra(BLEService.KEY_MAC, MAC_BT5);
+        Intent service = new Intent(context, BikeService.class);
+        service.putExtra(KEY_MAC, mac);
         context.startService(service);
     }
 }

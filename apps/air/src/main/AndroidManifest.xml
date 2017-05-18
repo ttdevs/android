@@ -48,6 +48,12 @@
 
         <activity android:name=".MainBLEActivity" />
         <activity android:name=".MainNormalActivity" />
+        <activity android:name=".BikeActivity" />
+
+        <service
+            android:name=".service.BikeService"
+            android:enabled="true"
+            android:exported="true"/>
     </application>
 
 </manifest>

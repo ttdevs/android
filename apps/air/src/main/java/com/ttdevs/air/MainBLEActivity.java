@@ -1,15 +1,6 @@
 package com.ttdevs.air;
 
-import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothDevice;
-import android.bluetooth.BluetoothGatt;
-import android.bluetooth.BluetoothGattCallback;
-import android.bluetooth.BluetoothGattCharacteristic;
-import android.bluetooth.BluetoothGattDescriptor;
-import android.bluetooth.BluetoothGattService;
-import android.bluetooth.BluetoothManager;
-import android.bluetooth.BluetoothProfile;
-import android.content.Context;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -18,9 +9,6 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.ttdevs.air.service.BLEService;
-
-import java.util.List;
-import java.util.UUID;
 
 public class MainBLEActivity extends BaseActivity {
     private static final String MAC_BT5 = "00:15:83:30:B4:70";
