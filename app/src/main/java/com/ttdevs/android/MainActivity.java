@@ -30,8 +30,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Bind(R.id.mdv_content)
     MarkDownView mdvContent;
-    @Bind(R.id.imageView)
-    ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
