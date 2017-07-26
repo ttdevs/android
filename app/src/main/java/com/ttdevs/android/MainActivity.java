@@ -16,6 +16,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 
 import com.ttdevs.android.utils.FileUtils;
 import com.ttdevs.android.utils.Utils;
@@ -29,6 +30,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Bind(R.id.mdv_content)
     MarkDownView mdvContent;
+    @Bind(R.id.imageView)
+    ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

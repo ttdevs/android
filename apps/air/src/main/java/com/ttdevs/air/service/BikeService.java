@@ -32,7 +32,7 @@ public class BikeService extends Service {
     //    public static final String MAC_BIKE = "82:EA:CA:00:00:01"; // bike
     public static final String MAC_BIKE = "00:15:83:30:B4:70"; // bt5
 
-//    private static final UUID UUID_RECEIVE = UUID.fromString("00001801-0000-1000-8000-00805f9b34fb");
+    //    private static final UUID UUID_RECEIVE = UUID.fromString("00001801-0000-1000-8000-00805f9b34fb");
 //    private static final UUID UUID_CONTROL = UUID.fromString("00001802-0000-1000-8000-00805f9b34fb");
     private static final UUID UUID_RECEIVE = UUID.fromString("0000ffe1-0000-1000-8000-00805f9b34fb");
 
@@ -144,8 +144,14 @@ public class BikeService extends Service {
                     List<BluetoothGattCharacteristic> characteristics = gattService.getCharacteristics();
                     for (BluetoothGattCharacteristic characteristic : characteristics) {
                         String uuid = characteristic.getUuid().toString();
-                        print("UUID     Cha:" + uuid);
+                        print("UUID     Charac:" + uuid);
                         print("UUID     Status:" + getProperties(characteristic));
+                        print("UUID     Status:" + characteristic.getInstanceId());
+                        List<BluetoothGattDescriptor> descriptors = characteristic.getDescriptors();
+                        for (BluetoothGattDescriptor descriptor : descriptors) {
+                            print("UUID          Desc:" + descriptor.getUuid().toString());
+                            print("UUID          Perm:" + String.valueOf(descriptor.getPermissions()));
+                        }
                         if (UUID_RECEIVE.toString().equalsIgnoreCase(uuid)) {
                             mBluetoothGatt.setCharacteristicNotification(characteristic, true);
                             print("开始监听：" + uuid);
@@ -156,10 +162,17 @@ public class BikeService extends Service {
         }
 
         private String getProperties(BluetoothGattCharacteristic characteristic) {
-            String format = "Read:%b Write:%b";
-            return String.format(format,
-                    BLEUtils.isCharacteristicReadable(characteristic),
-                    BLEUtils.isCharacteristicWriteable(characteristic));
+            StringBuilder builder = new StringBuilder();
+            if (BLEUtils.isCharacteristicReadable(characteristic)) {
+                builder.append("Read ");
+            }
+            if (BLEUtils.isCharacteristicWriteable(characteristic)) {
+                builder.append("Write ");
+            }
+            if (BLEUtils.isCharacteristicNotifiable(characteristic)) {
+                builder.append("Notify ");
+            }
+            return builder.toString();
         }
 
         @Override
@@ -227,30 +240,12 @@ public class BikeService extends Service {
         }
     };
 
-    private void parseData(byte[] data) {
-        print(HexUtils.bytesToHexString(data));
+    private void writeValue() {
+//        BluetoothGattCharacteristic cha = new BluetoothGattCharacteristic();
     }
 
-    private String parsePM25Data(byte[] data) {
-        String format = "%s:  %d ug/m3 \n";
-        StringBuilder result = new StringBuilder();
-
-        int CF_PM1_0 = 4;
-        int CF_PM2_5 = 6;
-        int CF_PM10_ = 8;
-        int EN_PM1_0 = 10;
-        int EN_PM2_5 = 12;
-        int EN_PM10_ = 14;
-
-        result.append(String.format(format, "PM1.0", HexUtils.byte2int(data[EN_PM1_0], data[EN_PM1_0 + 1])));
-        result.append(String.format(format, "PM2.5", HexUtils.byte2int(data[EN_PM2_5], data[EN_PM2_5 + 1])));
-        result.append(String.format(format, "PM10 ", HexUtils.byte2int(data[EN_PM10_], data[EN_PM10_ + 1])));
-        result.append("\n");
-        result.append(String.format(format, "dev PM1.0", HexUtils.byte2int(data[CF_PM1_0], data[CF_PM1_0 + 1])));
-        result.append(String.format(format, "dev PM2.5", HexUtils.byte2int(data[CF_PM2_5], data[CF_PM2_5 + 1])));
-        result.append(String.format(format, "dev PM10 ", HexUtils.byte2int(data[CF_PM10_], data[CF_PM10_ + 1])));
-
-        return result.toString();
+    private void parseData(byte[] data) {
+        print(HexUtils.bytesToHexString(data));
     }
 
     private void print(String msg) {

@@ -10,6 +10,7 @@ import android.content.IntentFilter;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 
 import com.ttdevs.android.utils.LogUtils;
 
@@ -22,6 +23,8 @@ public class TempActivity extends BaseActivity implements View.OnClickListener {
     private AlarmManager mManager;
     private PendingIntent mFirstPIntent, mSecondPIntent;
     private IntentFilter mAlarmFilter;
+
+    private EditText etNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +48,52 @@ public class TempActivity extends BaseActivity implements View.OnClickListener {
             mAlarmFilter.addAction(ALARM_SECOND);
         }
         registerReceiver(mAlarmReceiver, mAlarmFilter);
+
+        initEditText();
+    }
+
+    private void initEditText() {
+        etNumber = (EditText) findViewById(R.id.etNumber);
+
+//        etNumber.addTextChangedListener(new TextWatcher() {
+//
+//            private boolean isSetText = false;
+//
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//                System.out.println(String.format(">>>>>beforeChanged s:%s start:%d count:%d after:%d", s, start, count, after));
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//                System.out.println(String.format(">>>>>Text  Changed s:%s start:%d before:%d count:%d", s, start, before, count));
+//                System.out.println(String.format(">>>>>Selected  start:%d edn:%d", etNumber.getSelectionStart(), etNumber.getSelectionEnd()));
+//
+//                if (isSetText) {
+//                    isSetText = false;
+//                    return;
+//                }
+//
+//                int select = start;
+//                String result = NumberManager.getInstance().add(s);
+//                if (!result.equals(s.toString())) {
+//                    if (count > before) { // 添加
+//
+//                    } else if (count < before) { // 删除
+//                        select += (count - before);
+//                    }
+//                    etNumber.setText(result);
+//                    etNumber.setSelection(select);
+//                    isSetText = true;
+//                }
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable edit) {
+//
+//
+//            }
+//        });
     }
 
     @Override

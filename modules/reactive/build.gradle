@@ -38,6 +38,8 @@ dependencies {
 
     compile libs.rxjava
     compile libs.rxandroid
+//    compile libs.rxjava2
+//    compile libs.rxandroid2
 
     compile 'com.qiniu:qiniu-android-sdk:7.1.2'
 }

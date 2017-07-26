@@ -82,4 +82,6 @@ dependencies {
     compile project(':modules:hybrid')
     compile project(':modules:jcvideo')
     compile project(':modules:dagger')
+
+    compile group: 'org.apache.commons', name: 'commons-collections4', version: '4.1'
 }

@@ -14,6 +14,7 @@ include ':apps:sqlcipher'
 include ':apps:github'
 include ':apps:things'
 include ':apps:air'
+include ':apps:message'
 
 // module
 // include 'modules:jniutils'
@@ -28,3 +29,4 @@ include 'modules:jcvideo'
 include 'modules:dagger'
 include 'modules:guava'
 include 'modules:test'
+

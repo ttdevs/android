@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.TextView;
 
 import com.ttdevs.air.service.BLEService;
@@ -44,6 +45,32 @@ public class MainBLEActivity extends BaseActivity {
 
         tvPM25 = (TextView) findViewById(R.id.tvPM25);
         tvLog = (TextView) findViewById(R.id.tvLog);
+
+        testView(tvLog);
+    }
+
+    private void testView(final View view) {
+        view.post(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println(">>>>>w" + view.getWidth());
+                System.out.println(">>>>>h" + view.getHeight());
+            }
+        });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        System.out.println(">>>>>onStart");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        System.out.println(">>>>>wonResume");
     }
 
     public void onClick(View v) {

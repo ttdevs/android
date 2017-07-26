@@ -28,7 +28,7 @@ public class BLEUtils {
     /**
      * @return Returns <b>true</b> if property is supports notification
      */
-    public boolean isCharacteristicNotifiable(BluetoothGattCharacteristic pChar) {
+    public static boolean isCharacteristicNotifiable(BluetoothGattCharacteristic pChar) {
         return (pChar.getProperties() & BluetoothGattCharacteristic.PROPERTY_NOTIFY) != 0;
     }
 
