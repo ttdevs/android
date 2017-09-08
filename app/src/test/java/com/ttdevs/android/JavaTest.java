@@ -3,6 +3,7 @@ package com.ttdevs.android;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -166,5 +167,46 @@ public class JavaTest {
         // 监听器
         // 各种链接：数据库链接
         // 单例模式
+    }
+
+    @Test
+    public void testCal() {
+        Calendar startCal = Calendar.getInstance();
+        startCal.setTimeInMillis(System.currentTimeMillis());
+        int year = startCal.get(Calendar.YEAR);
+        int month = startCal.get(Calendar.MONTH) + 1;
+        int day = startCal.get(Calendar.DAY_OF_MONTH);
+        String week = getWeek(startCal);
+        int startHour = startCal.get(Calendar.HOUR_OF_DAY);
+        int startMinute = startCal.get(Calendar.MINUTE);
+        String format = "%d.%d.%d(%s) %d:%d ";
+        String result = String.format(format,
+                year, month, day,
+                week,
+                startHour, startMinute);
+        System.out.println(result);
+    }
+
+    private String getWeek(Calendar calendar) {
+        int week = calendar.get(Calendar.DAY_OF_WEEK) - 1;
+        switch (week) {
+            case 0:
+                return "周日";
+            case 1:
+                return "周一";
+            case 2:
+                return "周二";
+            case 3:
+                return "周三";
+            case 4:
+                return "周四";
+            case 5:
+                return "周五";
+            case 6:
+                return "周六";
+
+            default:
+                return "周日";
+        }
     }
 }

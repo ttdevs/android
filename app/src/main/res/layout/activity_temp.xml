@@ -6,37 +6,10 @@
     android:orientation="vertical"
     android:padding="@dimen/global_dimen_normal">
 
-
-
-    <Button
-        android:id="@+id/btSet"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:onClick="onClick"
-        android:text="Set" />
-
-    <Button
-        android:id="@+id/btCancelSelf"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:onClick="onClick"
-        android:text="Cancel By Self" />
-
-    <Button
-        android:id="@+id/btCancel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:onClick="onClick"
-        android:text="Cancel" />
-
-    <EditText
-        android:id="@+id/etNumber"
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:digits="1234567890"
-        android:inputType="number"
-        android:textSize="24sp" />
+        android:lines="1"
+        android:maxLines="1"
+        android:singleLine="true" />
 </LinearLayout>

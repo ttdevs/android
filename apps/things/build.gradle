@@ -1,19 +1,19 @@
 apply plugin: 'com.android.application'
 
-
+def cfg = rootProject.ext.projectConfig
 def support = rootProject.ext.projectSupport
 def libs = rootProject.ext.projectLibraries
 
 android {
-    compileSdkVersion 24
-    buildToolsVersion "25.0.2"
+    compileSdkVersion cfg.compileSdkVersion
+    buildToolsVersion cfg.buildToolsVersion
 
     defaultConfig {
         applicationId "com.ttdevs.sqlcipher"
-        minSdkVersion 24
-        targetSdkVersion 24
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion cfg.minSdkVersion
+        targetSdkVersion cfg.targetSdkVersion
+        versionCode cfg.versionCode
+        versionName cfg.versionName
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }

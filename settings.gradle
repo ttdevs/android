@@ -6,7 +6,7 @@
  */
 
 // main application
-include ':app'
+include ':app', ':annotations'
 
 // sub application
 include ':apps:bolts'

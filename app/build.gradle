@@ -58,6 +58,9 @@ android {
 //         sourceCompatibility JavaVersion.VERSION_1_8
 //         targetCompatibility JavaVersion.VERSION_1_8
     }
+    lintOptions {
+        abortOnError false
+    }
 }
 
 dependencies {
@@ -84,4 +87,5 @@ dependencies {
     compile project(':modules:dagger')
 
     compile group: 'org.apache.commons', name: 'commons-collections4', version: '4.1'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
 }

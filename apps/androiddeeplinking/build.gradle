@@ -7,16 +7,22 @@
 
 apply plugin: 'com.android.application'
 
+def cfg = rootProject.ext.projectConfig
+def support = rootProject.ext.projectSupport
+def libs = rootProject.ext.projectLibraries
+
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.3"
+    compileSdkVersion cfg.compileSdkVersion
+    buildToolsVersion cfg.buildToolsVersion
 
     defaultConfig {
         applicationId "com.recipe_app"
-        minSdkVersion 15
-        targetSdkVersion 23
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion cfg.minSdkVersion
+        targetSdkVersion cfg.targetSdkVersion
+        versionCode cfg.versionCode
+        versionName cfg.versionName
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
@@ -32,6 +38,6 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.3.0'
 
     compile 'com.android.support:support-v13:23.3.0'
-    compile group:'com.squareup.picasso', name:'picasso', version:'2.3.2'
+    compile group: 'com.squareup.picasso', name: 'picasso', version: '2.3.2'
     compile 'com.readystatesoftware.sqliteasset:sqliteassethelper:+'
 }

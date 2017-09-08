@@ -75,6 +75,10 @@
                 android:id="@+id/nav_vlc"
                 android:icon="@drawable/ic_menu_send"
                 android:title="VLC" />
+            <item
+                android:id="@+id/nav_video_view"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Video View" />
         </menu>
     </item>
 

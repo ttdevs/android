@@ -110,6 +110,21 @@ public class ExampleUnitTest {
 
     }
 
+    @Test
+    public void integerType() {
+        Integer f1 = 100, f2 = 100, f3 = 150, f4 = 150;
+
+        System.out.println(f1 == f2);
+        System.out.println(f3 == f4);
+    }
+
+    @Test
+    public void nullTest() {
+        String a = null;
+        String b = null;
+        System.out.println(a+b);
+    }
+
     private void parse(Locale locale, float source) throws Exception {
         System.out.println(source);
         String parsedString = formatFloatWithOneDot(locale, source);
