@@ -141,6 +141,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_video_view:
                 Utils.comeOnBaby(this, com.ttdevs.android.PlayerActivity.class);
                 break;
+            case R.id.nav_socket:
+                Utils.comeOnBaby(this, SocketActivity.class);
+                break;
 
             default:
                 break;

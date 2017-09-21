@@ -101,6 +101,11 @@
                 android:id="@+id/nav_include_text"
                 android:icon="@drawable/ic_menu_send"
                 android:title="Test Text View" />
+
+            <item
+                android:id="@+id/nav_socket"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Test Socket" />
         </menu>
     </item>
 </menu>
