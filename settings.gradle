@@ -6,15 +6,15 @@
  */
 
 // main application
-include ':app', ':annotations'
+include ':app'
 
 // sub application
 include ':apps:bolts'
 include ':apps:sqlcipher'
 include ':apps:github'
-include ':apps:things'
 include ':apps:air'
 include ':apps:message'
+//include ':apps:things'
 
 // module
 // include 'modules:jniutils'
@@ -29,4 +29,5 @@ include 'modules:jcvideo'
 include 'modules:dagger'
 include 'modules:guava'
 include 'modules:test'
+include 'modules:annotations'
 

@@ -2,6 +2,7 @@
 .gradle
 
 # idea
+.idea/copyright
 .idea/libraries
 .idea/.name
 .idea/compiler.xml
@@ -11,18 +12,15 @@
 .idea/modules.xml
 .idea/runConfigurations.xml
 .idea/workspace.xml
+.idea/markdown-navigator
+.idea/markdown-navigator.xml
 .idea/codeStyleSettings.xml
-.idea/*
 
 # build folder
 build
 
 # sdk.dir ndk.dir
 local.properties
-
-# gradlew
-gradlew
-gradlew.bat
 
 # other
 *.iml
