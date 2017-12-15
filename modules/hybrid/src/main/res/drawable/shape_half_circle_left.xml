@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Created by ttdevs at 16-8-18 下午5:26.
+  ~ E-mail:ttdevs@gmail.com
+  ~ https://github.com/ttdevs
+  ~ Copyright (c) 2016 ttdevs
+  -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#FF0000" />
+            <corners android:radius="30dp" />
+        </shape>
+    </item>
+
+    <item android:left="30dp">
+        <shape android:shape="rectangle">
+            <solid android:color="#FF0000" />
+        </shape>
+    </item>
+</layer-list>

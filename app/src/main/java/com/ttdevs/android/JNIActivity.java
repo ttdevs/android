@@ -15,14 +15,14 @@ import android.widget.ScrollView;
 import com.ttdevs.android.utils.SysUtils;
 //import com.ttdevs.jniutils.CipherUtils;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class JNIActivity extends BaseActivity {
 
 
-    @Bind(R.id.view_main)
+    @BindView(R.id.view_main)
     ScrollView viewMain;
 
     @OnClick({R.id.bt_authenticate,

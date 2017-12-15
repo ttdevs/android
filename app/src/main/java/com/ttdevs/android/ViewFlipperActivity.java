@@ -10,12 +10,12 @@ package com.ttdevs.android;
 import android.os.Bundle;
 import android.widget.ViewFlipper;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class ViewFlipperActivity extends BaseActivity {
 
-    @Bind(R.id.vf_notice)
+    @BindView(R.id.vf_notice)
     ViewFlipper vfNotice;
 
     @Override

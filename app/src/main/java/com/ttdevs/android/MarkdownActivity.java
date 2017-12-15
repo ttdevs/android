@@ -15,14 +15,14 @@ import android.widget.EditText;
 import com.ttdevs.android.utils.LogUtils;
 import com.ttdevs.markdown.MarkDownView;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.OnClick;
 
 public class MarkdownActivity extends BaseActivity {
 
-    @Bind(R.id.et_content)
+    @BindView(R.id.et_content)
     EditText etContent;
-    @Bind(R.id.mdv_content)
+    @BindView(R.id.mdv_content)
     MarkDownView mdvContent;
 
     @OnClick({R.id.bt_load})

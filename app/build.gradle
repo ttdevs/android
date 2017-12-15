@@ -14,7 +14,6 @@ def libs = rootProject.ext.projectLibraries
 
 android {
     compileSdkVersion cfg.compileSdkVersion
-//    buildToolsVersion cfg.buildToolsVersion
 
     defaultConfig {
         applicationId cfg.applicationId
@@ -46,21 +45,11 @@ android {
             zipAlignEnabled true
         }
     }
-    testOptions {
-        unitTests.returnDefaultValues = true
-    }
+
     dexOptions {
 //        incremental true
         maxProcessCount 4
         javaMaxHeapSize '4g'
-    }
-    compileOptions {
-        incremental false
-//         sourceCompatibility JavaVersion.VERSION_1_8
-//         targetCompatibility JavaVersion.VERSION_1_8
-    }
-    lintOptions {
-        abortOnError false
     }
 }
 
@@ -77,6 +66,7 @@ dependencies {
     compile libs.java_websocket
     compile libs.guava
     compile libs.okhttp3ws
+    compile 'com.android.support:support-v4:27.0.2'
 
     compile libs.butterknife
     annotationProcessor libs.butterknife_compiler
@@ -86,6 +76,7 @@ dependencies {
     compile project(':modules:reactive')
     compile project(':modules:indicator')
     compile project(':modules:dagger')
+    compile project(':modules:hybrid')
 
     compile group: 'org.apache.commons', name: 'commons-collections4', version: '4.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'

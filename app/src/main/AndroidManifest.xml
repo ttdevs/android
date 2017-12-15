@@ -55,6 +55,7 @@
         <activity
             android:name=".RouterActivity"
             android:label="@string/title_activity_router"
+            android:launchMode="singleTask"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -87,7 +88,8 @@
         <activity
             android:name=".WebSocketOKActivity"
             android:label="@string/title_activity_web_socket_ok" />
-        <activity android:name=".PlayerActivity"></activity>
+        <activity android:name=".PlayerActivity" />
+        <activity android:name=".TransformerActivity"></activity>
     </application>
 
 </manifest>

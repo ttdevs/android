@@ -19,13 +19,13 @@ import com.ttdevs.android.endless.LinearLayoutFragment;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 
 public class EndLessActivity extends BaseActivity {
 
-    @Bind(R.id.tableLayout)
+    @BindView(R.id.tableLayout)
     TabLayout tableLayout;
-    @Bind(R.id.viewPager)
+    @BindView(R.id.viewPager)
     ViewPager viewPager;
 
     private List<Fragment> mFragmentList = new ArrayList<>();

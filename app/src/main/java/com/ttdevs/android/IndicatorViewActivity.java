@@ -18,22 +18,22 @@ import com.ttdevs.indicator.LineIndicator;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class IndicatorViewActivity extends BaseActivity implements View.OnClickListener {
 
-    @Bind(R.id.ci_1)
+    @BindView(R.id.ci_1)
     CircleIndicator ci1;
 
-    @Bind(R.id.cp_1)
+    @BindView(R.id.cp_1)
     CircleProgress cp1;
-    @Bind(R.id.cp_2)
+    @BindView(R.id.cp_2)
     CircleProgress cp2;
-    @Bind(R.id.cp_3)
+    @BindView(R.id.cp_3)
     CircleProgress cp3;
 
-    @Bind(R.id.li_progress)
+    @BindView(R.id.li_progress)
     LineIndicator liProgress;
 
     @Override

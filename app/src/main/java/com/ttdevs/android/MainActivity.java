@@ -8,6 +8,9 @@
 package com.ttdevs.android;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -16,19 +19,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ImageView;
 
 import com.ttdevs.android.utils.FileUtils;
 import com.ttdevs.android.utils.Utils;
-import com.ttdevs.jcvideo.PlayerActivity;
 import com.ttdevs.markdown.MarkDownView;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+/**
+ * @author ttdevs
+ */
+public class MainActivity extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener {
 
-    @Bind(R.id.mdv_content)
+    @BindView(R.id.mdv_content)
     MarkDownView mdvContent;
 
     @Override
@@ -43,7 +48,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //        fab.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
-//
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
 //            }
 //        });
 
@@ -92,6 +98,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return super.onOptionsItemSelected(item);
     }
 
+    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -126,9 +133,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_tablayout:
                 Utils.comeOnBaby(this, TabLayoutActivity.class);
                 break;
-            case R.id.nav_jcplayer:
-                PlayerActivity.playTest(this);
-                break;
             case R.id.nav_include_text:
                 Utils.comeOnBaby(this, TempActivity.class);
                 break;
@@ -143,6 +147,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.nav_socket:
                 Utils.comeOnBaby(this, SocketActivity.class);
+                break;
+            case R.id.nav_transformer:
+                Utils.comeOnBaby(this, TransformerActivity.class);
                 break;
 
             default:

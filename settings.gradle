@@ -20,5 +20,6 @@ include 'modules:retrofit'
 include 'modules:webscoket'
 include 'modules:dagger'
 include 'modules:guava'
+include 'modules:hybrid'
 include 'modules:annotations'
 

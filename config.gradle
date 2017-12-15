@@ -9,20 +9,19 @@ ext {
 
     projectConfig = [
             applicationId    : "com.ttdevs.android",
-            compileSdkVersion: 26,
-            buildToolsVersion: "26.0.2",
-            minSdkVersion    : 16,
-            targetSdkVersion : 25,
+            compileSdkVersion: 27,
+            minSdkVersion    : 19,
+            targetSdkVersion : 24,
             versionCode      : 1,
             versionName      : "1.0.0",
     ]
 
     projectSupport = [
-            "v4"             : "com.android.support:support-v4:26.1.0",
-            "appcompat_v7"   : "com.android.support:appcompat-v7:26.1.0",
-            "design"         : "com.android.support:design:26.1.0",
-            "recyclerview_v7": "com.android.support:recyclerview-v7:26.1.0",
-            "cardview_v7"    : "com.android.support:cardview-v7:26.1.0",
+            "v4"             : "com.android.support:support-v4:27.0.2",
+            "appcompat_v7"   : "com.android.support:appcompat-v7:27.0.2",
+            "design"         : "com.android.support:design:27.0.2",
+            "recyclerview_v7": "com.android.support:recyclerview-v7:27.0.2",
+            "cardview_v7"    : "com.android.support:cardview-v7:27.0.2",
             "multidex"       : "com.android.support:multidex:1.0.0",
     ]
 

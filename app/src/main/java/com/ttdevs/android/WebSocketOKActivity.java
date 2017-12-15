@@ -15,7 +15,7 @@ import android.widget.TextView;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import okhttp3.MediaType;
@@ -34,28 +34,28 @@ public class WebSocketOKActivity extends BaseActivity {
     private static final int STATUS_CONNECT = 1;
     private static final int STATUS_MESSAGE = 2;
 
-    @Bind(R.id.etIP)
+    @BindView(R.id.etIP)
     EditText etIP;
-    @Bind(R.id.etPort)
+    @BindView(R.id.etPort)
     EditText etPort;
-    @Bind(R.id.tvStatus)
+    @BindView(R.id.tvStatus)
     TextView tvStatus;
-    @Bind(R.id.tvMsg)
+    @BindView(R.id.tvMsg)
     TextView tvMsg;
-    @Bind(R.id.rgVersion)
+    @BindView(R.id.rgVersion)
     RadioGroup rgVersion;
-    @Bind(R.id.etMessage)
+    @BindView(R.id.etMessage)
     EditText etMessage;
-    @Bind(R.id.svContent)
+    @BindView(R.id.svContent)
     ScrollView svContent;
-    @Bind(R.id.viewMain)
+    @BindView(R.id.viewMain)
     View viewMain;
 
-    @Bind(R.id.btConnect)
+    @BindView(R.id.btConnect)
     Button btConnect;
-    @Bind(R.id.btDisconnect)
+    @BindView(R.id.btDisconnect)
     Button btDisconnect;
-    @Bind(R.id.btSend)
+    @BindView(R.id.btSend)
     Button btSend;
 
     private OKClient mClient;

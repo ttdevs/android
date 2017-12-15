@@ -12,7 +12,6 @@ def libs = rootProject.ext.projectLibraries
 
 android {
     compileSdkVersion cfg.compileSdkVersion
-    buildToolsVersion cfg.buildToolsVersion
 
     defaultConfig {
         minSdkVersion cfg.minSdkVersion

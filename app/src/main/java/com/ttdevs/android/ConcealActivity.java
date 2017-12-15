@@ -29,7 +29,7 @@ import com.ttdevs.android.utils.LogUtils;
 
 import java.io.File;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.OnClick;
 
 public class ConcealActivity extends BaseActivity {
@@ -44,17 +44,17 @@ public class ConcealActivity extends BaseActivity {
         }
     };
 
-    @Bind(R.id.bt_encrypt_string)
+    @BindView(R.id.bt_encrypt_string)
     Button btEncryptString;
-    @Bind(R.id.bt_database)
+    @BindView(R.id.bt_database)
     Button btDatabase;
-    @Bind(R.id.bt_encrypt_file)
+    @BindView(R.id.bt_encrypt_file)
     Button btEncryptFile;
-    @Bind(R.id.bt_decrypt_file)
+    @BindView(R.id.bt_decrypt_file)
     Button btDecryptFile;
-    @Bind(R.id.et_original_string)
+    @BindView(R.id.et_original_string)
     EditText etOriginalString;
-    @Bind(R.id.tv_log_info)
+    @BindView(R.id.tv_log_info)
     TextView tvLogInfo;
 
     @OnClick({R.id.bt_encrypt_string,
