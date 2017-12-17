@@ -36,6 +36,10 @@
                 android:id="@+id/nav_custom_view"
                 android:icon="@drawable/ic_menu_send"
                 android:title="Custom View" />
+            <item
+                android:id="@+id/nav_transformer"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Transformer" />
         </menu>
     </item>
 
@@ -62,10 +66,6 @@
                 android:id="@+id/nav_tablayout"
                 android:icon="@drawable/ic_menu_send"
                 android:title="tabLayout" />
-            <item
-                android:id="@+id/nav_transformer"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Transformer" />
         </menu>
     </item>
 

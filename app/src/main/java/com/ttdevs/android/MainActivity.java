@@ -8,9 +8,6 @@
 package com.ttdevs.android;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -121,6 +118,9 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_custom_view:
                 Utils.comeOnBaby(this, CustomViewActivity.class);
                 break;
+            case R.id.nav_transformer:
+                Utils.comeOnBaby(this, TransformerActivity.class);
+                break;
             case R.id.nav_markdown:
                 Utils.comeOnBaby(this, MarkdownActivity.class);
                 break;
@@ -147,9 +147,6 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.nav_socket:
                 Utils.comeOnBaby(this, SocketActivity.class);
-                break;
-            case R.id.nav_transformer:
-                Utils.comeOnBaby(this, TransformerActivity.class);
                 break;
 
             default:

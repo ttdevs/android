@@ -21,7 +21,7 @@ public class LogUtils {
 
     public static void debug(String msg) {
         if (DEBUG) {
-            System.err.println(TAG + msg);
+//            System.err.println(TAG + msg);
             Log.d(TAG, msg);
         }
     }

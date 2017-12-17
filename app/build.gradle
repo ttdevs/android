@@ -54,19 +54,20 @@ android {
 }
 
 dependencies {
+    implementation 'com.android.support:support-v4:26.1.0'
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile libs.junit
 
     compile support.v4
     compile support.appcompat_v7
     compile support.design
+    compile support.cardview_v7
     compile libs.conceal
     compile libs.ucrop
     compile libs.markdownview
     compile libs.java_websocket
     compile libs.guava
     compile libs.okhttp3ws
-    compile 'com.android.support:support-v4:27.0.2'
 
     compile libs.butterknife
     annotationProcessor libs.butterknife_compiler

@@ -89,6 +89,7 @@
             android:name=".WebSocketOKActivity"
             android:label="@string/title_activity_web_socket_ok" />
         <activity android:name=".PlayerActivity" />
+        <activity android:name=".TransformerActivity" />
         <activity android:name=".TransformerActivity"></activity>
     </application>
 

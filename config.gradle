@@ -9,7 +9,7 @@ ext {
 
     projectConfig = [
             applicationId    : "com.ttdevs.android",
-            compileSdkVersion: 27,
+            compileSdkVersion: 26,
             minSdkVersion    : 19,
             targetSdkVersion : 24,
             versionCode      : 1,
