@@ -42,19 +42,5 @@ local.properties
 
 # Android Studio captures folder
 captures/
-.idea/inspectionProfiles/
-app/src/main/java/com/ttdevs/android/TransformerActivity.java
-app/src/main/java/com/ttdevs/android/transformer/
-app/src/main/res/layout/activity_transformer.xml
-apps/air/libs/
-apps/bolts/
-apps/github/
-apps/sqlcipher/
-modules/annotations/libs/
-modules/dagger/libs/
-modules/dagger/src/main/java/
-modules/dagger/src/main/res/drawable/
-modules/guava/libs/
-modules/guava/src/main/java/
-modules/guava/src/main/res/drawable/
-transformer/
+
+
