@@ -54,7 +54,6 @@ android {
 }
 
 dependencies {
-    implementation 'com.android.support:support-v4:26.1.0'
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile libs.junit
 
@@ -79,6 +78,5 @@ dependencies {
     compile project(':modules:dagger')
     compile project(':modules:hybrid')
 
-    compile group: 'org.apache.commons', name: 'commons-collections4', version: '4.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
 }

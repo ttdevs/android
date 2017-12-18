@@ -9,7 +9,7 @@ ext {
 
     projectConfig = [
             applicationId    : "com.ttdevs.android",
-            compileSdkVersion: 26,
+            compileSdkVersion: 27,
             minSdkVersion    : 19,
             targetSdkVersion : 24,
             versionCode      : 1,
@@ -31,24 +31,24 @@ ext {
             "butterknife_compiler": "com.jakewharton:butterknife-compiler:9.0.0-SNAPSHOT",
             "okhttp"              : "com.squareup.okhttp:okhttp:2.7.5",
             "okhttp_urlconnection": "com.squareup.okhttp:okhttp-urlconnection:2.7.5",
-            "okhttp3"             : "com.squareup.okhttp3:okhttp:3.4.1",
-            "okhttp3ws"           : 'com.squareup.okhttp3:okhttp-ws:3.4.2',
-            "rxjava"              : "io.reactivex:rxjava:1.1.0",
+            "okhttp3"             : "com.squareup.okhttp3:okhttp:3.8.0",
+            "okhttp3ws"           : "com.squareup.okhttp3:okhttp-ws:3.4.2",
+            "rxjava"              : "io.reactivex:rxjava:1.1.5",
             "rxandroid"           : "io.reactivex:rxandroid:1.1.0",
             "rxjava2"             : "io.reactivex.rxjava2:rxjava:2.1.1",
-            "rxandroid2"          : "io.reactivex.rxjava2:rxandroid:2.0.1",
+            "rxandroid2"          : "io.reactivex.rxjava2:rxandroid:2.1.1",
             "leakcanary_android"  : "com.squareup.leakcanary:leakcanary-android:1.3.1",
-            "volley"              : "com.mcxiaoke.volley:library:1.0.+",
+            "volley"              : "com.mcxiaoke.volley:library:1.0.19",
             "fastjson"            : "com.alibaba:fastjson:1.1.45",
-            "gson"                : "com.google.code.gson:gson:2.3",
-            "logger"              : "com.github.orhanobut:logger:1.12",
+            "gson"                : "com.google.code.gson:gson:2.8.0",
+            "logger"              : "com.github.orhanobut:logger:2.1.1",
             "dbinspector"         : "im.dino:dbinspector:3.1.0@aar",
-            "conceal"             : "com.facebook.conceal:conceal:1.0.1@aar",
-            "ucrop"               : "com.yalantis:ucrop:1.2.3",
+            "conceal"             : "com.facebook.conceal:conceal:2.0.1@aar",
+            "ucrop"               : "com.github.yalantis:ucrop:2.2.1",
             "markdownview"        : "us.feras.mdv:markdownview:1.1.0",
-            "retrofit2"           : "com.squareup.retrofit2:retrofit:2.1.0",
+            "retrofit2"           : "com.squareup.retrofit2:retrofit:2.3.0",
             "java_websocket"      : "org.java-websocket:Java-WebSocket:1.3.0",
-            "guava"               : "com.google.guava:guava:20.0"
+            "guava"               : "com.google.guava:guava:23.5-android"
     ]
 }
 
