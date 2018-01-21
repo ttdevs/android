@@ -75,7 +75,6 @@ dependencies {
     compile project(':modules:markdown')
     compile project(':modules:reactive')
     compile project(':modules:indicator')
-    compile project(':modules:dagger')
     compile project(':modules:hybrid')
 
     compile 'com.android.support.constraint:constraint-layout:1.0.2'

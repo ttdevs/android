@@ -1,0 +1,44 @@
+apply plugin: 'com.android.application'
+
+def cfg = rootProject.ext.projectConfig
+def support = rootProject.ext.projectSupport
+def libs = rootProject.ext.projectLibraries
+
+android {
+    compileSdkVersion cfg.compileSdkVersion
+
+    defaultConfig {
+        applicationId "com.ttdevs.dagger"
+        minSdkVersion cfg.minSdkVersion
+        targetSdkVersion cfg.targetSdkVersion
+        versionCode cfg.versionCode
+        versionName cfg.versionName
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    testImplementation libs.junit
+
+    implementation support.appcompat_v7
+    implementation support.constraint_layout
+
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+
+    implementation 'com.google.dagger:dagger-android:2.14.1'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.14.1'
+
+//    implementation 'com.google.dagger:dagger-android-support:2.14.1' // if you use the support libraries
+//    annotationProcessor 'com.google.dagger:dagger-android-processor:2.14.1'
+}

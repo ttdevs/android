@@ -10,6 +10,7 @@ include ':app'
 
 // sub application
 include ':apps:air'
+include ':apps:dagger'
 
 // module
 // include 'modules:jniutils'
@@ -18,7 +19,6 @@ include 'modules:reactive'
 include 'modules:indicator'
 include 'modules:retrofit'
 include 'modules:webscoket'
-include 'modules:dagger'
 include 'modules:guava'
 include 'modules:hybrid'
 include 'modules:annotations'
