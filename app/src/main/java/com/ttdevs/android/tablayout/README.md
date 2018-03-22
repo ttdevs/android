@@ -15,8 +15,8 @@ https://github.com/sqlcipher/android-database-sqlcipher
 
 最新的：
 
-- compile 'net.zetetic:android-database-sqlcipher:3.3.1-2'
-- compile 'net.zetetic:android-database-sqlcipher:3.3.1-2@aar'
+- implementation 'net.zetetic:android-database-sqlcipher:3.3.1-2'
+- implementation 'net.zetetic:android-database-sqlcipher:3.3.1-2@aar'
 
 ### 安装包变化
 

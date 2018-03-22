@@ -54,28 +54,28 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    testCompile libs.junit
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    testImplementation libs.junit
 
-    compile support.v4
-    compile support.appcompat_v7
-    compile support.design
-    compile support.cardview_v7
-    compile libs.conceal
-    compile libs.ucrop
-    compile libs.markdownview
-    compile libs.java_websocket
-    compile libs.guava
-    compile libs.okhttp3ws
+    implementation support.v4
+    implementation support.appcompat_v7
+    implementation support.design
+    implementation support.cardview_v7
+    implementation libs.conceal
+    implementation libs.ucrop
+    implementation libs.markdownview
+    implementation libs.java_websocket
+    implementation libs.guava
+    implementation libs.okhttp3ws
 
-    compile libs.butterknife
+    implementation libs.butterknife
     annotationProcessor libs.butterknife_compiler
 
-    // compile project(':modules:jniutils')
-    compile project(':modules:markdown')
-    compile project(':modules:reactive')
-    compile project(':modules:indicator')
-    compile project(':modules:hybrid')
+    // implementation project(':modules:jniutils')
+    implementation project(':modules:markdown')
+    implementation project(':modules:reactive')
+    implementation project(':modules:indicator')
+    implementation project(':modules:hybrid')
 
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
 }

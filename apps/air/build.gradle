@@ -28,10 +28,10 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
 
-    testCompile libs.junit
+    testImplementation libs.junit
 
-    compile support.appcompat_v7
-    compile support.design
+    implementation support.appcompat_v7
+    implementation support.design
 }

@@ -29,6 +29,6 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    testCompile libs.junit
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    testImplementation libs.junit
 }

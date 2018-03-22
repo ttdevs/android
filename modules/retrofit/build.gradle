@@ -29,11 +29,11 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    testCompile libs.junit
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    testImplementation libs.junit
 
-    compile support.appcompat_v7
-    compile libs.retrofit2
-    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
-    compile 'com.squareup.okhttp3:logging-interceptor:3.3.1'
+    implementation support.appcompat_v7
+    implementation libs.retrofit2
+    implementation 'com.squareup.retrofit2:converter-gson:2.1.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.3.1'
 }

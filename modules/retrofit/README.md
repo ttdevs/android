@@ -20,8 +20,8 @@ PS：从上面一句话，我们也可以看到，android生态在不断的进�
 
 - Gradle：
 
-	- Retrofit： ` compile 'com.squareup.retrofit2:retrofit:2.1.0' `
-	- JSON解析器： `compile 'com.squareup.retrofit2:converter-gson:2.1.0' `
+	- Retrofit： ` implementation 'com.squareup.retrofit2:retrofit:2.1.0' `
+	- JSON解析器： `implementation 'com.squareup.retrofit2:converter-gson:2.1.0' `
 	
 - Proguard：
 

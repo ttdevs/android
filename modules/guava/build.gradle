@@ -32,8 +32,8 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    compile support.appcompat_v7
-    compile libs.guava
+    implementation support.appcompat_v7
+    implementation libs.guava
 }

@@ -29,16 +29,16 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    testCompile libs.junit
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    testImplementation libs.junit
 
-    compile support.appcompat_v7
-    compile libs.butterknife
+    implementation support.appcompat_v7
+    implementation libs.butterknife
 
-    compile libs.rxjava
-    compile libs.rxandroid
-//    compile libs.rxjava2
-//    compile libs.rxandroid2
+    implementation libs.rxjava
+    implementation libs.rxandroid
+//    implementation libs.rxjava2
+//    implementation libs.rxandroid2
 
-    compile 'com.qiniu:qiniu-android-sdk:7.1.2'
+    implementation 'com.qiniu:qiniu-android-sdk:7.1.2'
 }

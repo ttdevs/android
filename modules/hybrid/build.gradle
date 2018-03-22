@@ -30,7 +30,7 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    compile support.appcompat_v7
+    implementation support.appcompat_v7
 }

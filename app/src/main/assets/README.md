@@ -37,7 +37,7 @@
 
 ### 引用
 
-`compile 'com.facebook.conceal:conceal:1.0.1@aar'`
+`implementation 'com.facebook.conceal:conceal:1.0.1@aar'`
 
 ### 关键代码
 
