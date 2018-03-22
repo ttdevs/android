@@ -7,32 +7,45 @@
 ### Android
 
 ``` shell
-Android
-|--app
-|--apps
-|----air
-|--doc
-|----image
-|--modules
-|----annotations
-|----dagger
-|----guava
-|----indicator
-|----jniutils
-|----markdown
-|----reactive
-|----retrofit
-|----websocket
-|--android.jks
-|--build.gradle
-|--config.gradle
-|--CONTRIBUTING.md
-|--gradle.properties
-|--gradlew
-|--gradlew.bat
-|--LICESE
-|--README.md
-|--settings.gradle
+.
+├── app
+│   ├── README.md
+│   ├── app.iml
+│   ├── build
+│   ├── build.gradle
+│   ├── proguard-rules.pro
+│   └── src
+├── apps
+│   ├── air
+│   ├── apps.iml
+│   └── dagger
+├── modules
+│   ├── annotations
+│   ├── guava
+│   ├── hybrid
+│   ├── indicator
+│   ├── jniutils
+│   ├── markdown
+│   ├── modules.iml
+│   ├── reactive
+│   ├── retrofit
+│   └── webscoket
+├── build.gradle
+├── config.gradle
+├── gradle.properties
+├── gradlew
+├── gradlew.bat
+├── local.properties
+├── CONTRIBUTING.md
+├── LICENSE
+├── README.md
+├── android.iml
+├── android.jks
+├── doc
+│   └── image
+├── gradle
+│   └── wrapper
+└── settings.gradle
 ```
 
 ## Application
