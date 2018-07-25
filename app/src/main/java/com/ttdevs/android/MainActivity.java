@@ -17,6 +17,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.ttdevs.android.calendar.CalendarActivity;
 import com.ttdevs.android.utils.FileUtils;
 import com.ttdevs.android.utils.Utils;
 import com.ttdevs.markdown.MarkDownView;
@@ -47,7 +48,7 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView =  findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
 
@@ -106,6 +107,9 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_web_socket_ok:
                 Utils.comeOnBaby(this, WebSocketOKActivity.class);
                 break;
+            case R.id.nav_backup:
+                Utils.comeOnBaby(this, BackupActivity.class);
+                break;
             case R.id.nav_custom_view:
                 Utils.comeOnBaby(this, CustomViewActivity.class);
                 break;
@@ -138,6 +142,9 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.nav_socket:
                 Utils.comeOnBaby(this, SocketActivity.class);
+                break;
+            case R.id.nav_calendar:
+                Utils.comeOnBaby(this, CalendarActivity.class);
                 break;
 
             default:

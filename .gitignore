@@ -2,6 +2,7 @@
 .gradle
 
 # idea
+.idea
 .idea/copyright
 .idea/libraries
 .idea/.name
@@ -43,4 +44,4 @@ local.properties
 # Android Studio captures folder
 captures/
 
-
+.DS_Store

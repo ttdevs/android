@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".calendar.CalendarActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="#FFEDF1F2"
+        android:gravity="center_vertical|center_horizontal"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="15dp"
+            android:src="@drawable/ic_prev_year" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:layout_marginTop="12dp"
+            android:text="2018年7月"
+            tools:text="2018年7月" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="15dp"
+            android:src="@drawable/ic_next_year" />
+    </LinearLayout>
+
+    <com.haibin.calendarview.CalendarView
+        android:id="@+id/calendarView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        app:week_background="#FFEDF1F2"
+
+        app:max_year="2020"
+        app:min_year="2018"
+        app:month_view="com.ttdevs.android.calendar.IndexMonthView"
+        app:month_view_show_mode="mode_fix"
+
+        app:current_day_text_color="@android:color/white"
+        app:current_month_text_color="#FF324556"
+        app:other_month_text_color="#FFC1C3C8"
+
+        app:selected_lunar_text_color="@android:color/white"
+        app:other_month_lunar_text_color="#FFC1C3C8"
+        app:current_month_lunar_text_color="#FF008DFF"
+
+        app:selected_theme_color="#FF008DFF" />
+</LinearLayout>

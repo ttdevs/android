@@ -28,6 +28,10 @@
             android:id="@+id/nav_web_socket_ok"
             android:icon="@drawable/ic_menu_send"
             android:title="WebSocketOK" />
+        <item
+            android:id="@+id/nav_backup"
+            android:icon="@drawable/ic_menu_send"
+            android:title="App Backup" />
     </group>
 
     <item android:title="Custom View">
@@ -53,6 +57,10 @@
                 android:id="@+id/nav_ucrop"
                 android:icon="@drawable/ic_menu_send"
                 android:title="uCrop" />
+            <item
+                android:id="@+id/nav_calendar"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Calendar" />
         </menu>
     </item>
 

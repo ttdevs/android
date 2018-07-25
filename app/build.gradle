@@ -55,18 +55,21 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
     testImplementation libs.junit
 
     implementation support.v4
     implementation support.appcompat_v7
     implementation support.design
     implementation support.cardview_v7
+    implementation support.constraint_layout
     implementation libs.conceal
     implementation libs.ucrop
     implementation libs.markdownview
     implementation libs.java_websocket
     implementation libs.guava
     implementation libs.okhttp3ws
+    implementation libs.calendarview
 
     implementation libs.butterknife
     annotationProcessor libs.butterknife_compiler
@@ -76,6 +79,4 @@ dependencies {
     implementation project(':modules:reactive')
     implementation project(':modules:indicator')
     implementation project(':modules:hybrid')
-
-    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
 }
