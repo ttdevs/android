@@ -2,6 +2,8 @@ package com.ttdevs.android.calendar;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
 
 import com.haibin.calendarview.Calendar;
 import com.haibin.calendarview.CalendarView;
@@ -14,7 +16,8 @@ import java.util.Map;
 /**
  * @author ttdevs
  */
-public class CalendarActivity extends BaseActivity {
+public class CalendarActivity extends BaseActivity implements View.OnClickListener {
+    private TextView tvCalendar;
     private CalendarView calendarView;
 
     @Override
@@ -22,6 +25,7 @@ public class CalendarActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar);
 
+        tvCalendar = findViewById(R.id.tv_calendar);
         calendarView = findViewById(R.id.calendarView);
 
         init();
@@ -35,6 +39,18 @@ public class CalendarActivity extends BaseActivity {
             map.put(calendar.toString(), calendar);
         }
         calendarView.setSchemeDate(map);
+        calendarView.setOnDateSelectedListener(new CalendarView.OnDateSelectedListener() {
+            @Override
+            public void onDateSelected(Calendar calendar, boolean isClick) {
+                updateDate(calendar.getYear(), calendar.getMonth());
+            }
+        });
+        calendarView.setOnMonthChangeListener(new CalendarView.OnMonthChangeListener() {
+            @Override
+            public void onMonthChange(int year, int month) {
+                updateDate(year, month);
+            }
+        });
     }
 
     private Calendar getSchemeCalendar(int year, int month, int day, String scheme) {
@@ -45,5 +61,21 @@ public class CalendarActivity extends BaseActivity {
         calendar.setSchemeColor(Color.GREEN);
         calendar.setScheme(scheme);
         return calendar;
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.iv_prev:
+                calendarView.scrollToPre(true);
+                break;
+            case R.id.iv_next:
+                calendarView.scrollToNext(true);
+                break;
+        }
+    }
+
+    private void updateDate(int year, int month) {
+        tvCalendar.setText(String.format("%d年%02d月", year, month));
     }
 }
