@@ -3,20 +3,7 @@
 
 # idea
 .idea
-.idea/copyright
-.idea/libraries
-.idea/.name
-.idea/compiler.xml
-.idea/encodings.xml
-.idea/gradle.xml
-.idea/misc.xml
-.idea/modules.xml
-.idea/runConfigurations.xml
-.idea/workspace.xml
-.idea/markdown-navigator
-.idea/markdown-navigator.xml
-.idea/codeStyleSettings.xml
-.idea/inspectionProfiles
+.idea/*
 
 # build folder
 build
