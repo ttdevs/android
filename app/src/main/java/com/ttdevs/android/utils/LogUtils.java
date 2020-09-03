@@ -7,8 +7,7 @@
 
 package com.ttdevs.android.utils;
 
-import android.provider.Settings;
-import android.support.design.widget.Snackbar;
+import com.google.android.material.snackbar.Snackbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;

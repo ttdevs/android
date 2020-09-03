@@ -3,6 +3,9 @@ package com.ttdevs.air;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothManager;
+import android.bluetooth.le.BluetoothLeScanner;
+import android.bluetooth.le.ScanCallback;
+import android.bluetooth.le.ScanResult;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +17,11 @@ import android.widget.TextView;
 import com.ttdevs.air.service.BLEService;
 import com.ttdevs.air.service.BikeService;
 
+import java.util.List;
+
+/**
+ * @author ttdevs
+ */
 public class BikeActivity extends BaseActivity {
 
     private static final long SCAN_PERIOD = 10000;
@@ -40,16 +48,18 @@ public class BikeActivity extends BaseActivity {
 
     private BluetoothManager mBluetoothManager;
     private BluetoothAdapter mBluetoothAdapter;
+    private BluetoothLeScanner mBluetoothScanner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bike);
 
-        tvLog = (TextView) findViewById(R.id.tvLog);
+        tvLog = findViewById(R.id.tvLog);
 
         mBluetoothManager = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
         mBluetoothAdapter = mBluetoothManager.getAdapter();
+        mBluetoothScanner = mBluetoothAdapter.getBluetoothLeScanner();
     }
 
     @Override
@@ -85,25 +95,38 @@ public class BikeActivity extends BaseActivity {
                 @Override
                 public void run() {
                     mScanning = false;
-                    mBluetoothAdapter.stopLeScan(mLeScanCallback);
+                    mBluetoothScanner.stopScan(mScanCallback);
                 }
             }, SCAN_PERIOD);
 
             mScanning = true;
-            mBluetoothAdapter.startLeScan(mLeScanCallback);
+
+            mBluetoothScanner.startScan(mScanCallback);
         } else {
             mScanning = false;
-            mBluetoothAdapter.stopLeScan(mLeScanCallback);
+            mBluetoothScanner.stopScan(mScanCallback);
         }
     }
 
-    // Device scan callback.
-    private BluetoothAdapter.LeScanCallback mLeScanCallback = new BluetoothAdapter.LeScanCallback() {
+    private ScanCallback mScanCallback = new ScanCallback() {
         @Override
-        public void onLeScan(final BluetoothDevice device, int rssi, byte[] scanRecord) {
+        public void onScanResult(int callbackType, ScanResult result) {
+            super.onScanResult(callbackType, result);
+
+            BluetoothDevice device = result.getDevice();
             String format = "Name:%s, Mac:%s, Type:%s";
-            String msg = String.format(format, device.getName(), device.getAddress(), device.getType());
+            String msg = String.format(format, result.getDevice(), device.getAddress(), device.getType());
             print(msg);
+        }
+
+        @Override
+        public void onBatchScanResults(List<ScanResult> results) {
+            super.onBatchScanResults(results);
+        }
+
+        @Override
+        public void onScanFailed(int errorCode) {
+            super.onScanFailed(errorCode);
         }
     };
 

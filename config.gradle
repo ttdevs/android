@@ -10,26 +10,26 @@ ext {
     projectConfig = [
             applicationId    : "com.ttdevs.android",
             compileSdkVersion: 28,
-            minSdkVersion    : 19,
-            targetSdkVersion : 24,
-            versionCode      : 1,
-            versionName      : "1.0.0",
+            minSdkVersion    : 21,
+            targetSdkVersion : 27,
+            versionCode      : 2,
+            versionName      : "2.0.0",
     ]
 
     projectSupport = [
-            "v4"               : "com.android.support:support-v4:27.1.1",
-            "appcompat_v7"     : "com.android.support:appcompat-v7:27.1.1",
-            "design"           : "com.android.support:design:27.1.1",
+            "v4"               : 'androidx.legacy:legacy-support-v4:1.0.0',
+            "appcompat_v7"     : 'androidx.appcompat:appcompat:1.0.0',
+            "design"           : 'com.google.android.material:material:1.0.0',
             "recyclerview_v7"  : "com.android.support:recyclerview-v7:27.1.1",
-            "cardview_v7"      : "com.android.support:cardview-v7:27.1.1",
-            "constraint_layout": "com.android.support.constraint:constraint-layout:1.1.2",
+            "cardview_v7"      : 'androidx.cardview:cardview:1.0.0',
+            "constraint_layout": 'androidx.constraintlayout:constraintlayout:1.1.3',
             "multidex"         : "com.android.support:multidex:1.0.0",
     ]
 
     projectLibraries = [
             "junit"               : "junit:junit:4.12",
-            "butterknife"         : "com.jakewharton:butterknife:9.0.0-SNAPSHOT",
-            "butterknife_compiler": "com.jakewharton:butterknife-compiler:9.0.0-SNAPSHOT",
+            "butterknife"         : "com.jakewharton:butterknife:10.1.0",
+            "butterknife_compiler": "com.jakewharton:butterknife-compiler:10.1.0",
             "okhttp"              : "com.squareup.okhttp:okhttp:2.7.5",
             "okhttp_urlconnection": "com.squareup.okhttp:okhttp-urlconnection:2.7.5",
             "okhttp3"             : "com.squareup.okhttp3:okhttp:3.8.0",

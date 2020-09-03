@@ -10,7 +10,7 @@
     tools:context=".ScanActivity"
     tools:showIn="@layout/activity_scan">
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvContent"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

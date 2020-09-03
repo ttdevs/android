@@ -8,17 +8,11 @@
 package com.ttdevs.hybrid.nested;
 
 import android.content.Context;
-import android.support.v4.view.NestedScrollingParent;
-import android.support.v4.view.NestedScrollingParentHelper;
-import android.text.TextUtils;
-import android.util.AttributeSet;
-import android.view.MotionEvent;
-import android.view.View;
-import android.webkit.WebView;
-import android.widget.LinearLayout;
-import android.widget.Scroller;
+import androidx.core.view.NestedScrollingParent;
+import androidx.core.view.NestedScrollingParentHelper;
 
-import com.ttdevs.hybrid.scroller.IScrollStatus;
+import android.util.AttributeSet;
+import android.widget.LinearLayout;
 
 public class HomeView extends LinearLayout implements NestedScrollingParent {
 

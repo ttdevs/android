@@ -51,11 +51,15 @@ android {
         maxProcessCount 4
         javaMaxHeapSize '4g'
     }
+    compileOptions {
+        sourceCompatibility = '1.8'
+        targetCompatibility = '1.8'
+    }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     testImplementation libs.junit
 
     implementation support.v4

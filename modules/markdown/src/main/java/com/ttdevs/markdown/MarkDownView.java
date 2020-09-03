@@ -109,14 +109,6 @@ public class MarkDownView extends LinearLayout implements View.OnClickListener {
     }
 
     private class MyWebViewClient extends WebViewClient {
-        @Override
-        public boolean shouldOverrideUrlLoading(WebView view, String url) {
-//            if (url.equals(DEFAULT_PATH)) {
-//                loadMarkdown(mContent); // TODO
-//                return true;
-//            }
-            return super.shouldOverrideUrlLoading(view, url);
-        }
 
         @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon) {

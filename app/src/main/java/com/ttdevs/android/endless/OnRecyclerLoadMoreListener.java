@@ -7,8 +7,8 @@
 
 package com.ttdevs.android.endless;
 
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.ttdevs.android.utils.LogUtils;
 
