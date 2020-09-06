@@ -27,7 +27,7 @@ public class Student implements Parcelable {
 
     /**
      * 需要手动编写。
-     * 若无tag: out，则不用写此方，具体查看源码。
+     * 若仅包含in这个tag，则不用写此方，具体查看源码IStudentManager.java
      *
      * @param in
      */

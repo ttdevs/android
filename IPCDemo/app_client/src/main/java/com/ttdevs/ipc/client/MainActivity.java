@@ -11,6 +11,7 @@ import android.os.RemoteException;
 import android.view.View;
 import android.widget.Button;
 
+import com.ttdevs.ipc.IStudentListener;
 import com.ttdevs.ipc.IStudentManager;
 import com.ttdevs.ipc.Student;
 import com.ttdevs.ipc.utils.Constant;
@@ -37,27 +38,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         bindService();
     }
 
-    private void bindService() {
-        try {
-            bindService(Constant.getServerIntent(), new ServiceConnection() {
-                @Override
-                public void onServiceConnected(ComponentName name, IBinder service) {
-                    mStudentManager = IStudentManager.Stub.asInterface(service);
-
-                    runOnUiThread(() -> btConnect.setEnabled(false));
-                }
-
-                @Override
-                public void onServiceDisconnected(ComponentName name) {
-                    runOnUiThread(() -> btConnect.setEnabled(true));
-
-                }
-            }, Context.BIND_AUTO_CREATE);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     @Override
     public void onClick(View v) {
         try {
@@ -68,14 +48,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     return;
                 case R.id.bt_get:
                     String result = mStudentManager.getStudent(student);
-                    LogUtils.d(result);
+                    LogUtils.d("getStudent: " + result);
                     return;
-                case R.id.bt_set:
-                    LogUtils.d("setStudent 1"); // 不加这行执行很慢？
-                    mStudentManager.setStudent(student);
-                    LogUtils.d("setStudent 2"); // 不加这行执行很慢？
-                    mStudentManager.setStudentOneWay(student);
-                    LogUtils.d("setStudent 3"); // 不加这行执行很慢？
+                case R.id.bt_oneway:
+                    mStudentManager.addStudentOneway(student);
+                    LogUtils.d("addStudentOneway: return");
+                    return;
+                case R.id.bt_register:
+                    registerListener(true);
+                    return;
+                case R.id.bt_unregister:
+                    registerListener(false);
                     return;
 
                 default:
@@ -85,23 +68,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             e.printStackTrace();
         }
 
-        Student student = new Student();
-        student.setName("Jim");
-        student.setAge(18);
         try {
+            Student student = new Student();
+            student.setName("Jim");
+            student.setAge(18);
             switch (v.getId()) {
                 case R.id.bt_in:
                     mStudentManager.addStudentWithIn(student);
                     break;
                 case R.id.bt_out:
+                    LogUtils.d("addStudentWithOut: " + student.toString());
                     mStudentManager.addStudentWithOut(student);
                     break;
                 case R.id.bt_inout:
+                    LogUtils.d("addStudentWithInout: " + student.toString());
                     mStudentManager.addStudentWithInout(student);
                     break;
                 case R.id.bt_inout_return:
+                    LogUtils.d("addStudentWithInoutAndReturn: " + student.toString());
                     Student temp = mStudentManager.addStudentWithInoutAndReturn(student);
-                    LogUtils.d("Return: " + temp.toString());
+                    LogUtils.d("addStudentWithInoutAndReturn: " + temp.toString());
                     break;
 
                 default:
@@ -110,6 +96,54 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             LogUtils.d(student.toString());
         } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static final IStudentListener mListener = new IStudentListener.Stub() {
+        @Override
+        public void updateStudent(Student student) throws RemoteException {
+            LogUtils.d("From server: " + student.toString());
+        }
+    };
+
+    /**
+     * 注册/取消注册
+     *
+     * @param register
+     */
+    private void registerListener(boolean register) {
+        try {
+            if (register) {
+                mStudentManager.register(mListener);
+            } else {
+                mStudentManager.unregister(mListener);
+            }
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void bindService() {
+        try {
+            bindService(Constant.getServerIntent(), new ServiceConnection() {
+                @Override
+                public void onServiceConnected(ComponentName name, IBinder service) {
+                    mStudentManager = IStudentManager.Stub.asInterface(service);
+
+                    LogUtils.d("Connect success.");
+                    runOnUiThread(() -> btConnect.setEnabled(false));
+                }
+
+                @Override
+                public void onServiceDisconnected(ComponentName name) {
+                    mStudentManager = null;
+
+                    runOnUiThread(() -> btConnect.setEnabled(true));
+
+                }
+            }, Context.BIND_AUTO_CREATE);
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
