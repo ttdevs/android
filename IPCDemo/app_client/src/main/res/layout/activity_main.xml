@@ -13,51 +13,59 @@
         android:onClick="onClick"
         android:text="Connect" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <Button
+        android:id="@+id/bt_get"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:onClick="onClick"
+        android:text="Get Student" />
 
-        <Button
-            android:id="@+id/bt_get"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="onClick"
-            android:text="get" />
-
-        <Button
-            android:id="@+id/bt_set"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="onClick"
-            android:text="set" />
-    </LinearLayout>
+    <Button
+        android:id="@+id/bt_oneway"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onClick"
+        android:text="Add Student Oneway" />
 
     <Button
         android:id="@+id/bt_in"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="onClick"
-        android:text="addStudentWithIn" />
+        android:text="Add Student With In" />
 
     <Button
         android:id="@+id/bt_out"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="onClick"
-        android:text="addStudentWithOut" />
+        android:text="Add Student With Out" />
 
     <Button
         android:id="@+id/bt_inout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="onClick"
-        android:text="addStudentWithInout" />
+        android:text="Add Student With Inout" />
 
     <Button
         android:id="@+id/bt_inout_return"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="onClick"
-        android:text="addStudentWithInoutAndReturn" />
+        android:text="Add Student With Inout And Return" />
+
+    <Button
+        android:id="@+id/bt_register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onClick"
+        android:text="Register Listener" />
+
+    <Button
+        android:id="@+id/bt_unregister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onClick"
+        android:text="Unregister Listener" />
 </LinearLayout>
