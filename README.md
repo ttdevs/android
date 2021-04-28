@@ -1,15 +1,14 @@
 # Android Demo By ttdevs
 
-这是一个关于Android的Demo项目，主要用于记录日常使用的学习代码。仅供参考！
+这是一个关于Android的Demo项目，主要用于记录日常使用的学习。仅供参考！
 
-## IPCDemo
+## DemoIPC
 
-AIDL(IPC)学习，更多信息参考[这里](IPCDemo/README.md)。
+AIDL(IPC)学习，更多信息参考[这里](DemoIPC/README.md)。
 
+## DemoOld
 
-## Demo
-
-之前学习记录，具体文档参考[这里](Demo/README.md)。主要包含以下内容：
+之前学习记录，具体文档参考[这里](DemoOld/README.md)。主要包含以下内容：
 
 - Air: 蓝牙PM2.5检测
 - Indicator: 仿仪表的指示盘
