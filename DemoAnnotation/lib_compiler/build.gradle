@@ -1,0 +1,24 @@
+plugins {
+    id 'java-library'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+sourceSets {
+    main {
+        resources {
+            srcDir 'src/main/java'
+        }
+    }
+}
+
+dependencies {
+    implementation project(path: ':lib_annotation')
+
+    implementation 'com.squareup:javapoet:1.13.0'
+    implementation 'com.google.auto.service:auto-service-annotations:1.0'
+    annotationProcessor 'com.google.auto.service:auto-service:1.0'
+}

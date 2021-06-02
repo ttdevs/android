@@ -2,6 +2,10 @@
 
 这是一个关于Android的Demo项目，主要用于记录日常使用的学习。仅供参考！
 
+## DemoAnnotation
+
+编译时注解的学习，涉及javac，apt，annotationProcessor等，更多信息参考[这里](DemoAnnotation/README.md)。
+
 ## DemoIPC
 
 AIDL(IPC)学习，更多信息参考[这里](DemoIPC/README.md)。
